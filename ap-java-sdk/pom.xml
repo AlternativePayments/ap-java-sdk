@@ -40,6 +40,7 @@
         <version.commons3>3.4</version.commons3>
         <version.junit>4.9</version.junit>
         <version.mockito>1.10.19</version.mockito>
+        <version.wiremock>1.58</version.wiremock>
         <version.plugin.jar>2.6</version.plugin.jar>
         <version.plugin.resources>2.7</version.plugin.resources>
         <version.plugin.install>2.5.2</version.plugin.install>
@@ -69,8 +70,8 @@
             <version>${version.fasterxml}</version>
         </dependency>
         <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
             <version>${version.fasterxml}</version>
         </dependency>
         <dependency>
@@ -94,6 +95,13 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
             <version>${version.mockito}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock</artifactId>
+            <version>${version.wiremock}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
