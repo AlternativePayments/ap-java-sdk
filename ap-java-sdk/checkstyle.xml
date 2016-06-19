@@ -5,7 +5,7 @@
 <module name="Checker">
 
     <module name="SuppressionFilter">
-        <property name="file" value="/Users/nenadbozic/Git/ap-java-sdk/ap-java-sdk/checkstyle-suppressions.xml"/>
+        <property name="file" value="${suppression_file}"/>
     </module>
 
     <module name="NewlineAtEndOfFile">
