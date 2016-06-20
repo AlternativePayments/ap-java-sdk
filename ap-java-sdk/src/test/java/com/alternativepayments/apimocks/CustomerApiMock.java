@@ -26,5 +26,4 @@ public class CustomerApiMock {
                             + "  \"created\": \"2012-04-23T18:25:43.511Z\"\n"
                             + "}")));
     }
-
 }

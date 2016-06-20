@@ -1,6 +1,6 @@
 package com.alternativepayments;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 
@@ -17,10 +17,10 @@ public class AlternativePaymentClientTest extends BaseApiResourceTest {
 
         final Customer customer = alternativePaymentClient.getCustomer(id);
 
-        assertEquals(id, customer.getId());
-        assertEquals("John", customer.getFirstName());
-        assertEquals("Doe", customer.getLastName());
-        assertEquals("2012-04-23T18:25:43.511Z", customer.getCreated());
+        assertThat(customer.getId()).isEqualTo(customer.getId());
+        assertThat(customer.getFirstName()).isEqualTo("John");
+        assertThat(customer.getLastName()).isEqualTo("Doe");
+        assertThat(customer.getCreated().toString()).isEqualTo("2012-04-23T18:25:43.511Z");
     }
 
 }

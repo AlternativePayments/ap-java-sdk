@@ -6,11 +6,6 @@ import javax.ws.rs.client.ClientBuilder;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
 
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
 /**
@@ -42,7 +37,7 @@ public class HttpClientFactory {
     public static Client create(final int connectionTimeout, final int readTimeout) {
         final ClientConfig clientConfig = new ClientConfig();
         clientConfig.register(JacksonJsonProvider.class);
-        clientConfig.register(createObjectMapper());
+        clientConfig.register(new ObjectMapperProvider());
 
         final Client client = ClientBuilder.newClient(clientConfig);
         client.property(ClientProperties.CONNECT_TIMEOUT, connectionTimeout);
@@ -50,16 +45,4 @@ public class HttpClientFactory {
         client.property(ClientProperties.FOLLOW_REDIRECTS, false);
         return client;
     }
-
-    private static ObjectMapper createObjectMapper() {
-        final ObjectMapper objectMapper = new ObjectMapper();
-
-        objectMapper.registerModule(new JavaTimeModule());
-        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        objectMapper.setSerializationInclusion(Include.NON_NULL);
-
-        return objectMapper;
-    }
-
 }

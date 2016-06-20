@@ -1,5 +1,7 @@
 package com.alternativepayments.models;
 
+import java.time.Instant;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -30,8 +32,8 @@ public class Customer extends BaseModel {
     public Customer(
             @JsonProperty("id") String id,
             @JsonProperty("mode") String mode,
-            @JsonProperty("created") String created,
-            @JsonProperty("updated") String updated,
+            @JsonProperty("created") Instant created,
+            @JsonProperty("updated") Instant updated,
             @JsonProperty("firstName") String firstName,
             @JsonProperty("lastName") String lastName) {
         super(id, mode, created, updated);

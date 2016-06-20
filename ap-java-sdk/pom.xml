@@ -39,7 +39,7 @@
         <version.slf4j>1.7.7</version.slf4j>
         <version.commons3>3.4</version.commons3>
         <version.junit>4.9</version.junit>
-        <version.mockito>1.10.19</version.mockito>
+        <version.assertj>3.4.1</version.assertj>
         <version.wiremock>1.58</version.wiremock>
         <version.plugin.jar>2.6</version.plugin.jar>
         <version.plugin.resources>2.7</version.plugin.resources>
@@ -92,9 +92,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>${version.mockito}</version>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${version.assertj}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

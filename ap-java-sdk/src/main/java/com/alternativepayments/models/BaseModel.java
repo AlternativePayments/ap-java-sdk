@@ -1,5 +1,7 @@
 package com.alternativepayments.models;
 
+import java.time.Instant;
+
 /**
  * Base entity with common properties.
  */
@@ -7,8 +9,8 @@ public class BaseModel {
 
     private final String id;
     private final String mode;
-    private final String created;
-    private final String updated;
+    private final Instant created;
+    private final Instant updated;
 
     /**
      * Create base model for each resource holding common properties.
@@ -18,7 +20,7 @@ public class BaseModel {
      * @param created when resource is created.
      * @param updated when resource was updated.
      */
-    public BaseModel(String id, String mode, String created, String updated) {
+    public BaseModel(String id, String mode, Instant created, Instant updated) {
         this.id = id;
         this.mode = mode;
         this.created = created;
@@ -42,14 +44,14 @@ public class BaseModel {
     /**
      * @return when this resource was created.
      */
-    public String getCreated() {
+    public Instant getCreated() {
         return created;
     }
 
     /**
      * @return when this resource was updated.
      */
-    public String getUpdated() {
+    public Instant getUpdated() {
         return updated;
     }
 
