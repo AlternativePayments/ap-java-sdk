@@ -26,4 +26,33 @@ public class CustomerApiMock {
                             + "  \"created\": \"2012-04-23T18:25:43.511Z\"\n"
                             + "}")));
     }
+
+    public static void expectGetAll() {
+        WireMock.stubFor(
+                get(WireMock.urlMatching("/api/customers/"))
+                .willReturn(aResponse()
+                        .withStatus(Status.OK.getStatusCode())
+                        .withHeader("Content-Type", "application/json")
+                        .withBody("{\n"
+                            + "  \"customers\": [\n"
+                            + "  {\n"
+                            + "  \"id\": \"cus_7f0724f3b1d745d49\",\n"
+                            + "  \"firstName\": \"John\",\n"
+                            + "  \"lastName\": \"Doe\",\n"
+                            + "  \"created\": \"2012-04-23T18:25:43.511Z\"\n"
+                            + "  },\n"
+                            + "  {\n"
+                            + "  \"id\": \"cus_7f0724f3b1d745d49\",\n"
+                            + "  \"firstName\": \"John\",\n"
+                            + "  \"lastName\": \"Doe\",\n"
+                            + "  \"created\": \"2012-04-23T18:25:43.511Z\"\n"
+                            + "  }\n"
+                            + "  ],\n"
+                            + "  \"pagination\": {\n"
+                            + "  \"offset\": 10,\n"
+                            + "  \"limit\": 2,\n"
+                            + "  \"count\": 2504\n"
+                            + "  }\n"
+                            + "}")));
+    }
 }

@@ -13,8 +13,9 @@ import com.alternativepayments.http.error.ApiException;
 import com.alternativepayments.http.error.AuthenticationException;
 import com.alternativepayments.http.error.InvalidParameterException;
 import com.alternativepayments.http.error.PaymentException;
-import com.alternativepayments.models.Customer;
 import com.alternativepayments.models.ErrorModel;
+import com.alternativepayments.models.customer.Customer;
+import com.alternativepayments.models.customer.CustomerCollection;
 
 /**
  * Alternative Payments Java SDK Client.
@@ -43,6 +44,15 @@ public class AlternativePaymentClient {
      */
     public Customer getCustomer(final String id) {
         return get(apiTarget.path(Customer.API_ENDPOINT + id), Customer.class);
+    }
+
+    /**
+     * Return all customers.
+     *
+     * @return all customers.
+     */
+    public CustomerCollection getAllCustomer() {
+        return get(apiTarget.path(Customer.API_ENDPOINT), CustomerCollection.class);
     }
 
     /**
