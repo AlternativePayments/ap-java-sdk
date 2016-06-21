@@ -1,7 +1,8 @@
-package com.alternativepayments.models;
+package com.alternativepayments.models.customer;
 
 import java.time.Instant;
 
+import com.alternativepayments.models.BaseModel;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
