@@ -1,7 +1,9 @@
 package com.alternativepayments.apimocks;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.github.tomakehurst.wiremock.client.WireMock.containing;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlMatching;
 
 import javax.ws.rs.core.Response.Status;
 
@@ -15,7 +17,8 @@ public class CustomerErrorApiMock {
 
     public static void expectApiErrorUpperCase() {
         WireMock.stubFor(
-                get(WireMock.urlMatching("/api/customers/error_upper_case"))
+                get(urlMatching("/api/customers/error_upper_case"))
+                .withHeader("Authorization", containing(""))
                 .willReturn(aResponse()
                         .withStatus(Status.PAYMENT_REQUIRED.getStatusCode())
                         .withHeader("Content-Type", "application/json")
@@ -29,7 +32,8 @@ public class CustomerErrorApiMock {
 
     public static void expectApiErrorLowerCase() {
         WireMock.stubFor(
-                get(WireMock.urlMatching("/api/customers/error_lower_case"))
+                get(urlMatching("/api/customers/error_lower_case"))
+                .withHeader("Authorization", containing(""))
                 .willReturn(aResponse()
                         .withStatus(Status.PAYMENT_REQUIRED.getStatusCode())
                         .withHeader("Content-Type", "application/json")
@@ -43,7 +47,8 @@ public class CustomerErrorApiMock {
 
     public static void expectUnsupportedError() {
         WireMock.stubFor(
-                get(WireMock.urlMatching("/api/customers/unsupported_error"))
+                get(urlMatching("/api/customers/unsupported_error"))
+                .withHeader("Authorization", containing(""))
                 .willReturn(aResponse()
                         .withStatus(Status.INTERNAL_SERVER_ERROR.getStatusCode())
                         .withHeader("Content-Type", "application/json")
@@ -57,7 +62,8 @@ public class CustomerErrorApiMock {
 
     public static void expectPaymentError() {
         WireMock.stubFor(
-                get(WireMock.urlMatching("/api/customers/payment_error"))
+                get(urlMatching("/api/customers/payment_error"))
+                .withHeader("Authorization", containing(""))
                 .willReturn(aResponse()
                         .withStatus(Status.PAYMENT_REQUIRED.getStatusCode())
                         .withHeader("Content-Type", "application/json")
@@ -71,7 +77,8 @@ public class CustomerErrorApiMock {
 
     public static void expectCustomerOlderError() {
         WireMock.stubFor(
-                get(WireMock.urlMatching("/api/customers/customer_older_error"))
+                get(urlMatching("/api/customers/customer_older_error"))
+                .withHeader("Authorization", containing(""))
                 .willReturn(aResponse()
                         .withStatus(Status.PAYMENT_REQUIRED.getStatusCode())
                         .withHeader("Content-Type", "application/json")
@@ -85,7 +92,8 @@ public class CustomerErrorApiMock {
 
     public static void expectApiErrorNotFound() {
         WireMock.stubFor(
-                get(WireMock.urlMatching("/api/customers/not_found"))
+                get(urlMatching("/api/customers/not_found"))
+                .withHeader("Authorization", containing(""))
                 .willReturn(aResponse()
                         .withStatus(Status.PAYMENT_REQUIRED.getStatusCode())
                         .withHeader("Content-Type", "application/json")
@@ -99,7 +107,8 @@ public class CustomerErrorApiMock {
 
     public static void expectApiErrorInternalServerError() {
         WireMock.stubFor(
-                get(WireMock.urlMatching("/api/customers/internal_server_error"))
+                get(urlMatching("/api/customers/internal_server_error"))
+                .withHeader("Authorization", containing(""))
                 .willReturn(aResponse()
                         .withStatus(Status.PAYMENT_REQUIRED.getStatusCode())
                         .withHeader("Content-Type", "application/json")
@@ -113,7 +122,8 @@ public class CustomerErrorApiMock {
 
     public static void expectApiErrorAcquirerError() {
         WireMock.stubFor(
-                get(WireMock.urlMatching("/api/customers/acquirer_error"))
+                get(urlMatching("/api/customers/acquirer_error"))
+                .withHeader("Authorization", containing(""))
                 .willReturn(aResponse()
                         .withStatus(Status.PAYMENT_REQUIRED.getStatusCode())
                         .withHeader("Content-Type", "application/json")
@@ -127,7 +137,8 @@ public class CustomerErrorApiMock {
 
     public static void expectInvalidParameterSentError() {
         WireMock.stubFor(
-                get(WireMock.urlMatching("/api/customers/invalid_object_sent"))
+                get(urlMatching("/api/customers/invalid_object_sent"))
+                .withHeader("Authorization", containing(""))
                 .willReturn(aResponse()
                         .withStatus(Status.BAD_REQUEST.getStatusCode())
                         .withHeader("Content-Type", "application/json")

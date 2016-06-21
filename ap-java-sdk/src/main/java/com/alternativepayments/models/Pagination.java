@@ -8,6 +8,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Pagination {
 
+    /**
+     * String for limit parameter for pagination.
+     */
+    public static final String LIMIT = "limit";
+
+    /**
+     * String for offset parameter for pagination.
+     */
+    public static final String OFFSET = "offset";
+
     private final int offset;
     private final int limit;
     private final int count;
@@ -21,9 +31,9 @@ public class Pagination {
      */
     @JsonCreator
     public Pagination(
-            @JsonProperty("offset") int offset,
-            @JsonProperty("limit") int limit,
-            @JsonProperty("count") int count) {
+            @JsonProperty("offset") final int offset,
+            @JsonProperty("limit") final int limit,
+            @JsonProperty("count") final int count) {
         this.offset = offset;
         this.limit = limit;
         this.count = count;
