@@ -14,6 +14,7 @@ import com.alternativepayments.http.error.AuthenticationException;
 import com.alternativepayments.http.error.InvalidParameterException;
 import com.alternativepayments.http.error.PaymentException;
 import com.alternativepayments.models.ErrorModel;
+import com.alternativepayments.models.Pagination;
 import com.alternativepayments.models.customer.Customer;
 import com.alternativepayments.models.customer.CustomerCollection;
 
@@ -32,7 +33,7 @@ public class AlternativePaymentClient {
      * @param apiKey API key to use.
      */
     public AlternativePaymentClient(final String apiBase, final String apiKey) {
-        this.httpClient = HttpClientFactory.createDefault();
+        this.httpClient = HttpClientFactory.createDefault(apiKey);
         this.apiTarget = httpClient.target(apiBase);
     }
 
@@ -51,8 +52,32 @@ public class AlternativePaymentClient {
      *
      * @return all customers.
      */
-    public CustomerCollection getAllCustomer() {
+    public CustomerCollection getAllCustomers() {
         return get(apiTarget.path(Customer.API_ENDPOINT), CustomerCollection.class);
+    }
+
+    /**
+     * Return customers taking pagination in consideration.
+     *
+     * @param limit how many records we want
+     * @param offset offset of the requested results
+     *
+     * @return all customers.
+     */
+    public CustomerCollection getCustomersWithPagination(final int limit, final int offset) {
+        return get(apiTarget.path(Customer.API_ENDPOINT).queryParam(Pagination.LIMIT, limit)
+                .queryParam(Pagination.OFFSET, offset), CustomerCollection.class);
+    }
+
+    /**
+     * Create new customer.
+     *
+     * @param customer you want to create
+     *
+     * @return newly created customer.
+     */
+    public Customer createCustomer(final Customer customer) {
+        return post(apiTarget.path(Customer.API_ENDPOINT), customer, Customer.class);
     }
 
     /**
@@ -102,7 +127,7 @@ public class AlternativePaymentClient {
             case ACQUIRER_DOWN:
                 return new ApiException(errorModel);
             case AUTHENTICATION_ERROR:
-                throw new AuthenticationException(errorModel);
+                return new AuthenticationException(errorModel);
             case INVALID_PARAMETER_ERROR:
                 return new InvalidParameterException(errorModel);
             case PAYMENT_ERROR:
