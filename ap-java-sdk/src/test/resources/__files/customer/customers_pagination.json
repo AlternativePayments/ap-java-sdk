@@ -1,0 +1,45 @@
+{
+    "customers": [
+        {
+            "id": "cus_7f0724f3b1d745d49",
+            "mode": "Live",
+            "firstName": "Jane",
+            "lastName": "Doe",
+            "email": "jane@doe.com",
+            "country": "DE",
+            "created": "2012-04-23T18:25:43.511Z"
+        },
+        {
+            "id": "cus_7f0724f3b1d745d49",
+            "firstName": "John",
+            "lastName": "Doe",
+            "mode": "Live",
+            "email": "john@doe.com",
+            "address": "Rutledge Ave 409",
+            "city": "Folsom",
+            "zip": "19033",
+            "country": "US",
+            "state": "PA",
+            "phone": "55555555555",
+            "created": "2012-04-23T18:25:43.511Z"
+        },
+        {
+           "id": "cus_15b154da233sxcvby",
+           "firstName": "John",
+           "lastName": "Wayne",
+           "mode": "Live",
+           "email": "wayne.john@doe.com",
+           "address": "Wild wild west",
+           "city": "Texas",
+           "zip": "19033",
+           "country": "US",
+           "state": "Texas",
+           "created": "2012-04-23T18:25:43.511Z"
+       }
+    ],
+    "pagination": {
+        "offset": 10,
+        "limit": 3,
+        "count": 2504
+    }
+}

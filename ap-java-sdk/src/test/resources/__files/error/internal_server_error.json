@@ -1,0 +1,6 @@
+{
+    "Type": "internal_error",
+    "Code": "internal_error",
+    "StatusCode": "500",
+    "Message": "Internal Error"
+}

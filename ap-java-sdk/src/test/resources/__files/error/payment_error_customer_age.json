@@ -1,0 +1,6 @@
+{
+    "Type": "payment_error",
+    "Code": "customer_must_be_at_least_16_years_old",
+    "StatusCode": "402",
+    "Message": "Customer must be at least 16 years old"
+}
