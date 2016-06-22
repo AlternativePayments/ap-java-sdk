@@ -1,0 +1,6 @@
+{
+    "Type": "acquirer_down",
+    "Code": "acquirer_down",
+    "StatusCode": "402",
+    "Message": "Acquirer Down"
+}

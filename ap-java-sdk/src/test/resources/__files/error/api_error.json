@@ -1,0 +1,6 @@
+{
+    "Type": "api_error",
+    "Code": "api_error",
+    "StatusCode": "402",
+    "Message": "Api Error"
+}

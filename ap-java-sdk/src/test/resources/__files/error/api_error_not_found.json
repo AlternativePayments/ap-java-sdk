@@ -1,0 +1,6 @@
+{
+    "Type": "api_error",
+    "Code": "not_found",
+    "StatusCode": "404",
+    "Message": "Not Found - The requested item doesn’t exist."
+}

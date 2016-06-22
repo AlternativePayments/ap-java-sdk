@@ -1,0 +1,6 @@
+{
+    "Type": "payment_error",
+    "Code": "void_not_supported",
+    "StatusCode": "402",
+    "Message": "Void is not supported"
+}

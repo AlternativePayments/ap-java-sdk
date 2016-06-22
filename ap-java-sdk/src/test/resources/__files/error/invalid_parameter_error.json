@@ -1,0 +1,7 @@
+{
+    "Type": "invalid_parameter_error",
+    "Code": "invalid_object_sent",
+    "StatusCode": "400",
+    "Message": "Object is not sent or invalid object is sent",
+    "parameter": "id"
+}

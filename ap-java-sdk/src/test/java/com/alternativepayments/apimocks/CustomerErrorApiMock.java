@@ -22,12 +22,7 @@ public class CustomerErrorApiMock {
                 .willReturn(aResponse()
                         .withStatus(Status.PAYMENT_REQUIRED.getStatusCode())
                         .withHeader("Content-Type", "application/json")
-                        .withBody("{\n"
-                            + "  \"Type\": \"api_error\",\n"
-                            + "  \"Code\": \"api_error\",\n"
-                            + "  \"StatusCode\": \"402\",\n"
-                            + "  \"Message\": \"Api Error\"\n"
-                            + "}")));
+                        .withBodyFile("error/api_error.json")));
     }
 
     public static void expectApiErrorLowerCase() {
@@ -37,12 +32,7 @@ public class CustomerErrorApiMock {
                 .willReturn(aResponse()
                         .withStatus(Status.PAYMENT_REQUIRED.getStatusCode())
                         .withHeader("Content-Type", "application/json")
-                        .withBody("{\n"
-                            + "  \"type\": \"api_error\",\n"
-                            + "  \"code\": \"api_error\",\n"
-                            + "  \"statusCode\": \"402\",\n"
-                            + "  \"message\": \"Api Error\"\n"
-                            + "}")));
+                        .withBodyFile("error/api_error.json")));
     }
 
     public static void expectUnsupportedError() {
@@ -52,12 +42,7 @@ public class CustomerErrorApiMock {
                 .willReturn(aResponse()
                         .withStatus(Status.INTERNAL_SERVER_ERROR.getStatusCode())
                         .withHeader("Content-Type", "application/json")
-                        .withBody("{\n"
-                            + "  \"type\": \"internal_error\",\n"
-                            + "  \"code\": \"internal_error\",\n"
-                            + "  \"statusCode\": \"500\",\n"
-                            + "  \"message\": \"Internal Error\"\n"
-                            + "}")));
+                        .withBodyFile("error/internal_server_error.json")));
     }
 
     public static void expectPaymentError() {
@@ -67,12 +52,7 @@ public class CustomerErrorApiMock {
                 .willReturn(aResponse()
                         .withStatus(Status.PAYMENT_REQUIRED.getStatusCode())
                         .withHeader("Content-Type", "application/json")
-                        .withBody("{\n"
-                            + "  \"type\": \"payment_error\",\n"
-                            + "  \"code\": \"void_not_supported\",\n"
-                            + "  \"statusCode\": \"402\",\n"
-                            + "  \"message\": \"Void is not supported\"\n"
-                            + "}")));
+                        .withBodyFile("error/payment_error_void.json")));
     }
 
     public static void expectCustomerOlderError() {
@@ -82,12 +62,7 @@ public class CustomerErrorApiMock {
                 .willReturn(aResponse()
                         .withStatus(Status.PAYMENT_REQUIRED.getStatusCode())
                         .withHeader("Content-Type", "application/json")
-                        .withBody("{\n"
-                            + "  \"type\": \"payment_error\",\n"
-                            + "  \"code\": \"customer_must_be_at_least_16_years_old\",\n"
-                            + "  \"statusCode\": \"402\",\n"
-                            + "  \"message\": \"Customer must be at least 16 years old\"\n"
-                            + "}")));
+                        .withBodyFile("error/payment_error_customer_age.json")));
     }
 
     public static void expectApiErrorNotFound() {
@@ -97,12 +72,7 @@ public class CustomerErrorApiMock {
                 .willReturn(aResponse()
                         .withStatus(Status.PAYMENT_REQUIRED.getStatusCode())
                         .withHeader("Content-Type", "application/json")
-                        .withBody("{\n"
-                            + "  \"type\": \"api_error\",\n"
-                            + "  \"code\": \"not_found\",\n"
-                            + "  \"statusCode\": \"404\",\n"
-                            + "  \"message\": \"Not Found - The requested item doesn’t exist.\"\n"
-                            + "}")));
+                        .withBodyFile("error/api_error_not_found.json")));
     }
 
     public static void expectApiErrorInternalServerError() {
@@ -112,12 +82,7 @@ public class CustomerErrorApiMock {
                 .willReturn(aResponse()
                         .withStatus(Status.PAYMENT_REQUIRED.getStatusCode())
                         .withHeader("Content-Type", "application/json")
-                        .withBody("{\n"
-                            + "  \"type\": \"api_error\",\n"
-                            + "  \"code\": \"internal_server_error\",\n"
-                            + "  \"statusCode\": \"500\",\n"
-                            + "  \"message\": \"Server errors - internal server error.\"\n"
-                            + "}")));
+                        .withBodyFile("error/api_error_internal.json")));
     }
 
     public static void expectApiErrorAcquirerError() {
@@ -127,12 +92,7 @@ public class CustomerErrorApiMock {
                 .willReturn(aResponse()
                         .withStatus(Status.PAYMENT_REQUIRED.getStatusCode())
                         .withHeader("Content-Type", "application/json")
-                        .withBody("{\n"
-                            + "  \"type\": \"acquirer_down\",\n"
-                            + "  \"code\": \"acquirer_down\",\n"
-                            + "  \"statusCode\": \"402\",\n"
-                            + "  \"message\": \"Acquirer Down\"\n"
-                            + "}")));
+                        .withBodyFile("error/acquirer_down_error.json")));
     }
 
     public static void expectInvalidParameterSentError() {
@@ -142,13 +102,7 @@ public class CustomerErrorApiMock {
                 .willReturn(aResponse()
                         .withStatus(Status.BAD_REQUEST.getStatusCode())
                         .withHeader("Content-Type", "application/json")
-                        .withBody("{\n"
-                            + "  \"type\": \"invalid_parameter_error\",\n"
-                            + "  \"code\": \"invalid_object_sent\",\n"
-                            + "  \"statusCode\": \"400\",\n"
-                            + "  \"message\": \"Object is not sent or invalid object is sent\",\n"
-                            + "  \"parameter\": \"id\"\n"
-                            + "}")));
+                        .withBodyFile("error/invalid_parameter_error.json")));
     }
 
 }

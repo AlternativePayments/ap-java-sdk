@@ -1,0 +1,6 @@
+{
+    "Type": "api_error",
+    "Code": "internal_server_error",
+    "StatusCode": "500",
+    "Message": "Server errors - internal server error."
+}
