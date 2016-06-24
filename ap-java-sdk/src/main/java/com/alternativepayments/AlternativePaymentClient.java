@@ -17,11 +17,20 @@ import com.alternativepayments.models.ErrorModel;
 import com.alternativepayments.models.Pagination;
 import com.alternativepayments.models.customer.Customer;
 import com.alternativepayments.models.customer.CustomerCollection;
+import com.alternativepayments.models.transaction.PhoneVerification;
+import com.alternativepayments.models.transaction.Preauthorization;
+import com.alternativepayments.models.transaction.Transaction;
+import com.alternativepayments.models.transaction.TransactionCollection;
 
 /**
  * Alternative Payments Java SDK Client.
  */
 public class AlternativePaymentClient {
+
+    /**
+     * Version of the library. Should be updated together with version from inside maven.
+     */
+    public static final String VERSION = "0.1.0";
 
     private Client httpClient;
     private WebTarget apiTarget;
@@ -78,6 +87,61 @@ public class AlternativePaymentClient {
      */
     public Customer createCustomer(final Customer customer) {
         return post(apiTarget.path(Customer.API_ENDPOINT), customer, Customer.class);
+    }
+
+    /**
+     * Create new preauthorization.
+     *
+     * @param preauthorization you want to create
+     *
+     * @return newly created preauthorization.
+     */
+    public Preauthorization createPreauthorization(final Preauthorization preauthorization) {
+        return post(apiTarget.path(Preauthorization.API_ENDPOINT), preauthorization, Preauthorization.class);
+    }
+
+    /**
+     * Create new phoneverification.
+     *
+     * @param phoneverification you want to create
+     *
+     * @return newly created phoneverification.
+     */
+    public PhoneVerification createPhoneverification(final PhoneVerification phoneverification) {
+        return post(apiTarget.path(PhoneVerification.API_ENDPOINT), phoneverification, PhoneVerification.class);
+    }
+
+    /**
+     * Create new transaction.
+     *
+     * @param transaction you want to create
+     *
+     * @return newly created transaction.
+     */
+    public Transaction createTransaction(final Transaction transaction) {
+        return post(apiTarget.path(Transaction.API_ENDPOINT), transaction, Transaction.class);
+    }
+
+    /**
+     * Return all transactions.
+     *
+     * @return all transactions.
+     */
+    public TransactionCollection getAllTransactions() {
+        return get(apiTarget.path(Transaction.API_ENDPOINT), TransactionCollection.class);
+    }
+
+    /**
+     * Return transactions taking pagination in consideration.
+     *
+     * @param limit how many records we want
+     * @param offset offset of the requested results
+     *
+     * @return all transactions.
+     */
+    public TransactionCollection getTransactionsWithPagination(final int limit, final int offset) {
+        return get(apiTarget.path(Transaction.API_ENDPOINT).queryParam(Pagination.LIMIT, limit)
+                .queryParam(Pagination.OFFSET, offset), TransactionCollection.class);
     }
 
     /**

@@ -13,6 +13,17 @@ public class BaseModel {
     private final Instant updated;
 
     /**
+     * Create base model for each resource holding common as nulls.
+     *
+     */
+    public BaseModel() {
+        this.id = null;
+        this.mode = null;
+        this.created = null;
+        this.updated = null;
+    }
+
+    /**
      * Create base model for each resource holding common properties.
      *
      * @param id id of resource.
@@ -20,7 +31,7 @@ public class BaseModel {
      * @param created when resource is created.
      * @param updated when resource was updated.
      */
-    public BaseModel(String id, String mode, Instant created, Instant updated) {
+    public BaseModel(final String id, final String mode, final Instant created, final Instant updated) {
         this.id = id;
         this.mode = mode;
         this.created = created;

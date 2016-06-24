@@ -42,7 +42,7 @@ public class HttpClientFactory {
         final ClientConfig clientConfig = new ClientConfig();
         clientConfig.register(JacksonJsonProvider.class);
         clientConfig.register(new ObjectMapperProvider());
-        clientConfig.register(new AuthorizationClientFilter(apiKey));
+        clientConfig.register(new HeadersClientFilter(apiKey));
 
         final Client client = ClientBuilder.newClient(clientConfig);
         client.property(ClientProperties.CONNECT_TIMEOUT, connectionTimeout);

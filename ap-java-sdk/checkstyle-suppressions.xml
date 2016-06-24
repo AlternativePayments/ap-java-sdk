@@ -5,6 +5,14 @@
     "suppressions_1_1.dtd">
 
 <suppressions>
+    <!-- Allow all upper case for attributes -->
+    <suppress files="[\\/]src[\\/]main[\\/].*" checks="MemberName" />
+    <suppress files="[\\/]src[\\/]test[\\/].*" checks="MemberName" />
+
+    <!-- Allow all upper case for method parameters -->
+    <suppress files="[\\/]src[\\/]main[\\/].*" checks="ParameterName" />
+    <suppress files="[\\/]src[\\/]test[\\/].*" checks="ParameterName" />
+
     <!-- Exclude JavaDoc for tests -->
     <suppress files="[\\/]src[\\/]test[\\/].*" checks="JavadocMethod" />
     <suppress files="[\\/]src[\\/]test[\\/].*" checks="JavadocVariable" />

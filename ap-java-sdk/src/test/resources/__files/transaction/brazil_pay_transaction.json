@@ -1,0 +1,40 @@
+{
+    "id": "trn_d12209838b",
+    "mode": "Live",
+    "status": "Pending",
+    "customer": {
+        "id": "cus_bd838e3611d34d598",
+        "mode": "Live",
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "john@doe.com",
+        "address": "Rua E",
+        "address2": "1040",
+        "city": "Maracanaú",
+        "zip": "61919-230",
+        "country": "BR",
+        "state": "CE",
+        "phone": "+55A7xxxxxxx",
+        "birthDate": "12/04/1979",
+        "created": "2016-03-24T15:19:10.780Z"
+    },
+    "payment": {
+        "id": "pay_ffd25121f84e4d249",
+        "mode": "Live",
+        "holder": "John Doe",
+        "paymentOption": "BrazilPayBankTransfer",
+        "bankCode": "hsbc",
+        "documentId": "853.513.468-93",
+        "created": "2016-03-24T15:19:10.780Z"
+    },
+    "amount": 100,
+    "currency": "EUR",
+    "merchantPassThruData": "Order #1234958",
+    "created": "2016-03-24T15:19:10.780Z",
+    "redirectUrls": {
+        "returnUrl": "http://plugins.alternativepayments.com/message/success.html",
+        "cancelUrl": "http://plugins.alternativepayments.com/message/failure.html"
+    },
+    "ipAddress": "89.216.124.9",
+    "redirectUrl": "http://mybankingsite.com/hRedirection.aspx?transaction_id=trn_1a5f5e0c97"
+}
