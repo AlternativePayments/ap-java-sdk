@@ -78,8 +78,8 @@ public class CustomerModelTest extends BaseApiResourceTest {
 
     @Test
     public void create_new_customer() {
-        Customer customer = new Customer("cus_bd838e3611d34d598", null, null, null, "John", "Doe", "john@doe.com",
-                "Rutledge Ave 409", null, "Folsom", "19033", "US", "PA", "55555555555", null);
+        Customer customer = new Customer.Builder("John", "Doe", "john@doe.com", "US").address("Rutledge Ave 409")
+                .city("Folsom").zip("19033").state("PA").phone("55555555555").build();
 
         CustomerApiMock.expectPost(customer);
 
