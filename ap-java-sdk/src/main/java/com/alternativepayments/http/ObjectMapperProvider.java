@@ -22,7 +22,7 @@ public class ObjectMapperProvider implements ContextResolver<ObjectMapper> {
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         objectMapper.setSerializationInclusion(Include.NON_NULL);
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CAMEL_CASE);
+        objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CASE);
 
         return objectMapper;
     }

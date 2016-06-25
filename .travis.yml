@@ -3,6 +3,7 @@ sudo: true
 
 env:
   - TEST_DIR=ap-java-sdk
+  - TEST_DIR=sample-application
 
 jdk:
   - oraclejdk8
