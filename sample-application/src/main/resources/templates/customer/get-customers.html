@@ -6,5 +6,9 @@
 </head>
 <body>
     <div th:include="customer/fragments/customer-menu :: customer-menu"></div>
+    <div th:each="customer : ${customers}">
+       <ul th:replace="customer/fragments/one-customer :: 'one-customer' (customer=${customer})">
+        </ul>
+    </div>
 </body>
 </html>

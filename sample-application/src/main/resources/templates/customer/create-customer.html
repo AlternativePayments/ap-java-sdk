@@ -5,6 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <p th:text="'Hello, ' + ${customer.firstName} + '!'" />
+    <div th:include="customer/fragments/customer-menu :: customer-menu"></div>
+    <p th:text="'Customer ' + ${customer.firstName} + ' with ID ' + ${customer.id} + ' created!'" />
+    <ul th:replace="customer/fragments/one-customer :: 'one-customer' (customer=${customer})">
+    </ul>
 </body>
 </html>

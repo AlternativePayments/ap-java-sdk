@@ -6,5 +6,13 @@
 </head>
 <body>
     <div th:include="customer/fragments/customer-menu :: customer-menu"></div>
+    <form th:action="@{/get-customer}">
+        <input type="text" name="customer_id"/>
+        <button type="submit">Get Customer</button>
+    </form>
+    <div th:if="${customer != null}" >
+        <ul th:replace="customer/fragments/one-customer :: 'one-customer' (customer=${customer})">
+        </ul>
+    </div>
 </body>
 </html>
