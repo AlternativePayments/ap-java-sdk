@@ -2,17 +2,18 @@ package com.alternativepayments.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * Base model for error.
  */
 public class ErrorModel {
 
-    private final ErrorType type;
-    private final String code;
-    private final int statusCode;
-    private final String message;
-    private final String parameter;
+    private ErrorType type;
+    private String code;
+    private int statusCode;
+    private String message;
+    private String parameter;
 
     /**
      * Create base error model for non 2xx response from API.
@@ -79,23 +80,34 @@ public class ErrorModel {
         /**
          * Api level error.
          */
-        @JsonProperty("api_error") API_ERROR,
+        API_ERROR("api_error"),
         /**
          * Authentication level error.
          */
-        @JsonProperty("authentication_error") AUTHENTICATION_ERROR,
+        AUTHENTICATION_ERROR("authentication_error"),
         /**
          * Invalid parameter error.
          */
-        @JsonProperty("invalid_parameter_error") INVALID_PARAMETER_ERROR,
+        INVALID_PARAMETER_ERROR("invalid_parameter_error"),
         /**
          * Payment error.
          */
-        @JsonProperty("payment_error") PAYMENT_ERROR,
+        PAYMENT_ERROR("payment_error"),
         /**
          * Acquirer error.
          */
-        @JsonProperty("acquirer_down") ACQUIRER_DOWN;
+        ACQUIRER_DOWN("acquirer_down");
+
+        private final String value;
+
+        private ErrorType(final String description) {
+            this.value = description;
+        }
+
+        @JsonValue
+        final String value() {
+            return this.value;
+        }
     }
 
 }

@@ -1,0 +1,128 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.alternativepayments</groupId>
+    <artifactId>sample-application-java</artifactId>
+    <version>0.1.0</version>
+    <packaging>jar</packaging>
+
+    <name>Sample Java Application</name>
+    <description>Sample Java application which demonstrates usage of Alternative Payments SDK</description>
+    <url>https://github.com/AlternativePayments/ap-java-sdk</url>
+
+    <repositories>
+        <repository>
+            <id>bintray-alternativepaymentscom-maven</id>
+            <name>bintray</name>
+            <url>http://dl.bintray.com/alternativepaymentscom/maven</url>
+        </repository>
+    </repositories>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://github.com/AlternativePayments/ap-java-sdk/blob/master/LICENSE</url>
+        </license>
+    </licenses>
+
+    <issueManagement>
+        <system>github.com</system>
+        <url>https://github.com/AlternativePayments/ap-java-sdk/issues</url>
+    </issueManagement>
+
+    <scm>
+        <connection>scm:git:git@github.com:AlternativePayments/ap-java-sdk.git</connection>
+        <developerConnection>scm:git@github.com:AlternativePayments/ap-java-sdk.git</developerConnection>
+        <url>https://github.com/AlternativePayments/ap-java-sdk</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <source.level>1.8</source.level>
+        <code.level>1.8</code.level>
+        <start-class>com.alternativepayments.SampleApplication</start-class>
+        <version.spring.boot>1.3.5.RELEASE</version.spring.boot>
+        <version.alternative.payment.sdk>0.1.0</version.alternative.payment.sdk>
+        <version.plugin.jar>2.6</version.plugin.jar>
+        <version.plugin.checkstyle>2.17</version.plugin.checkstyle>
+        <version.plugin.spring.boot>2.6</version.plugin.spring.boot>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${version.spring.boot}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <version>${version.spring.boot}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alternativepayments</groupId>
+            <artifactId>ap-java-sdk</artifactId>
+            <version>${version.alternative.payment.sdk}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${version.spring.boot}</version>
+                    <configuration>
+                        <mainClass>${start-class}</mainClass>
+                        <layout>ZIP</layout>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>checks</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <!-- Check style on build. -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-checkstyle-plugin</artifactId>
+                        <version>${version.plugin.checkstyle}</version>
+                        <executions>
+                            <execution>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                                <configuration>
+                                    <configLocation>checkstyle.xml</configLocation>
+                                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                                    <consoleOutput>true</consoleOutput>
+                                    <failsOnError>true</failsOnError>
+                                    <propertiesLocation>checkstyle.properties</propertiesLocation>
+                                    <excludes>**/generated/**/*</excludes>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

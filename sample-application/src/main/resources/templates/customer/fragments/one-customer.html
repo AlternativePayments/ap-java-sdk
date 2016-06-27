@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<body th:fragment="one-customer">
+    <ul>
+        <li th:text="'ID: ' + ${customer.id}"></li>
+        <li th:text="'First Name: ' + ${customer.firstName}"></li>
+        <li th:text="'Last Name: ' + ${customer.lastName}"></li>
+        <li th:text="'Email: ' + ${customer.email}"></li>
+        <li th:text="'Address: ' + ${customer.address}"></li>
+        <li th:text="'Address 2: ' + ${customer.address2}"></li>
+        <li th:text="'City: ' + ${customer.city}"></li>
+        <li th:text="'Zip: ' + ${customer.zip}"></li>
+        <li th:text="'Country: ' + ${customer.country}"></li>
+        <li th:text="'State: ' + ${customer.state}"></li>
+        <li th:text="'Phone: ' + ${customer.phone}"></li>
+        <li th:text="'Birth Date: ' + ${customer.birthDate}"></li>
+    </ul>
+</body>
+</html>

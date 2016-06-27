@@ -1,0 +1,3 @@
+alternativePayment:
+  apiBase: https://api.alternativepayments.com/api
+  apiKey: add key here

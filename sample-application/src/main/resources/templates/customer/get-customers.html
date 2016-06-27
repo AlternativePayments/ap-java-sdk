@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Alternative Payments Java SDK Sample Application</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <div th:include="customer/fragments/customer-menu :: customer-menu"></div>
+    <div th:each="customer : ${customers}">
+       <ul th:replace="customer/fragments/one-customer :: 'one-customer' (customer=${customer})">
+        </ul>
+    </div>
+</body>
+</html>
