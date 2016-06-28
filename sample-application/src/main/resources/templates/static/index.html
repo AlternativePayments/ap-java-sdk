@@ -7,7 +7,21 @@
     <title>Alternative Payments Java SDK Sample Application</title>
 </head>
 <body>
-    <section layout:fragment="menu" th:include="customer/fragments/customer-menu :: customer-menu">
+    <section layout:fragment="menu">
+        <ul class="list-inline">
+            <li><a href="create-customer">Add customer</a></li>
+            <li><a href="get-customer">Get customer</a></li>
+            <li><a href="get-customers">Get all customers</a></li>
+        </ul>
+        <ul class="list-inline">
+            <li><a href="create-sepa-transaction">Add SEPA transaction</a></li>
+            <li><a href="create-mistercach-transaction">Add Mistercach transaction</a></li>
+            <li><a href="create-ideal-transaction">Add IDEAL transaction</a></li>
+            <li><a href="create-brazilpay-transaction">Add BrazilPay transaction</a></li>
+            <li><a href="create-creditcard-transaction">Add credit card transaction</a></li>
+            <li><a href="get-transaction">Get transaction</a></li>
+            <li><a href="get-transactions">Get all transactions</a></li>
+        </ul>
     </section>
 </body>
 </html>

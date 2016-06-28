@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout/main">
+<head>
+    <title>Alternative Payments Java SDK Sample Application</title>
+</head>
+<body>
+    <section layout:fragment="menu" th:include="transaction/fragments/transaction-menu :: transaction-menu">
+    </section>
+    <section layout:fragment="content">
+        <form th:action="@{/get-transaction}">
+            <input type="text" name="transaction_id"/>
+            <button type="submit">Get Transaction</button>
+        </form>
+        <div th:if="${transaction != null}" >
+            <ul th:replace="transaction/fragments/one-transaction :: 'one-transaction' (transaction=${transaction})">
+            </ul>
+        </div>
+    </section>
+</body>
+</html>
