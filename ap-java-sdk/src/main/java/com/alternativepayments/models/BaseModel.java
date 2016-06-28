@@ -1,6 +1,6 @@
 package com.alternativepayments.models;
 
-import java.time.Instant;
+import org.joda.time.DateTime;
 
 /**
  * Base entity with common properties.
@@ -9,8 +9,8 @@ public class BaseModel {
 
     private final String id;
     private final String mode;
-    private final Instant created;
-    private final Instant updated;
+    private final DateTime created;
+    private final DateTime updated;
 
     /**
      * Create base model for each resource holding common as nulls.
@@ -31,7 +31,7 @@ public class BaseModel {
      * @param created when resource is created.
      * @param updated when resource was updated.
      */
-    public BaseModel(final String id, final String mode, final Instant created, final Instant updated) {
+    public BaseModel(final String id, final String mode, final DateTime created, final DateTime updated) {
         this.id = id;
         this.mode = mode;
         this.created = created;
@@ -55,14 +55,14 @@ public class BaseModel {
     /**
      * @return when this resource was created.
      */
-    public Instant getCreated() {
+    public DateTime getCreated() {
         return created;
     }
 
     /**
      * @return when this resource was updated.
      */
-    public Instant getUpdated() {
+    public DateTime getUpdated() {
         return updated;
     }
 

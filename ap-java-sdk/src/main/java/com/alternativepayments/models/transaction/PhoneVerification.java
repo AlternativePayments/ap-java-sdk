@@ -1,6 +1,6 @@
 package com.alternativepayments.models.transaction;
 
-import java.time.Instant;
+import org.joda.time.DateTime;
 
 import com.alternativepayments.models.BaseModel;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -39,8 +39,8 @@ public class PhoneVerification extends BaseModel {
     public PhoneVerification(
             @JsonProperty("id") final String id,
             @JsonProperty("mode") final String mode,
-            @JsonProperty("created") final Instant created,
-            @JsonProperty("updated") final Instant updated,
+            @JsonProperty("created") final DateTime created,
+            @JsonProperty("updated") final DateTime updated,
             @JsonProperty("key") final String key,
             @JsonProperty("phone") final String phone,
             @JsonProperty("type") final String type,

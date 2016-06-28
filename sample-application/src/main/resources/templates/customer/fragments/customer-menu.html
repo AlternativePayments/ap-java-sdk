@@ -3,15 +3,10 @@
       xmlns:th="http://www.thymeleaf.org"
       lang="en">
 <body th:fragment="customer-menu">
-    <table>
-        <tr>
-            <td><strong>Options:</strong></td>
-        </tr>
-        <tr>
-            <td><a href="create-customer">Add customer</a></td>
-            <td><a href="get-customer">Get customer</a></td>
-            <td><a href="get-customers">Get all customers</a></td>
-        </tr>
-    </table>
+    <ul class="list-inline">
+        <li><a href="create-customer">Add customer</a></li>
+        <li><a href="get-customer">Get customer</a></li>
+        <li><a href="get-customers">Get all customers</a></li>
+    </ul>
 </body>
 </html>

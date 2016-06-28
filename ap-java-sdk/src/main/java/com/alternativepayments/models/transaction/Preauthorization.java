@@ -1,6 +1,6 @@
 package com.alternativepayments.models.transaction;
 
-import java.time.Instant;
+import org.joda.time.DateTime;
 
 import com.alternativepayments.models.BaseModel;
 import com.alternativepayments.models.customer.Customer;
@@ -38,8 +38,8 @@ public class Preauthorization extends BaseModel {
     public Preauthorization(
             @JsonProperty("id") final String id,
             @JsonProperty("mode") final String mode,
-            @JsonProperty("created") final Instant created,
-            @JsonProperty("updated") final Instant updated,
+            @JsonProperty("created") final DateTime created,
+            @JsonProperty("updated") final DateTime updated,
             @JsonProperty("customer") final Customer customer,
             @JsonProperty("payment") final Payment payment,
             @JsonProperty("amount") final int amount,

@@ -1,18 +1,23 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout/main">
 <head>
     <title>Alternative Payments Java SDK Sample Application</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <div th:include="customer/fragments/customer-menu :: customer-menu"></div>
-    <form th:action="@{/get-customer}">
-        <input type="text" name="customer_id"/>
-        <button type="submit">Get Customer</button>
-    </form>
-    <div th:if="${customer != null}" >
-        <ul th:replace="customer/fragments/one-customer :: 'one-customer' (customer=${customer})">
-        </ul>
-    </div>
+    <section layout:fragment="menu" th:include="customer/fragments/customer-menu :: customer-menu">
+    </section>
+    <section layout:fragment="content">
+        <form th:action="@{/get-customer}">
+            <input type="text" name="customer_id"/>
+            <button type="submit">Get Customer</button>
+        </form>
+        <div th:if="${customer != null}" >
+            <ul th:replace="customer/fragments/one-customer :: 'one-customer' (customer=${customer})">
+            </ul>
+        </div>
+    </section>
 </body>
 </html>
