@@ -123,6 +123,132 @@ public class TransactionController {
     }
 
     /**
+     * Create teleingreso transaction page.
+     *
+     * @param model view model
+     * @return view to create teleingreso transaction.
+     */
+    @RequestMapping("/create-teleingreso-transaction")
+    public String createTeleingresoTransaction(Model model) {
+        Customer customer = new Customer.Builder("John", "Doe", "john@doe.com", "ES").build();
+        Payment payment = new Payment.Builder("Teleingreso", "John Doe").build();
+        RedirectUrls redirectUrls = new RedirectUrls("http://plugins.alternativepayments.com/message/success.html",
+                "http://plugins.alternativepayments.com/message/failure.html");
+        Transaction teleingresoTransaction = new Transaction.Builder(payment, null, 100, "EUR")
+                .redirectUrls(redirectUrls).customer(customer).build();
+
+        Transaction createdTransaction = alternativePaymentClient.createTransaction(teleingresoTransaction);
+        model.addAttribute("transaction", createdTransaction);
+        return "transaction/create-transaction";
+    }
+
+    /**
+     * Create safetypay transaction page.
+     *
+     * @param model view model
+     * @return view to create safetypay transaction.
+     */
+    @RequestMapping("/create-safetypay-transaction")
+    public String createSafetypayTransaction(Model model) {
+        Customer customer = new Customer.Builder("John", "Doe", "john@doe.com", "ES").build();
+        Payment payment = new Payment.Builder("Teleingreso", "John Doe").build();
+        RedirectUrls redirectUrls = new RedirectUrls("http://plugins.alternativepayments.com/message/success.html",
+                "http://plugins.alternativepayments.com/message/failure.html");
+        Transaction safetyPayTransaction = new Transaction.Builder(payment, null, 100, "EUR").redirectUrls(redirectUrls)
+                .customer(customer).build();
+
+        Transaction createdTransaction = alternativePaymentClient.createTransaction(safetyPayTransaction);
+
+        model.addAttribute("transaction", createdTransaction);
+        return "transaction/create-transaction";
+    }
+
+    /**
+     * Create POLi transaction page.
+     *
+     * @param model view model
+     * @return view to create POLi transaction.
+     */
+    @RequestMapping("/create-poli-transaction")
+    public String createPoliTransaction(Model model) {
+        Customer customer = new Customer.Builder("John", "Doe", "john@doe.com", "AU").build();
+        Payment payment = new Payment.Builder("POLi", "John Doe").build();
+        RedirectUrls redirectUrls = new RedirectUrls("http://plugins.alternativepayments.com/message/success.html",
+                "http://plugins.alternativepayments.com/message/failure.html");
+        Transaction poliTransaction = new Transaction.Builder(payment, null, 100, "EUR").redirectUrls(redirectUrls)
+                .customer(customer).build();
+
+        Transaction createdTransaction = alternativePaymentClient.createTransaction(poliTransaction);
+
+        model.addAttribute("transaction", createdTransaction);
+        return "transaction/create-transaction";
+    }
+
+    /**
+     * Create TrustPay transaction page.
+     *
+     * @param model view model
+     * @return view to create TrustPay transaction.
+     */
+    @RequestMapping("/create-trustpay-transaction")
+    public String createTrustPayTransaction(Model model) {
+        Customer customer = new Customer.Builder("John", "Doe", "john@doe.com", "BA").build();
+        Payment payment = new Payment.Builder("TrustPay", "John Doe").build();
+        RedirectUrls redirectUrls = new RedirectUrls("http://plugins.alternativepayments.com/message/success.html",
+                "http://plugins.alternativepayments.com/message/failure.html");
+        Transaction trustPayTransaction = new Transaction.Builder(payment, null, 100, "EUR").redirectUrls(redirectUrls)
+                .customer(customer).build();
+
+        Transaction createdTransaction = alternativePaymentClient.createTransaction(trustPayTransaction);
+
+        model.addAttribute("transaction", createdTransaction);
+        return "transaction/create-transaction";
+    }
+
+    /**
+     * Create DirectPay transaction page.
+     *
+     * @param model view model
+     * @return view to create DirectPay transaction.
+     */
+    @RequestMapping("/create-directpay-transaction")
+    public String createDirectPayTransaction(Model model) {
+        Customer customer = new Customer.Builder("John", "Doe", "john@doe.com", "DE").build();
+        Payment payment = new Payment.Builder("directpay", "John Doe").build();
+        RedirectUrls redirectUrls = new RedirectUrls("http://plugins.alternativepayments.com/message/success.html",
+                "http://plugins.alternativepayments.com/message/failure.html");
+        Transaction directPayTransaction = new Transaction.Builder(payment, null, 100, "EUR").redirectUrls(redirectUrls)
+                .customer(customer).build();
+
+        Transaction createdTransaction = alternativePaymentClient.createTransaction(directPayTransaction);
+
+        model.addAttribute("transaction", createdTransaction);
+        return "transaction/create-transaction";
+    }
+
+    /**
+     * Create DirectPay Max transaction page.
+     *
+     * @param model view model
+     * @return view to create DirectPay Max transaction.
+     */
+    @RequestMapping("/create-directpay-max-transaction")
+    public String createDirectPayMaxTransaction(Model model) {
+        Customer customer = new Customer.Builder("John", "Doe", "john@doe.com", "DE").build();
+        Payment payment = new Payment.Builder("directpaymax", "John Doe").bankCode("POSTBANK").build();
+        RedirectUrls redirectUrls = new RedirectUrls("http://plugins.alternativepayments.com/message/success.html",
+                "http://plugins.alternativepayments.com/message/failure.html");
+        Transaction directPayMaxTransaction = new Transaction.Builder(payment, null, 100, "EUR")
+                .redirectUrls(redirectUrls)
+                .customer(customer).build();
+
+        Transaction createdTransaction = alternativePaymentClient.createTransaction(directPayMaxTransaction);
+
+        model.addAttribute("transaction", createdTransaction);
+        return "transaction/create-transaction";
+    }
+
+    /**
      * Get transaction.
      *
      * @param model view model
