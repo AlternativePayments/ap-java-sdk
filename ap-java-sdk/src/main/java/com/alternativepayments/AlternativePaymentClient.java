@@ -123,6 +123,16 @@ public class AlternativePaymentClient {
     }
 
     /**
+     * Return transaction for provided ID.
+     *
+     * @param id id of requested transaction.
+     * @return Transaction with given ID.
+     */
+    public Transaction getTransaction(final String id) {
+        return get(apiTarget.path(Transaction.API_ENDPOINT + id), Transaction.class);
+    }
+
+    /**
      * Return all transactions.
      *
      * @return all transactions.
