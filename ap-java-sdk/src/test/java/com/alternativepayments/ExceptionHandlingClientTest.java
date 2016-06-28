@@ -1,8 +1,8 @@
 package com.alternativepayments;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import com.alternativepayments.apimocks.CustomerErrorApiMock;
@@ -18,13 +18,14 @@ public class ExceptionHandlingClientTest extends BaseApiResourceTest {
         final String id = "payment_error";
         CustomerErrorApiMock.expectPaymentError();
 
-        final Throwable thrown = catchThrowable(() -> alternativePaymentClient.getCustomer(id));
-
-        assertThat(thrown).isInstanceOf(PaymentException.class);
-        PaymentException paymentException = (PaymentException) thrown;
-        assertThat(paymentException.getMessage()).isEqualTo("Void is not supported");
-        assertThat(paymentException.getErrorCode()).isEqualTo("void_not_supported");
-        assertThat(paymentException.getStatusCode()).isEqualTo(402);
+        try {
+            alternativePaymentClient.getCustomer(id);
+            Assert.fail("Exception must not be thrown.");
+        } catch (PaymentException paymentException) {
+            assertThat(paymentException.getMessage()).isEqualTo("Void is not supported");
+            assertThat(paymentException.getErrorCode()).isEqualTo("void_not_supported");
+            assertThat(paymentException.getStatusCode()).isEqualTo(402);
+        }
     }
 
     @Test
@@ -32,13 +33,14 @@ public class ExceptionHandlingClientTest extends BaseApiResourceTest {
         final String id = "customer_older_error";
         CustomerErrorApiMock.expectCustomerOlderError();
 
-        final Throwable thrown = catchThrowable(() -> alternativePaymentClient.getCustomer(id));
-
-        assertThat(thrown).isInstanceOf(PaymentException.class);
-        PaymentException paymentException = (PaymentException) thrown;
-        assertThat(paymentException.getMessage()).isEqualTo("Customer must be at least 16 years old");
-        assertThat(paymentException.getErrorCode()).isEqualTo("customer_must_be_at_least_16_years_old");
-        assertThat(paymentException.getStatusCode()).isEqualTo(402);
+        try {
+            alternativePaymentClient.getCustomer(id);
+            Assert.fail("Exception must not be thrown.");
+        } catch (PaymentException paymentException) {
+            assertThat(paymentException.getMessage()).isEqualTo("Customer must be at least 16 years old");
+            assertThat(paymentException.getErrorCode()).isEqualTo("customer_must_be_at_least_16_years_old");
+            assertThat(paymentException.getStatusCode()).isEqualTo(402);
+        }
     }
 
     @Test
@@ -46,13 +48,14 @@ public class ExceptionHandlingClientTest extends BaseApiResourceTest {
         final String id = "error_upper_case";
         CustomerErrorApiMock.expectApiErrorUpperCase();
 
-        final Throwable thrown = catchThrowable(() -> alternativePaymentClient.getCustomer(id));
-
-        assertThat(thrown).isInstanceOf(ApiException.class);
-        ApiException apiException = (ApiException) thrown;
-        assertThat(apiException.getMessage()).isEqualTo("Api Error");
-        assertThat(apiException.getErrorCode()).isEqualTo("api_error");
-        assertThat(apiException.getStatusCode()).isEqualTo(402);
+        try {
+            alternativePaymentClient.getCustomer(id);
+            Assert.fail("Exception must not be thrown.");
+        } catch (ApiException apiException) {
+            assertThat(apiException.getMessage()).isEqualTo("Api Error");
+            assertThat(apiException.getErrorCode()).isEqualTo("api_error");
+            assertThat(apiException.getStatusCode()).isEqualTo(402);
+        }
     }
 
     @Test
@@ -60,13 +63,14 @@ public class ExceptionHandlingClientTest extends BaseApiResourceTest {
         final String id = "error_lower_case";
         CustomerErrorApiMock.expectApiErrorLowerCase();
 
-        final Throwable thrown = catchThrowable(() -> alternativePaymentClient.getCustomer(id));
-
-        assertThat(thrown).isInstanceOf(ApiException.class);
-        ApiException apiException = (ApiException) thrown;
-        assertThat(apiException.getMessage()).isEqualTo("Api Error");
-        assertThat(apiException.getErrorCode()).isEqualTo("api_error");
-        assertThat(apiException.getStatusCode()).isEqualTo(402);
+        try {
+            alternativePaymentClient.getCustomer(id);
+            Assert.fail("Exception must not be thrown.");
+        } catch (ApiException apiException) {
+            assertThat(apiException.getMessage()).isEqualTo("Api Error");
+            assertThat(apiException.getErrorCode()).isEqualTo("api_error");
+            assertThat(apiException.getStatusCode()).isEqualTo(402);
+        }
     }
 
     @Test
@@ -74,13 +78,14 @@ public class ExceptionHandlingClientTest extends BaseApiResourceTest {
         final String id = "not_found";
         CustomerErrorApiMock.expectApiErrorNotFound();
 
-        final Throwable thrown = catchThrowable(() -> alternativePaymentClient.getCustomer(id));
-
-        assertThat(thrown).isInstanceOf(ApiException.class);
-        ApiException apiException = (ApiException) thrown;
-        assertThat(apiException.getMessage()).isEqualTo("Not Found - The requested item doesn’t exist.");
-        assertThat(apiException.getErrorCode()).isEqualTo("not_found");
-        assertThat(apiException.getStatusCode()).isEqualTo(404);
+        try {
+            alternativePaymentClient.getCustomer(id);
+            Assert.fail("Exception must not be thrown.");
+        } catch (ApiException apiException) {
+            assertThat(apiException.getMessage()).isEqualTo("Not Found - The requested item doesn’t exist.");
+            assertThat(apiException.getErrorCode()).isEqualTo("not_found");
+            assertThat(apiException.getStatusCode()).isEqualTo(404);
+        }
     }
 
     @Test
@@ -88,13 +93,14 @@ public class ExceptionHandlingClientTest extends BaseApiResourceTest {
         final String id = "internal_server_error";
         CustomerErrorApiMock.expectApiErrorInternalServerError();
 
-        final Throwable thrown = catchThrowable(() -> alternativePaymentClient.getCustomer(id));
-
-        assertThat(thrown).isInstanceOf(ApiException.class);
-        ApiException apiException = (ApiException) thrown;
-        assertThat(apiException.getMessage()).isEqualTo("Server errors - internal server error.");
-        assertThat(apiException.getErrorCode()).isEqualTo("internal_server_error");
-        assertThat(apiException.getStatusCode()).isEqualTo(500);
+        try {
+            alternativePaymentClient.getCustomer(id);
+            Assert.fail("Exception must not be thrown.");
+        } catch (ApiException apiException) {
+            assertThat(apiException.getMessage()).isEqualTo("Server errors - internal server error.");
+            assertThat(apiException.getErrorCode()).isEqualTo("internal_server_error");
+            assertThat(apiException.getStatusCode()).isEqualTo(500);
+        }
     }
 
     @Test
@@ -102,13 +108,14 @@ public class ExceptionHandlingClientTest extends BaseApiResourceTest {
         final String id = "acquirer_error";
         CustomerErrorApiMock.expectApiErrorAcquirerError();
 
-        final Throwable thrown = catchThrowable(() -> alternativePaymentClient.getCustomer(id));
-
-        assertThat(thrown).isInstanceOf(ApiException.class);
-        ApiException apiException = (ApiException) thrown;
-        assertThat(apiException.getMessage()).isEqualTo("Acquirer Down");
-        assertThat(apiException.getErrorCode()).isEqualTo("acquirer_down");
-        assertThat(apiException.getStatusCode()).isEqualTo(402);
+        try {
+            alternativePaymentClient.getCustomer(id);
+            Assert.fail("Exception must not be thrown.");
+        } catch (ApiException apiException) {
+            assertThat(apiException.getMessage()).isEqualTo("Acquirer Down");
+            assertThat(apiException.getErrorCode()).isEqualTo("acquirer_down");
+            assertThat(apiException.getStatusCode()).isEqualTo(402);
+        }
     }
 
     @Test
@@ -116,24 +123,24 @@ public class ExceptionHandlingClientTest extends BaseApiResourceTest {
         final String id = "invalid_object_sent";
         CustomerErrorApiMock.expectInvalidParameterSentError();
 
-        final Throwable thrown = catchThrowable(() -> alternativePaymentClient.getCustomer(id));
-
-        assertThat(thrown).isInstanceOf(InvalidParameterException.class);
-        InvalidParameterException invalidParameterException = (InvalidParameterException) thrown;
-        assertThat(invalidParameterException.getMessage()).isEqualTo("Object is not sent or invalid object is sent");
-        assertThat(invalidParameterException.getErrorCode()).isEqualTo("invalid_object_sent");
-        assertThat(invalidParameterException.getStatusCode()).isEqualTo(400);
-        assertThat(invalidParameterException.getParameter()).isEqualTo("id");
+        try {
+            alternativePaymentClient.getCustomer(id);
+            Assert.fail("Exception must not be thrown.");
+        } catch (InvalidParameterException invalidParameterException) {
+            assertThat(invalidParameterException.getMessage())
+                    .isEqualTo("Object is not sent or invalid object is sent");
+            assertThat(invalidParameterException.getErrorCode()).isEqualTo("invalid_object_sent");
+            assertThat(invalidParameterException.getStatusCode()).isEqualTo(400);
+            assertThat(invalidParameterException.getParameter()).isEqualTo("id");
+        }
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void return_unsupported_error() {
         final String id = "unsupported_error";
         CustomerErrorApiMock.expectUnsupportedError();
 
-        final Throwable thrown = catchThrowable(() -> alternativePaymentClient.getCustomer(id));
-
-        assertThat(thrown).isInstanceOf(RuntimeException.class);
+        alternativePaymentClient.getCustomer(id);
     }
 
 }

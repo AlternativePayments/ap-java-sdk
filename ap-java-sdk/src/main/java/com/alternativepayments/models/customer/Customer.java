@@ -1,6 +1,6 @@
 package com.alternativepayments.models.customer;
 
-import java.time.Instant;
+import org.joda.time.DateTime;
 
 import com.alternativepayments.models.BaseModel;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -51,8 +51,8 @@ public class Customer extends BaseModel {
     public Customer(
             @JsonProperty("id") final String id,
             @JsonProperty("mode") final String mode,
-            @JsonProperty("created") final Instant created,
-            @JsonProperty("updated") final Instant updated,
+            @JsonProperty("created") final DateTime created,
+            @JsonProperty("updated") final DateTime updated,
             @JsonProperty("firstName") final String firstName,
             @JsonProperty("lastName") final String lastName,
             @JsonProperty("email") final String email,

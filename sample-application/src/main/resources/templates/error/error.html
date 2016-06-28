@@ -7,13 +7,12 @@
     <title>Alternative Payments Java SDK Sample Application</title>
 </head>
 <body>
-    <section layout:fragment="menu" th:include="customer/fragments/customer-menu :: customer-menu">
-    </section>
     <section layout:fragment="content">
-        <div th:each="customer : ${customers}">
-            <ul th:replace="customer/fragments/one-customer :: 'one-customer' (customer=${customer})">
-            </ul>
-        </div>
+        <ul>
+	        <li th:text="'Error Code: ' + ${exception.errorCode}"></li>
+	        <li th:text="'Status Code: ' + ${exception.statusCode}"></li>
+	        <li th:text="'Message: ' + ${exception.message}"></li>
+        </ul>
     </section>
 </body>
 </html>
