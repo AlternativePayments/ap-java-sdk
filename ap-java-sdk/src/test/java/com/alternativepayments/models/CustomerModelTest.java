@@ -16,7 +16,7 @@ public class CustomerModelTest extends BaseApiResourceTest {
         final String id = "cus_bd838e3611d34d598";
         CustomerApiMock.expectGet(id);
 
-        final Customer customer = alternativePaymentClient.getCustomer(id);
+        final Customer customer = alternativePaymentClient.getById(id, Customer.API_ENDPOINT, Customer.class);
 
         assertThat(customer.getId()).isEqualTo("cus_bd838e3611d34d598");
         assertThat(customer.getFirstName()).isEqualTo("John");
@@ -37,7 +37,8 @@ public class CustomerModelTest extends BaseApiResourceTest {
     public void return_all_customers() {
         CustomerApiMock.expectGetAll();
 
-        final CustomerCollection customers = alternativePaymentClient.getAllCustomers();
+        final CustomerCollection customers = alternativePaymentClient.getAll(Customer.API_ENDPOINT,
+                CustomerCollection.class);
 
         assertThat(customers.getCustomers()).hasSize(2);
         assertThat(customers.getPagination().getOffset()).isEqualTo(10);
@@ -83,7 +84,8 @@ public class CustomerModelTest extends BaseApiResourceTest {
 
         CustomerApiMock.expectPost(customer);
 
-        final Customer createdCustomer = alternativePaymentClient.createCustomer(customer);
+        final Customer createdCustomer = alternativePaymentClient.create(customer, Customer.API_ENDPOINT,
+                Customer.class);
 
         assertThat(createdCustomer.getId()).isEqualTo("cus_bd838e3611d34d598");
         assertThat(createdCustomer.getFirstName()).isEqualTo("John");
@@ -104,7 +106,8 @@ public class CustomerModelTest extends BaseApiResourceTest {
     public void return_customers_with_pagination() {
         CustomerApiMock.expectGetWithPagination();
 
-        final CustomerCollection customers = alternativePaymentClient.getCustomersWithPagination(3, 10);
+        final CustomerCollection customers = alternativePaymentClient.getAllWithPagination(3, 10, Customer.API_ENDPOINT,
+                CustomerCollection.class);
 
         assertThat(customers.getCustomers()).hasSize(3);
         assertThat(customers.getPagination().getOffset()).isEqualTo(10);

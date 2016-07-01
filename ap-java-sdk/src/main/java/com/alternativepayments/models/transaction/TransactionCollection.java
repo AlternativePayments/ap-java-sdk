@@ -2,6 +2,7 @@ package com.alternativepayments.models.transaction;
 
 import java.util.List;
 
+import com.alternativepayments.models.BaseCollection;
 import com.alternativepayments.models.Pagination;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,10 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * List of transactions.
  */
-public class TransactionCollection {
+public class TransactionCollection extends BaseCollection {
 
     private final List<Transaction> transactions;
-    private final Pagination pagination;
 
     /**
      * Transaction collection with pagination.
@@ -24,8 +24,8 @@ public class TransactionCollection {
     public TransactionCollection(
             @JsonProperty("transactions") final List<Transaction> transactions,
             @JsonProperty("pagination") final Pagination pagination) {
+        super(pagination);
         this.transactions = transactions;
-        this.pagination = pagination;
     }
 
     /**
@@ -33,12 +33,5 @@ public class TransactionCollection {
      */
     public List<Transaction> getTransactions() {
         return transactions;
-    }
-
-    /**
-     * @return the pagination
-     */
-    public Pagination getPagination() {
-        return pagination;
     }
 }

@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout/main">
+<head>
+    <title>Alternative Payments Java SDK Sample Application</title>
+</head>
+<body>
+    <section layout:fragment="menu" th:include="plan/fragments/plan-menu :: plan-menu">
+    </section>
+    <section layout:fragment="content">
+        <div th:each="plan : ${plans}">
+            <ul th:replace="plan/fragments/one-plan :: 'one-plan' (plan=${plan})">
+            </ul>
+        </div>
+    </section>
+</body>
+</html>

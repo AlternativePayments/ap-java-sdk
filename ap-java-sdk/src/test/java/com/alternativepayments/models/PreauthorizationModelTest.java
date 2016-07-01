@@ -22,7 +22,7 @@ public class PreauthorizationModelTest extends BaseApiResourceTest {
         PreauthorizationApiMock.expectPost(preauthorization);
 
         final Preauthorization createdPreauthorization = alternativePaymentClient
-                .createPreauthorization(preauthorization);
+                .create(preauthorization, Preauthorization.API_ENDPOINT, Preauthorization.class);
 
         assertThat(createdPreauthorization.getId()).isEqualTo("preauth_ee146f5315");
         assertThat(createdPreauthorization.getAmount()).isEqualTo(500);

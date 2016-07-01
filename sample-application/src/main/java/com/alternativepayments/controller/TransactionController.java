@@ -35,7 +35,8 @@ public class TransactionController {
         Payment payment = new Payment.Builder("SEPA", "John Doe").iban("BE88271080782541").build();
 
         Transaction sepaTransaction = new Transaction.Builder(payment, null, 500, "EUR").customer(customer).build();
-        Transaction createdTransaction = alternativePaymentClient.createTransaction(sepaTransaction);
+        Transaction createdTransaction = alternativePaymentClient.create(sepaTransaction, Transaction.API_ENDPOINT,
+                Transaction.class);
         model.addAttribute("transaction", createdTransaction);
         return "transaction/create-transaction";
     }
@@ -55,7 +56,8 @@ public class TransactionController {
 
         Transaction mistercashTransaction = new Transaction.Builder(payment, null, 500, "EUR")
                 .redirectUrls(redirectUrls).customer(customer).build();
-        Transaction createdTransaction = alternativePaymentClient.createTransaction(mistercashTransaction);
+        Transaction createdTransaction = alternativePaymentClient.create(mistercashTransaction,
+                Transaction.API_ENDPOINT, Transaction.class);
         model.addAttribute("transaction", createdTransaction);
         return "transaction/create-transaction";
     }
@@ -75,7 +77,8 @@ public class TransactionController {
 
         Transaction idealTransaction = new Transaction.Builder(payment, null, 500, "EUR").redirectUrls(redirectUrls)
                 .customer(customer).build();
-        Transaction createdTransaction = alternativePaymentClient.createTransaction(idealTransaction);
+        Transaction createdTransaction = alternativePaymentClient.create(idealTransaction,
+                Transaction.API_ENDPOINT, Transaction.class);
         model.addAttribute("transaction", createdTransaction);
         return "transaction/create-transaction";
     }
@@ -97,7 +100,8 @@ public class TransactionController {
 
         Transaction brazilPayTransaction = new Transaction.Builder(payment, null, 100, "EUR").redirectUrls(redirectUrls)
                 .customer(customer).build();
-        Transaction createdTransaction = alternativePaymentClient.createTransaction(brazilPayTransaction);
+        Transaction createdTransaction = alternativePaymentClient.create(brazilPayTransaction,
+                Transaction.API_ENDPOINT, Transaction.class);
         model.addAttribute("transaction", createdTransaction);
         return "transaction/create-transaction";
     }
@@ -117,7 +121,8 @@ public class TransactionController {
         Transaction creditCardTransaction = new Transaction.Builder(payment, null, 100, "EUR").customer(customer)
                 .build();
 
-        Transaction createdTransaction = alternativePaymentClient.createTransaction(creditCardTransaction);
+        Transaction createdTransaction = alternativePaymentClient.create(creditCardTransaction,
+                Transaction.API_ENDPOINT, Transaction.class);
         model.addAttribute("transaction", createdTransaction);
         return "transaction/create-transaction";
     }
@@ -137,7 +142,8 @@ public class TransactionController {
         Transaction teleingresoTransaction = new Transaction.Builder(payment, null, 100, "EUR")
                 .redirectUrls(redirectUrls).customer(customer).build();
 
-        Transaction createdTransaction = alternativePaymentClient.createTransaction(teleingresoTransaction);
+        Transaction createdTransaction = alternativePaymentClient.create(teleingresoTransaction,
+                Transaction.API_ENDPOINT, Transaction.class);
         model.addAttribute("transaction", createdTransaction);
         return "transaction/create-transaction";
     }
@@ -157,7 +163,8 @@ public class TransactionController {
         Transaction safetyPayTransaction = new Transaction.Builder(payment, null, 100, "EUR").redirectUrls(redirectUrls)
                 .customer(customer).build();
 
-        Transaction createdTransaction = alternativePaymentClient.createTransaction(safetyPayTransaction);
+        Transaction createdTransaction = alternativePaymentClient.create(safetyPayTransaction,
+                Transaction.API_ENDPOINT, Transaction.class);
 
         model.addAttribute("transaction", createdTransaction);
         return "transaction/create-transaction";
@@ -178,7 +185,8 @@ public class TransactionController {
         Transaction poliTransaction = new Transaction.Builder(payment, null, 100, "EUR").redirectUrls(redirectUrls)
                 .customer(customer).build();
 
-        Transaction createdTransaction = alternativePaymentClient.createTransaction(poliTransaction);
+        Transaction createdTransaction = alternativePaymentClient.create(poliTransaction,
+                Transaction.API_ENDPOINT, Transaction.class);
 
         model.addAttribute("transaction", createdTransaction);
         return "transaction/create-transaction";
@@ -199,7 +207,8 @@ public class TransactionController {
         Transaction trustPayTransaction = new Transaction.Builder(payment, null, 100, "EUR").redirectUrls(redirectUrls)
                 .customer(customer).build();
 
-        Transaction createdTransaction = alternativePaymentClient.createTransaction(trustPayTransaction);
+        Transaction createdTransaction = alternativePaymentClient.create(trustPayTransaction,
+                Transaction.API_ENDPOINT, Transaction.class);
 
         model.addAttribute("transaction", createdTransaction);
         return "transaction/create-transaction";
@@ -220,7 +229,8 @@ public class TransactionController {
         Transaction directPayTransaction = new Transaction.Builder(payment, null, 100, "EUR").redirectUrls(redirectUrls)
                 .customer(customer).build();
 
-        Transaction createdTransaction = alternativePaymentClient.createTransaction(directPayTransaction);
+        Transaction createdTransaction = alternativePaymentClient.create(directPayTransaction,
+                Transaction.API_ENDPOINT, Transaction.class);
 
         model.addAttribute("transaction", createdTransaction);
         return "transaction/create-transaction";
@@ -242,7 +252,8 @@ public class TransactionController {
                 .redirectUrls(redirectUrls)
                 .customer(customer).build();
 
-        Transaction createdTransaction = alternativePaymentClient.createTransaction(directPayMaxTransaction);
+        Transaction createdTransaction = alternativePaymentClient.create(directPayMaxTransaction,
+                Transaction.API_ENDPOINT, Transaction.class);
 
         model.addAttribute("transaction", createdTransaction);
         return "transaction/create-transaction";
@@ -259,7 +270,8 @@ public class TransactionController {
     public String getTransaction(Model model,
             @RequestParam(value = "transaction_id", required = false) final String transactionId) {
         if (StringUtils.isNotBlank(transactionId)) {
-            Transaction transaction = alternativePaymentClient.getTransaction(transactionId);
+            Transaction transaction = alternativePaymentClient.getById(transactionId, Transaction.API_ENDPOINT,
+                    Transaction.class);
             model.addAttribute("transaction", transaction);
         }
 
@@ -274,7 +286,8 @@ public class TransactionController {
      */
     @RequestMapping("/get-transactions")
     public String getTransactions(Model model) {
-        TransactionCollection transactions = alternativePaymentClient.getAllTransactions();
+        TransactionCollection transactions = alternativePaymentClient.getAll(Transaction.API_ENDPOINT,
+                TransactionCollection.class);
         model.addAttribute("transactions", transactions.getTransactions());
 
         return "transaction/get-transactions";

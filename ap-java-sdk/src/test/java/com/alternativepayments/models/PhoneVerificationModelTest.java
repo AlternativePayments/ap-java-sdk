@@ -18,7 +18,7 @@ public class PhoneVerificationModelTest extends BaseApiResourceTest {
         PhoneVerificationApiMock.expectPost(phoneverification);
 
         final PhoneVerification createdPphoneverification = alternativePaymentClient
-                .createPhoneverification(phoneverification);
+                .create(phoneverification, PhoneVerification.API_ENDPOINT, PhoneVerification.class);
 
         assertThat(createdPphoneverification.getKey()).isEqualTo("pk_live_cyelxxxxxxxxddddddddBQuFeAGDDNG");
         assertThat(createdPphoneverification.getType()).isEqualTo("SMS");

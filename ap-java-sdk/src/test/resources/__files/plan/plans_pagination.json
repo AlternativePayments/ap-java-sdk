@@ -1,0 +1,39 @@
+{
+    "plans": [
+        {
+            "id": "pln_a27286a",
+            "name": "Test",
+            "description": "Test plan",
+            "amount": 1000,
+            "currency": "EUR",
+            "period": "Day",
+            "interval": 5,
+            "created": "2012-04-23T18:25:43.511Z"
+        },
+        {
+            "id": "pln_a27286b",
+            "name": "Test2",
+            "description": "Test2 plan",
+            "amount": 2000,
+            "currency": "EUR",
+            "period": "Day",
+            "interval": 5,
+            "created": "2012-04-23T18:25:43.511Z"
+        },
+        {
+            "id": "pln_a27286c",
+            "name": "Test2",
+            "description": "Test2 plan",
+            "amount": 2000,
+            "currency": "EUR",
+            "period": "Day",
+            "interval": 5,
+            "created": "2012-04-23T18:25:43.511Z"
+        }
+    ],
+    "pagination": {
+        "offset": 10,
+        "limit": 3,
+        "count": 2504
+    }
+}
