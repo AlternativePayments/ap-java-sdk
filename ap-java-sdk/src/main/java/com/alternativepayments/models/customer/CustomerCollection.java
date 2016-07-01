@@ -2,6 +2,7 @@ package com.alternativepayments.models.customer;
 
 import java.util.List;
 
+import com.alternativepayments.models.BaseCollection;
 import com.alternativepayments.models.Pagination;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,10 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * List of customers.
  */
-public class CustomerCollection {
+public class CustomerCollection extends BaseCollection {
 
     private final List<Customer> customers;
-    private final Pagination pagination;
 
     /**
      * Customer collection with pagination.
@@ -24,8 +24,8 @@ public class CustomerCollection {
     public CustomerCollection(
             @JsonProperty("customers") List<Customer> customers,
             @JsonProperty("pagination") Pagination pagination) {
+        super(pagination);
         this.customers = customers;
-        this.pagination = pagination;
     }
 
     /**
@@ -34,12 +34,4 @@ public class CustomerCollection {
     public List<Customer> getCustomers() {
         return customers;
     }
-
-    /**
-     * @return the pagination
-     */
-    public Pagination getPagination() {
-        return pagination;
-    }
-
 }

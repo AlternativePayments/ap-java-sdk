@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout/main">
+<head>
+    <title>Alternative Payments Java SDK Sample Application</title>
+</head>
+<body>
+    <section layout:fragment="menu" th:include="subscription/fragments/subscription-menu :: subscription-menu">
+    </section>
+    <section layout:fragment="content">
+        <form th:action="@{/get-subscription}">
+            <input type="text" name="subscription_id"/>
+            <button type="submit">Get Subscription</button>
+        </form>
+        <div th:if="${subscription != null}" >
+            <ul th:replace="subscription/fragments/one-subscription :: 'one-subscription' (subscription=${subscription})">
+            </ul>
+        </div>
+    </section>
+</body>
+</html>

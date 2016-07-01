@@ -1,0 +1,90 @@
+{
+    "subscriptions": [
+        {
+            "id": "sbs_c475040",
+            "mode": "Test",
+            "planId": "pln_a27286a",
+            "plan": {
+                "id": "pln_a27286a",
+                "mode": "Test",
+                "name": "Test",
+                "description": "Abc",
+                "amount": 1000,
+                "currency": "EUR",
+                "period": "Day",
+                "interval": 5
+            },
+            "customerId": "cus_70ac08b06b4949bfb",
+            "customer": {
+                "id": "cus_70ac08b06b4949bfb",
+                "mode": "Test",
+                "firstName": "John",
+                "lastName": "Smith",
+                "email": "johnsmith@johnsmith.com",
+                "created": "2016-06-02T08:33:05.61Z"
+            },
+            "paymentId": "25275",
+            "created": "2016-06-02T08:44:16.963Z",
+            "status": "InRecur"
+        },
+        {
+            "id": "sbs_c475041",
+            "mode": "Test",
+            "planId": "pln_a27286b",
+            "plan": {
+                "id": "pln_a27286b",
+                "mode": "Test",
+                "name": "Test",
+                "description": "Abc",
+                "amount": 1000,
+                "currency": "EUR",
+                "period": "Day",
+                "interval": 5
+            },
+            "customerId": "cus_70ac08b06b4949bfc",
+            "customer": {
+                "id": "cus_70ac08b06b4949bfc",
+                "mode": "Test",
+                "firstName": "John",
+                "lastName": "Smith",
+                "email": "johnsmith@johnsmith.com",
+                "created": "2016-06-02T08:33:05.61Z"
+            },
+            "paymentId": "25276",
+            "created": "2016-06-02T08:44:16.963Z",
+            "status": "InRecur"
+        },
+        {
+            "id": "sbs_c475042",
+            "mode": "Test",
+            "planId": "pln_a27286c",
+            "plan": {
+                "id": "pln_a27286c",
+                "mode": "Test",
+                "name": "Test",
+                "description": "Abc",
+                "amount": 1000,
+                "currency": "EUR",
+                "period": "Day",
+                "interval": 5
+            },
+            "customerId": "cus_70ac08b06b4949bfd",
+            "customer": {
+                "id": "cus_70ac08b06b4949bfd",
+                "mode": "Test",
+                "firstName": "John",
+                "lastName": "Smith",
+                "email": "johnsmith@johnsmith.com",
+                "created": "2016-06-02T08:33:05.61Z"
+            },
+            "paymentId": "25277",
+            "created": "2016-06-02T08:44:16.963Z",
+            "status": "InRecur"
+        }
+    ],
+    "pagination": {
+        "offset": 10,
+        "limit": 3,
+        "count": 2504
+    }
+}

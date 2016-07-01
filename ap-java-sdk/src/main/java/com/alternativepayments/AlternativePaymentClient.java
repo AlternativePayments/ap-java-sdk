@@ -13,14 +13,10 @@ import com.alternativepayments.http.error.ApiException;
 import com.alternativepayments.http.error.AuthenticationException;
 import com.alternativepayments.http.error.InvalidParameterException;
 import com.alternativepayments.http.error.PaymentException;
+import com.alternativepayments.models.BaseCollection;
+import com.alternativepayments.models.BaseModel;
 import com.alternativepayments.models.ErrorModel;
 import com.alternativepayments.models.Pagination;
-import com.alternativepayments.models.customer.Customer;
-import com.alternativepayments.models.customer.CustomerCollection;
-import com.alternativepayments.models.transaction.PhoneVerification;
-import com.alternativepayments.models.transaction.Preauthorization;
-import com.alternativepayments.models.transaction.Transaction;
-import com.alternativepayments.models.transaction.TransactionCollection;
 
 /**
  * Alternative Payments Java SDK Client.
@@ -47,111 +43,58 @@ public class AlternativePaymentClient {
     }
 
     /**
-     * Return customer for provided ID.
+     * Create new entity.
      *
-     * @param id id of requested customer.
-     * @return Customer with given ID.
+     * @param <T> This is the type parameter
+     * @param entity entity which will be created
+     * @param endpoint endpoint to query
+     * @param clazz class for deserialization
+     * @return
+     * @return newly created entity
      */
-    public Customer getCustomer(final String id) {
-        return get(apiTarget.path(Customer.API_ENDPOINT + id), Customer.class);
+    public <T extends BaseModel> T create(final T entity, final String endpoint, Class<T> clazz) {
+        return post(apiTarget.path(endpoint), entity, clazz);
     }
 
     /**
-     * Return all customers.
+     * Get single entity by ID.
      *
-     * @return all customers.
+     * @param <T> This is the type parameter
+     * @param id id of entity
+     * @param endpoint endpoint to query
+     * @param clazz class for deserialization
+     * @return single entity by id
      */
-    public CustomerCollection getAllCustomers() {
-        return get(apiTarget.path(Customer.API_ENDPOINT), CustomerCollection.class);
+    public <T extends BaseModel> T getById(final String id, final String endpoint, Class<T> clazz) {
+        return get(apiTarget.path(endpoint + id), clazz);
     }
 
     /**
-     * Return customers taking pagination in consideration.
+     * Get all entities.
      *
+     * @param <T> This is the type parameter
+     * @param endpoint endpoint to query
+     * @param clazz class for deserialization
+     * @return all entities for given type
+     */
+    public <T extends BaseCollection> T getAll(final String endpoint, Class<T> clazz) {
+        return get(apiTarget.path(endpoint), clazz);
+    }
+
+    /**
+     * Get all entities.
+     *
+     * @param <T> This is the type parameter
      * @param limit how many records we want
      * @param offset offset of the requested results
-     *
-     * @return all customers.
+     * @param endpoint endpoint to query
+     * @param clazz class for deserialization
+     * @return all entities for given type
      */
-    public CustomerCollection getCustomersWithPagination(final int limit, final int offset) {
-        return get(apiTarget.path(Customer.API_ENDPOINT).queryParam(Pagination.LIMIT, limit)
-                .queryParam(Pagination.OFFSET, offset), CustomerCollection.class);
-    }
-
-    /**
-     * Create new customer.
-     *
-     * @param customer you want to create
-     *
-     * @return newly created customer.
-     */
-    public Customer createCustomer(final Customer customer) {
-        return post(apiTarget.path(Customer.API_ENDPOINT), customer, Customer.class);
-    }
-
-    /**
-     * Create new preauthorization.
-     *
-     * @param preauthorization you want to create
-     *
-     * @return newly created preauthorization.
-     */
-    public Preauthorization createPreauthorization(final Preauthorization preauthorization) {
-        return post(apiTarget.path(Preauthorization.API_ENDPOINT), preauthorization, Preauthorization.class);
-    }
-
-    /**
-     * Create new phoneverification.
-     *
-     * @param phoneverification you want to create
-     *
-     * @return newly created phoneverification.
-     */
-    public PhoneVerification createPhoneverification(final PhoneVerification phoneverification) {
-        return post(apiTarget.path(PhoneVerification.API_ENDPOINT), phoneverification, PhoneVerification.class);
-    }
-
-    /**
-     * Create new transaction.
-     *
-     * @param transaction you want to create
-     *
-     * @return newly created transaction.
-     */
-    public Transaction createTransaction(final Transaction transaction) {
-        return post(apiTarget.path(Transaction.API_ENDPOINT), transaction, Transaction.class);
-    }
-
-    /**
-     * Return transaction for provided ID.
-     *
-     * @param id id of requested transaction.
-     * @return Transaction with given ID.
-     */
-    public Transaction getTransaction(final String id) {
-        return get(apiTarget.path(Transaction.API_ENDPOINT + id), Transaction.class);
-    }
-
-    /**
-     * Return all transactions.
-     *
-     * @return all transactions.
-     */
-    public TransactionCollection getAllTransactions() {
-        return get(apiTarget.path(Transaction.API_ENDPOINT), TransactionCollection.class);
-    }
-
-    /**
-     * Return transactions taking pagination in consideration.
-     *
-     * @param limit how many records we want
-     * @param offset offset of the requested results
-     *
-     * @return all transactions.
-     */
-    public TransactionCollection getTransactionsWithPagination(final int limit, final int offset) {
-        return get(apiTarget.path(Transaction.API_ENDPOINT).queryParam(Pagination.LIMIT, limit)
-                .queryParam(Pagination.OFFSET, offset), TransactionCollection.class);
+    public <T extends BaseCollection> T getAllWithPagination(final int limit, final int offset, final String endpoint,
+            Class<T> clazz) {
+        return get(apiTarget.path(endpoint).queryParam(Pagination.LIMIT, limit).queryParam(Pagination.OFFSET, offset),
+                clazz);
     }
 
     /**

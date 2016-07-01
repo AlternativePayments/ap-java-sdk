@@ -23,7 +23,8 @@ public class TransactionModelTest extends BaseApiResourceTest {
 
         TransactionApiMock.expectSepaPost(sepaTransaction);
 
-        final Transaction createdSepaTransaction = alternativePaymentClient.createTransaction(sepaTransaction);
+        final Transaction createdSepaTransaction = alternativePaymentClient.create(sepaTransaction,
+                Transaction.API_ENDPOINT, Transaction.class);
 
         assertThat(createdSepaTransaction.getId()).isEqualTo("trn_d12209838b");
         assertThat(createdSepaTransaction.getMode()).isEqualTo("Live");
@@ -59,7 +60,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
         TransactionApiMock.expectMistercashPost(mistercashTransaction);
 
         final Transaction createdMistercashTransaction = alternativePaymentClient
-                .createTransaction(mistercashTransaction);
+                .create(mistercashTransaction, Transaction.API_ENDPOINT, Transaction.class);
 
         assertThat(createdMistercashTransaction.getId()).isEqualTo("trn_d12209838b");
         assertThat(createdMistercashTransaction.getMode()).isEqualTo("Live");
@@ -100,7 +101,8 @@ public class TransactionModelTest extends BaseApiResourceTest {
 
         TransactionApiMock.expectIdealTranasaction(idealTransaction);
 
-        final Transaction createdIdealTransaction = alternativePaymentClient.createTransaction(idealTransaction);
+        final Transaction createdIdealTransaction = alternativePaymentClient.create(idealTransaction,
+                Transaction.API_ENDPOINT, Transaction.class);
 
         assertThat(createdIdealTransaction.getId()).isEqualTo("trn_d12209838b");
         assertThat(createdIdealTransaction.getMode()).isEqualTo("Live");
@@ -146,7 +148,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
         TransactionApiMock.expectBrazilPayTranasaction(brazilPayTransaction);
 
         final Transaction createdBrazilPayTransaction = alternativePaymentClient
-                .createTransaction(brazilPayTransaction);
+                .create(brazilPayTransaction, Transaction.API_ENDPOINT, Transaction.class);
 
         assertThat(createdBrazilPayTransaction.getId()).isEqualTo("trn_d12209838b");
         assertThat(createdBrazilPayTransaction.getMode()).isEqualTo("Live");
@@ -198,7 +200,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
         TransactionApiMock.expectCreditCardTranasaction(creditCardTransaction);
 
         final Transaction createdCreditCardTransaction = alternativePaymentClient
-                .createTransaction(creditCardTransaction);
+                .create(creditCardTransaction, Transaction.API_ENDPOINT, Transaction.class);
 
         assertThat(createdCreditCardTransaction.getId()).isEqualTo("trn_d12209838b");
         assertThat(createdCreditCardTransaction.getMode()).isEqualTo("Live");
@@ -229,7 +231,8 @@ public class TransactionModelTest extends BaseApiResourceTest {
     public void return_all_transactions() {
         TransactionApiMock.expectGetAll();
 
-        final TransactionCollection transactions = alternativePaymentClient.getAllTransactions();
+        final TransactionCollection transactions = alternativePaymentClient.getAll(Transaction.API_ENDPOINT,
+                TransactionCollection.class);
 
         assertThat(transactions.getTransactions()).hasSize(2);
         assertThat(transactions.getPagination().getOffset()).isEqualTo(10);
@@ -287,7 +290,8 @@ public class TransactionModelTest extends BaseApiResourceTest {
     public void return_transactions_with_pagination() {
         TransactionApiMock.expectGetWithPagination();
 
-        final TransactionCollection transactions = alternativePaymentClient.getTransactionsWithPagination(3, 10);
+        final TransactionCollection transactions = alternativePaymentClient.getAllWithPagination(3, 10,
+                Transaction.API_ENDPOINT, TransactionCollection.class);
 
         assertThat(transactions.getTransactions()).hasSize(3);
         assertThat(transactions.getPagination().getOffset()).isEqualTo(10);

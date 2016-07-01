@@ -30,7 +30,7 @@ public class CustomerController {
     public String createCustomer(Model model) {
         Customer customer = new Customer.Builder("John", "Doe", "john@doe.com", "US").address("Rutledge Ave 409")
                 .city("Folsom").zip("19033").state("PA").phone("55555555555").build();
-        Customer createdCustomer = alternativePaymentClient.createCustomer(customer);
+        Customer createdCustomer = alternativePaymentClient.create(customer, Customer.API_ENDPOINT, Customer.class);
         model.addAttribute("customer", createdCustomer);
         return "customer/create-customer";
     }
@@ -46,7 +46,7 @@ public class CustomerController {
     public String getCustomer(Model model,
             @RequestParam(value = "customer_id", required = false) final String customerId) {
         if (StringUtils.isNotBlank(customerId)) {
-            Customer customer = alternativePaymentClient.getCustomer(customerId);
+            Customer customer = alternativePaymentClient.getById(customerId, Customer.API_ENDPOINT, Customer.class);
             model.addAttribute("customer", customer);
         }
 
@@ -61,7 +61,7 @@ public class CustomerController {
      */
     @RequestMapping("/get-customers")
     public String getCustomers(Model model) {
-        CustomerCollection customers = alternativePaymentClient.getAllCustomers();
+        CustomerCollection customers = alternativePaymentClient.getAll(Customer.API_ENDPOINT, CustomerCollection.class);
         model.addAttribute("customers", customers.getCustomers());
 
         return "customer/get-customers";

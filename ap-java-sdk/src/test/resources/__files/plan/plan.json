@@ -1,0 +1,10 @@
+{
+    "id": "pln_a27286a",
+    "name": "Test",
+    "description": "Test plan",
+    "amount": 1000,
+    "currency": "EUR",
+    "period": "Day",
+    "interval": 5,
+    "created": "2012-04-23T18:25:43.511Z"
+}

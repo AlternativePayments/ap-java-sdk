@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<body th:fragment="one-plan">
+    <ul>
+        <li th:text="'ID: ' + ${plan.id}"></li>
+        <li th:text="'Name: ' + ${plan.name}"></li>
+        <li th:text="'Description: ' + ${plan.description}"></li>
+        <li th:text="'Interval: ' + ${plan.interval}"></li>
+        <li th:text="'Period: ' + ${plan.period}"></li>
+        <li th:text="'Amount: ' + ${plan.amount}"></li>
+        <li th:text="'Currency: ' + ${plan.currency}"></li>
+    </ul>
+</body>
+</html>
