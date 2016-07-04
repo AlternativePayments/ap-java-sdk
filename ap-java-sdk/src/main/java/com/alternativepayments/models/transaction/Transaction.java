@@ -1,5 +1,7 @@
 package com.alternativepayments.models.transaction;
 
+import java.math.BigDecimal;
+
 import org.joda.time.DateTime;
 
 import com.alternativepayments.models.BaseModel;
@@ -21,7 +23,7 @@ public class Transaction extends BaseModel {
     private final String customerId;
     private final Payment payment;
     private final String token;
-    private final int amount;
+    private final BigDecimal amount;
     private final String currency;
     private final String merchantPassThruData;
     private final String merchantTransactionId;
@@ -66,7 +68,7 @@ public class Transaction extends BaseModel {
             @JsonProperty("customerId") final String customerId,
             @JsonProperty("payment") final Payment payment,
             @JsonProperty("token") final String token,
-            @JsonProperty("amount") final int amount,
+            @JsonProperty("amount") final BigDecimal amount,
             @JsonProperty("currency") final String currency,
             @JsonProperty("merchantPassThruData") final String merchantPassThruData,
             @JsonProperty("merchantTransactionId") final String merchantTransactionId,
@@ -103,7 +105,7 @@ public class Transaction extends BaseModel {
         // Required parameters
         private final Payment payment;
         private final String token;
-        private final int amount;
+        private final BigDecimal amount;
         private final String currency;
 
         // Optional parameters - initialize with default values
@@ -127,7 +129,7 @@ public class Transaction extends BaseModel {
          * @param amount amount for the transaction
          * @param currency currency for the transaction
          */
-        public Builder(final Payment payment, final String token, final int amount, final String currency) {
+        public Builder(final Payment payment, final String token, final BigDecimal amount, final String currency) {
             this.payment = payment;
             this.token = token;
             this.amount = amount;
@@ -330,7 +332,7 @@ public class Transaction extends BaseModel {
     /**
      * @return amount for transaction.
      */
-    public int getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 

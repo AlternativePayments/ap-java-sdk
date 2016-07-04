@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout/main">
+<head>
+    <title>Alternative Payments Java SDK Sample Application</title>
+</head>
+<body>
+    <section layout:fragment="menu" th:include="void/fragments/transaction-void-menu :: transaction-void-menu">
+    </section>
+    <section layout:fragment="content">
+        <form th:action="@{/get-transaction-void}">
+            Void id: <input type="text" name="void_id"/><br />
+            Transaction id: <input type="text" name="transaction_id"/><br />
+            <button type="submit">Get Transaction Void</button>
+        </form>
+        <div th:if="${transactionVoid != null}" >
+            <ul th:replace="void/fragments/one-transaction-void :: 'one-transaction-void' (transactionVoid=${transactionVoid})">
+            </ul>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,45 @@
+{
+    "voidTransactions": [
+        {
+            "id": "void_0a3f6b2",
+            "mode": "Live",
+            "amount": 4000,
+            "currency": "EUR",
+            "reason": "FRAUD",
+            "originalTransactionId": "trn_41f1487",
+            "originalTransaction": {
+                "id": "trn_41f1487",
+                "mode": "Live",
+                "status": "Voided",
+                "amount": 4000,
+                "currency": "EUR",
+                "created": "2015-06-24T11:46:35.303Z"
+            },
+            "created": "2012-04-23T18:25:43.511Z",
+            "status": "Approved"
+        },
+        {
+           "id": "void_0a3f6b3",
+            "mode": "Live",
+            "amount": 2000,
+            "currency": "EUR",
+            "reason": "FRAUD",
+            "originalTransactionId": "trn_41f1487",
+            "originalTransaction": {
+                "id": "trn_41f1487",
+                "mode": "Live",
+                "status": "Voided",
+                "amount": 4000,
+                "currency": "EUR",
+                "created": "2015-06-24T11:46:35.303Z"
+            },
+            "created": "2012-04-23T18:25:43.511Z",
+            "status": "Approved"
+        }
+    ],
+    "pagination": {
+        "offset": 10,
+        "limit": 3,
+        "count": 2504
+    }
+}

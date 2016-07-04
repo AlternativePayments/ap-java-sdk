@@ -1,5 +1,7 @@
 package com.alternativepayments.controller;
 
+import java.math.BigDecimal;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +30,8 @@ public class PlanController {
      */
     @RequestMapping("/create-plan")
     public String createPlan(Model model) {
-        Plan plan = new Plan.Builder("Test", 1000, "EUR", 5, Plan.Period.DAY).description("Test plan").build();
+        Plan plan = new Plan.Builder("Test", BigDecimal.valueOf(1000), "EUR", 5, Plan.Period.DAY)
+                .description("Test plan").build();
 
         Plan createdPlan = alternativePaymentClient.create(plan, Plan.API_ENDPOINT, Plan.class);
         model.addAttribute("plan", createdPlan);

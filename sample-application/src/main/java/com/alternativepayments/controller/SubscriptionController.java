@@ -1,5 +1,7 @@
 package com.alternativepayments.controller;
 
+import java.math.BigDecimal;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,12 +34,14 @@ public class SubscriptionController {
      */
     @RequestMapping("/create-subscription")
     public String createSubscription(Model model) {
-        Plan plan = new Plan.Builder("Test", 1000, "EUR", 5, Plan.Period.DAY).description("Abc").build();
+        Plan plan = new Plan.Builder("Test", BigDecimal.valueOf(1000), "EUR", 5, Plan.Period.DAY).description("Abc")
+                .build();
         Plan createdPlan = alternativePaymentClient.create(plan, Plan.API_ENDPOINT, Plan.class);
 
         Customer customer = new Customer.Builder("John", "Smith", "johnsmith@johnsmith.com", "US").build();
         Payment payment = new Payment.Builder("SEPA", "John Doe").iban("BE88271080782541").build();
-        Transaction transaction = new Transaction.Builder(payment, null, 500, "EUR").customer(customer).build();
+        Transaction transaction = new Transaction.Builder(payment, null, BigDecimal.valueOf(500), "EUR")
+                .customer(customer).build();
         Transaction createdTransaction = alternativePaymentClient.create(transaction, Transaction.API_ENDPOINT,
                 Transaction.class);
 
