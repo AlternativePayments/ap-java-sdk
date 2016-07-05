@@ -2,8 +2,6 @@ package com.alternativepayments.models;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.math.BigDecimal;
-
 import org.junit.Test;
 
 import com.alternativepayments.apimocks.TransactionVoidApiMock;
@@ -26,7 +24,7 @@ public class TransactionVoidModelTest extends BaseApiResourceTest {
         assertThat(transactionVoid.getId()).isEqualTo("void_0a3f6b2");
         assertThat(transactionVoid.getOriginalTransactionId()).isEqualTo("trn_41f1487");
         assertThat(transactionVoid.getReason()).isEqualTo(ReturnReason.FRAUD);
-        assertThat(transactionVoid.getAmount()).isEqualTo(BigDecimal.valueOf(4000));
+        assertThat(transactionVoid.getAmount()).isEqualTo(4000);
         assertThat(transactionVoid.getCurrency()).isEqualTo("EUR");
         assertThat(transactionVoid.getStatus()).isEqualTo("Approved");
         assertThat(transactionVoid.getCreated().toString()).isEqualTo("2012-04-23T18:25:43.511Z");
@@ -51,7 +49,7 @@ public class TransactionVoidModelTest extends BaseApiResourceTest {
         assertThat(firstTransactionVoid.getId()).isEqualTo("void_0a3f6b2");
         assertThat(firstTransactionVoid.getOriginalTransactionId()).isEqualTo("trn_41f1487");
         assertThat(firstTransactionVoid.getReason()).isEqualTo(ReturnReason.FRAUD);
-        assertThat(firstTransactionVoid.getAmount()).isEqualTo(BigDecimal.valueOf(4000));
+        assertThat(firstTransactionVoid.getAmount()).isEqualTo(4000);
         assertThat(firstTransactionVoid.getCurrency()).isEqualTo("EUR");
         assertThat(firstTransactionVoid.getStatus()).isEqualTo("Approved");
         assertThat(firstTransactionVoid.getCreated().toString()).isEqualTo("2012-04-23T18:25:43.511Z");
@@ -62,7 +60,7 @@ public class TransactionVoidModelTest extends BaseApiResourceTest {
         assertThat(secondTransactionVoid.getId()).isEqualTo("void_0a3f6b3");
         assertThat(secondTransactionVoid.getOriginalTransactionId()).isEqualTo("trn_41f1487");
         assertThat(secondTransactionVoid.getReason()).isEqualTo(ReturnReason.FRAUD);
-        assertThat(secondTransactionVoid.getAmount()).isEqualTo(BigDecimal.valueOf(2000));
+        assertThat(secondTransactionVoid.getAmount()).isEqualTo(2000);
         assertThat(secondTransactionVoid.getCurrency()).isEqualTo("EUR");
         assertThat(secondTransactionVoid.getStatus()).isEqualTo("Approved");
         assertThat(secondTransactionVoid.getCreated().toString()).isEqualTo("2012-04-23T18:25:43.511Z");
@@ -83,7 +81,7 @@ public class TransactionVoidModelTest extends BaseApiResourceTest {
         assertThat(createdVoid.getId()).isEqualTo("void_0a3f6b2");
         assertThat(createdVoid.getOriginalTransactionId()).isEqualTo("trn_41f1487");
         assertThat(createdVoid.getReason()).isEqualTo(ReturnReason.FRAUD);
-        assertThat(createdVoid.getAmount()).isEqualTo(BigDecimal.valueOf(4000));
+        assertThat(createdVoid.getAmount()).isEqualTo(4000);
         assertThat(createdVoid.getCurrency()).isEqualTo("EUR");
         assertThat(createdVoid.getStatus()).isEqualTo("Approved");
         assertThat(createdVoid.getCreated().toString()).isEqualTo("2012-04-23T18:25:43.511Z");
@@ -108,7 +106,7 @@ public class TransactionVoidModelTest extends BaseApiResourceTest {
         assertThat(firstTransactionVoid.getId()).isEqualTo("void_0a3f6b2");
         assertThat(firstTransactionVoid.getOriginalTransactionId()).isEqualTo("trn_41f1487");
         assertThat(firstTransactionVoid.getReason()).isEqualTo(ReturnReason.FRAUD);
-        assertThat(firstTransactionVoid.getAmount()).isEqualTo(BigDecimal.valueOf(4000));
+        assertThat(firstTransactionVoid.getAmount()).isEqualTo(4000);
         assertThat(firstTransactionVoid.getCurrency()).isEqualTo("EUR");
         assertThat(firstTransactionVoid.getStatus()).isEqualTo("Approved");
         assertThat(firstTransactionVoid.getCreated().toString()).isEqualTo("2012-04-23T18:25:43.511Z");
@@ -119,7 +117,7 @@ public class TransactionVoidModelTest extends BaseApiResourceTest {
         assertThat(secondTransactionVoid.getId()).isEqualTo("void_0a3f6b3");
         assertThat(secondTransactionVoid.getOriginalTransactionId()).isEqualTo("trn_41f1487");
         assertThat(secondTransactionVoid.getReason()).isEqualTo(ReturnReason.FRAUD);
-        assertThat(secondTransactionVoid.getAmount()).isEqualTo(BigDecimal.valueOf(2000));
+        assertThat(secondTransactionVoid.getAmount()).isEqualTo(2000);
         assertThat(secondTransactionVoid.getCurrency()).isEqualTo("EUR");
         assertThat(secondTransactionVoid.getStatus()).isEqualTo("Approved");
         assertThat(secondTransactionVoid.getCreated().toString()).isEqualTo("2012-04-23T18:25:43.511Z");
@@ -130,7 +128,7 @@ public class TransactionVoidModelTest extends BaseApiResourceTest {
         assertThat(thirdTransactionVoid.getId()).isEqualTo("void_0a3f6b4");
         assertThat(thirdTransactionVoid.getOriginalTransactionId()).isEqualTo("trn_41f1487");
         assertThat(thirdTransactionVoid.getReason()).isEqualTo(ReturnReason.FRAUD);
-        assertThat(thirdTransactionVoid.getAmount()).isEqualTo(BigDecimal.valueOf(1000));
+        assertThat(thirdTransactionVoid.getAmount()).isEqualTo(1000);
         assertThat(thirdTransactionVoid.getCurrency()).isEqualTo("EUR");
         assertThat(thirdTransactionVoid.getStatus()).isEqualTo("Approved");
         assertThat(thirdTransactionVoid.getCreated().toString()).isEqualTo("2012-04-23T18:25:43.511Z");

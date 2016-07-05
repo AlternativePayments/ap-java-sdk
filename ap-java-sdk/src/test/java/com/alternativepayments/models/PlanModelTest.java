@@ -2,8 +2,6 @@ package com.alternativepayments.models;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.math.BigDecimal;
-
 import org.junit.Test;
 
 import com.alternativepayments.apimocks.PlanApiMock;
@@ -23,7 +21,7 @@ public class PlanModelTest extends BaseApiResourceTest {
         assertThat(plan.getId()).isEqualTo("pln_a27286a");
         assertThat(plan.getName()).isEqualTo("Test");
         assertThat(plan.getDescription()).isEqualTo("Test plan");
-        assertThat(plan.getAmount()).isEqualTo(BigDecimal.valueOf(1000));
+        assertThat(plan.getAmount()).isEqualTo(1000);
         assertThat(plan.getCurrency()).isEqualTo("EUR");
         assertThat(plan.getPeriod()).isEqualTo(Plan.Period.DAY);
         assertThat(plan.getInterval()).isEqualTo(5);
@@ -45,7 +43,7 @@ public class PlanModelTest extends BaseApiResourceTest {
         assertThat(firstPlan.getId()).isEqualTo("pln_a27286a");
         assertThat(firstPlan.getName()).isEqualTo("Test");
         assertThat(firstPlan.getDescription()).isEqualTo("Test plan");
-        assertThat(firstPlan.getAmount()).isEqualTo(BigDecimal.valueOf(1000));
+        assertThat(firstPlan.getAmount()).isEqualTo(1000);
         assertThat(firstPlan.getCurrency()).isEqualTo("EUR");
         assertThat(firstPlan.getPeriod()).isEqualTo(Plan.Period.DAY);
         assertThat(firstPlan.getInterval()).isEqualTo(5);
@@ -55,7 +53,7 @@ public class PlanModelTest extends BaseApiResourceTest {
         assertThat(secondPlan.getId()).isEqualTo("pln_a27286b");
         assertThat(secondPlan.getName()).isEqualTo("Test2");
         assertThat(secondPlan.getDescription()).isEqualTo("Test2 plan");
-        assertThat(secondPlan.getAmount()).isEqualTo(BigDecimal.valueOf(2000));
+        assertThat(secondPlan.getAmount()).isEqualTo(2000);
         assertThat(secondPlan.getCurrency()).isEqualTo("EUR");
         assertThat(secondPlan.getPeriod()).isEqualTo(Plan.Period.DAY);
         assertThat(secondPlan.getInterval()).isEqualTo(5);
@@ -65,7 +63,7 @@ public class PlanModelTest extends BaseApiResourceTest {
 
     @Test
     public void create_new_plan() {
-        Plan plan = new Plan.Builder("Test", BigDecimal.valueOf(1000), "EUR", 5, Plan.Period.DAY)
+        Plan plan = new Plan.Builder("Test", 1000, "EUR", 5, Plan.Period.DAY)
                 .description("Test plan").build();
 
         PlanApiMock.expectPost(plan);
@@ -75,7 +73,7 @@ public class PlanModelTest extends BaseApiResourceTest {
         assertThat(createdPlan.getId()).isEqualTo("pln_a27286a");
         assertThat(createdPlan.getName()).isEqualTo("Test");
         assertThat(createdPlan.getDescription()).isEqualTo("Test plan");
-        assertThat(createdPlan.getAmount()).isEqualTo(BigDecimal.valueOf(1000));
+        assertThat(createdPlan.getAmount()).isEqualTo(1000);
         assertThat(createdPlan.getCurrency()).isEqualTo("EUR");
         assertThat(createdPlan.getPeriod()).isEqualTo(Plan.Period.DAY);
         assertThat(createdPlan.getInterval()).isEqualTo(5);
@@ -98,7 +96,7 @@ public class PlanModelTest extends BaseApiResourceTest {
         assertThat(firstPlan.getId()).isEqualTo("pln_a27286a");
         assertThat(firstPlan.getName()).isEqualTo("Test");
         assertThat(firstPlan.getDescription()).isEqualTo("Test plan");
-        assertThat(firstPlan.getAmount()).isEqualTo(BigDecimal.valueOf(1000));
+        assertThat(firstPlan.getAmount()).isEqualTo(1000);
         assertThat(firstPlan.getCurrency()).isEqualTo("EUR");
         assertThat(firstPlan.getPeriod()).isEqualTo(Plan.Period.DAY);
         assertThat(firstPlan.getInterval()).isEqualTo(5);
@@ -108,7 +106,7 @@ public class PlanModelTest extends BaseApiResourceTest {
         assertThat(secondPlan.getId()).isEqualTo("pln_a27286b");
         assertThat(secondPlan.getName()).isEqualTo("Test2");
         assertThat(secondPlan.getDescription()).isEqualTo("Test2 plan");
-        assertThat(secondPlan.getAmount()).isEqualTo(BigDecimal.valueOf(2000));
+        assertThat(secondPlan.getAmount()).isEqualTo(2000);
         assertThat(secondPlan.getCurrency()).isEqualTo("EUR");
         assertThat(secondPlan.getPeriod()).isEqualTo(Plan.Period.DAY);
         assertThat(secondPlan.getInterval()).isEqualTo(5);
@@ -118,7 +116,7 @@ public class PlanModelTest extends BaseApiResourceTest {
         assertThat(thirdPlan.getId()).isEqualTo("pln_a27286c");
         assertThat(thirdPlan.getName()).isEqualTo("Test2");
         assertThat(thirdPlan.getDescription()).isEqualTo("Test2 plan");
-        assertThat(thirdPlan.getAmount()).isEqualTo(BigDecimal.valueOf(2000));
+        assertThat(thirdPlan.getAmount()).isEqualTo(2000);
         assertThat(thirdPlan.getCurrency()).isEqualTo("EUR");
         assertThat(thirdPlan.getPeriod()).isEqualTo(Plan.Period.DAY);
         assertThat(thirdPlan.getInterval()).isEqualTo(5);

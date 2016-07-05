@@ -2,8 +2,6 @@ package com.alternativepayments.models;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.math.BigDecimal;
-
 import org.junit.Test;
 
 import com.alternativepayments.apimocks.TransactionApiMock;
@@ -21,7 +19,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
         Customer customer = new Customer.Builder("John", "Doe", "john@doe.com", "DE").build();
         Payment payment = new Payment.Builder("SEPA", "John Doe").iban("DE71XXXXX3330").build();
 
-        Transaction sepaTransaction = new Transaction.Builder(payment, null, BigDecimal.valueOf(500), "EUR")
+        Transaction sepaTransaction = new Transaction.Builder(payment, null, 500, "EUR")
                 .customer(customer).build();
 
         TransactionApiMock.expectSepaPost(sepaTransaction);
@@ -31,7 +29,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
 
         assertThat(createdSepaTransaction.getId()).isEqualTo("trn_d12209838b");
         assertThat(createdSepaTransaction.getMode()).isEqualTo("Live");
-        assertThat(createdSepaTransaction.getAmount()).isEqualTo(BigDecimal.valueOf(500));
+        assertThat(createdSepaTransaction.getAmount()).isEqualTo(500);
         assertThat(createdSepaTransaction.getCurrency()).isEqualTo("EUR");
         assertThat(createdSepaTransaction.getCreated().toString()).isEqualTo("2016-03-24T15:19:10.780Z");
 
@@ -57,7 +55,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
         RedirectUrls redirectUrls = new RedirectUrls("http://plugins.alternativepayments.com/message/success.html",
                 "http://plugins.alternativepayments.com/message/failure.html");
 
-        Transaction mistercashTransaction = new Transaction.Builder(payment, null, BigDecimal.valueOf(500), "EUR")
+        Transaction mistercashTransaction = new Transaction.Builder(payment, null, 500, "EUR")
                 .redirectUrls(redirectUrls).customer(customer).build();
 
         TransactionApiMock.expectMistercashPost(mistercashTransaction);
@@ -67,7 +65,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
 
         assertThat(createdMistercashTransaction.getId()).isEqualTo("trn_d12209838b");
         assertThat(createdMistercashTransaction.getMode()).isEqualTo("Live");
-        assertThat(createdMistercashTransaction.getAmount()).isEqualTo(BigDecimal.valueOf(500));
+        assertThat(createdMistercashTransaction.getAmount()).isEqualTo(500);
         assertThat(createdMistercashTransaction.getCurrency()).isEqualTo("EUR");
         assertThat(createdMistercashTransaction.getCreated().toString()).isEqualTo("2016-03-24T15:19:10.780Z");
         assertThat(createdMistercashTransaction.getMerchantPassThruData()).isEqualTo("Order #1234958");
@@ -99,7 +97,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
         RedirectUrls redirectUrls = new RedirectUrls("http://plugins.alternativepayments.com/message/success.html",
                 "http://plugins.alternativepayments.com/message/failure.html");
 
-        Transaction idealTransaction = new Transaction.Builder(payment, null, BigDecimal.valueOf(500), "EUR")
+        Transaction idealTransaction = new Transaction.Builder(payment, null, 500, "EUR")
                 .redirectUrls(redirectUrls).customer(customer).build();
 
         TransactionApiMock.expectIdealTranasaction(idealTransaction);
@@ -109,7 +107,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
 
         assertThat(createdIdealTransaction.getId()).isEqualTo("trn_d12209838b");
         assertThat(createdIdealTransaction.getMode()).isEqualTo("Live");
-        assertThat(createdIdealTransaction.getAmount()).isEqualTo(BigDecimal.valueOf(500));
+        assertThat(createdIdealTransaction.getAmount()).isEqualTo(500);
         assertThat(createdIdealTransaction.getCurrency()).isEqualTo("EUR");
         assertThat(createdIdealTransaction.getIpAddress()).isEqualTo("89.216.124.9");
         assertThat(createdIdealTransaction.getCreated().toString()).isEqualTo("2016-03-24T15:19:10.780Z");
@@ -145,7 +143,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
         RedirectUrls redirectUrls = new RedirectUrls("http://plugins.alternativepayments.com/message/success.html",
                 "http://plugins.alternativepayments.com/message/failure.html");
 
-        Transaction brazilPayTransaction = new Transaction.Builder(payment, null, BigDecimal.valueOf(100), "EUR")
+        Transaction brazilPayTransaction = new Transaction.Builder(payment, null, 100, "EUR")
                 .redirectUrls(redirectUrls).customer(customer).build();
 
         TransactionApiMock.expectBrazilPayTranasaction(brazilPayTransaction);
@@ -155,7 +153,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
 
         assertThat(createdBrazilPayTransaction.getId()).isEqualTo("trn_d12209838b");
         assertThat(createdBrazilPayTransaction.getMode()).isEqualTo("Live");
-        assertThat(createdBrazilPayTransaction.getAmount()).isEqualTo(BigDecimal.valueOf(100));
+        assertThat(createdBrazilPayTransaction.getAmount()).isEqualTo(100);
         assertThat(createdBrazilPayTransaction.getCurrency()).isEqualTo("EUR");
         assertThat(createdBrazilPayTransaction.getIpAddress()).isEqualTo("89.216.124.9");
         assertThat(createdBrazilPayTransaction.getCreated().toString()).isEqualTo("2016-03-24T15:19:10.780Z");
@@ -197,7 +195,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
         Payment payment = new Payment.Builder("CreditCard", "John Doe").creditCardNumber("XXXXXXXXXXX1111")
                 .creditCardType("visa").expirationMonth(12).expirationYear(2009).cvv2(222).build();
 
-        Transaction creditCardTransaction = new Transaction.Builder(payment, null, BigDecimal.valueOf(100), "EUR")
+        Transaction creditCardTransaction = new Transaction.Builder(payment, null, 100, "EUR")
                 .customer(customer).build();
 
         TransactionApiMock.expectCreditCardTranasaction(creditCardTransaction);
@@ -207,7 +205,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
 
         assertThat(createdCreditCardTransaction.getId()).isEqualTo("trn_d12209838b");
         assertThat(createdCreditCardTransaction.getMode()).isEqualTo("Live");
-        assertThat(createdCreditCardTransaction.getAmount()).isEqualTo(BigDecimal.valueOf(1500));
+        assertThat(createdCreditCardTransaction.getAmount()).isEqualTo(1500);
         assertThat(createdCreditCardTransaction.getCurrency()).isEqualTo("EUR");
         assertThat(createdCreditCardTransaction.getCreated().toString()).isEqualTo("2016-03-24T15:19:10.780Z");
 
@@ -245,7 +243,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
         final Transaction firstTransaction = transactions.getTransactions().get(0);
         assertThat(firstTransaction.getId()).isEqualTo("trn_d12209838b");
         assertThat(firstTransaction.getMode()).isEqualTo("Live");
-        assertThat(firstTransaction.getAmount()).isEqualTo(BigDecimal.valueOf(300));
+        assertThat(firstTransaction.getAmount()).isEqualTo(300);
         assertThat(firstTransaction.getCurrency()).isEqualTo("EUR");
         assertThat(firstTransaction.getCreated().toString()).isEqualTo("2016-03-24T15:19:10.780Z");
 
@@ -266,7 +264,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
         final Transaction secondTransaction = transactions.getTransactions().get(1);
         assertThat(secondTransaction.getId()).isEqualTo("trn_d12209838c");
         assertThat(secondTransaction.getMode()).isEqualTo("Live");
-        assertThat(secondTransaction.getAmount()).isEqualTo(BigDecimal.valueOf(1500));
+        assertThat(secondTransaction.getAmount()).isEqualTo(1500);
         assertThat(secondTransaction.getCurrency()).isEqualTo("EUR");
         assertThat(secondTransaction.getCreated().toString()).isEqualTo("2016-03-24T15:19:10.780Z");
 
@@ -304,7 +302,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
         final Transaction firstTransaction = transactions.getTransactions().get(0);
         assertThat(firstTransaction.getId()).isEqualTo("trn_d12209838b");
         assertThat(firstTransaction.getMode()).isEqualTo("Live");
-        assertThat(firstTransaction.getAmount()).isEqualTo(BigDecimal.valueOf(300));
+        assertThat(firstTransaction.getAmount()).isEqualTo(300);
         assertThat(firstTransaction.getCurrency()).isEqualTo("EUR");
         assertThat(firstTransaction.getStatus()).isEqualTo("Funded");
         assertThat(firstTransaction.getCreated().toString()).isEqualTo("2016-03-24T15:19:10.780Z");
@@ -326,7 +324,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
         final Transaction secondTransaction = transactions.getTransactions().get(1);
         assertThat(secondTransaction.getId()).isEqualTo("trn_d12209838c");
         assertThat(secondTransaction.getMode()).isEqualTo("Live");
-        assertThat(secondTransaction.getAmount()).isEqualTo(BigDecimal.valueOf(1500));
+        assertThat(secondTransaction.getAmount()).isEqualTo(1500);
         assertThat(secondTransaction.getCurrency()).isEqualTo("EUR");
         assertThat(secondTransaction.getStatus()).isEqualTo("Funded");
         assertThat(secondTransaction.getCreated().toString()).isEqualTo("2016-03-24T15:19:10.780Z");
@@ -351,7 +349,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
         final Transaction thirdTransaction = transactions.getTransactions().get(2);
         assertThat(thirdTransaction.getId()).isEqualTo("trn_d12209838dff");
         assertThat(thirdTransaction.getMode()).isEqualTo("Live");
-        assertThat(thirdTransaction.getAmount()).isEqualTo(BigDecimal.valueOf(1500));
+        assertThat(thirdTransaction.getAmount()).isEqualTo(1500);
         assertThat(thirdTransaction.getCurrency()).isEqualTo("EUR");
         assertThat(thirdTransaction.getIpAddress()).isEqualTo("89.216.124.9");
         assertThat(thirdTransaction.getRedirectUrl())

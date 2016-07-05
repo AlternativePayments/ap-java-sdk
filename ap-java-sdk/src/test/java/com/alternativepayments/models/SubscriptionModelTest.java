@@ -2,8 +2,6 @@ package com.alternativepayments.models;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.math.BigDecimal;
-
 import org.junit.Test;
 
 import com.alternativepayments.apimocks.SubscriptionApiMock;
@@ -26,7 +24,7 @@ public class SubscriptionModelTest extends BaseApiResourceTest {
         assertThat(subscription.getPlanId()).isEqualTo("pln_a27286a");
         assertThat(subscription.getPlan().getName()).isEqualTo("Test");
         assertThat(subscription.getPlan().getDescription()).isEqualTo("Abc");
-        assertThat(subscription.getPlan().getAmount()).isEqualTo(BigDecimal.valueOf(1000));
+        assertThat(subscription.getPlan().getAmount()).isEqualTo(1000);
         assertThat(subscription.getPlan().getCurrency()).isEqualTo("EUR");
         assertThat(subscription.getPlan().getPeriod()).isEqualTo(Plan.Period.DAY);
         assertThat(subscription.getPlan().getInterval()).isEqualTo(5);
@@ -56,7 +54,7 @@ public class SubscriptionModelTest extends BaseApiResourceTest {
         assertThat(firstSubscription.getPlanId()).isEqualTo("pln_a27286a");
         assertThat(firstSubscription.getPlan().getName()).isEqualTo("Test");
         assertThat(firstSubscription.getPlan().getDescription()).isEqualTo("Abc");
-        assertThat(firstSubscription.getPlan().getAmount()).isEqualTo(BigDecimal.valueOf(1000));
+        assertThat(firstSubscription.getPlan().getAmount()).isEqualTo(1000);
         assertThat(firstSubscription.getPlan().getCurrency()).isEqualTo("EUR");
         assertThat(firstSubscription.getPlan().getPeriod()).isEqualTo(Plan.Period.DAY);
         assertThat(firstSubscription.getPlan().getInterval()).isEqualTo(5);
@@ -73,7 +71,7 @@ public class SubscriptionModelTest extends BaseApiResourceTest {
         assertThat(secondSubscription.getPlanId()).isEqualTo("pln_a27286b");
         assertThat(secondSubscription.getPlan().getName()).isEqualTo("Test");
         assertThat(secondSubscription.getPlan().getDescription()).isEqualTo("Abc");
-        assertThat(secondSubscription.getPlan().getAmount()).isEqualTo(BigDecimal.valueOf(1000));
+        assertThat(secondSubscription.getPlan().getAmount()).isEqualTo(1000);
         assertThat(secondSubscription.getPlan().getCurrency()).isEqualTo("EUR");
         assertThat(secondSubscription.getPlan().getPeriod()).isEqualTo(Plan.Period.DAY);
         assertThat(secondSubscription.getPlan().getInterval()).isEqualTo(5);
@@ -101,7 +99,7 @@ public class SubscriptionModelTest extends BaseApiResourceTest {
         assertThat(subscription.getPlanId()).isEqualTo("pln_a27286a");
         assertThat(subscription.getPlan().getName()).isEqualTo("Test");
         assertThat(subscription.getPlan().getDescription()).isEqualTo("Abc");
-        assertThat(subscription.getPlan().getAmount()).isEqualTo(BigDecimal.valueOf(1000));
+        assertThat(subscription.getPlan().getAmount()).isEqualTo(1000);
         assertThat(subscription.getPlan().getCurrency()).isEqualTo("EUR");
         assertThat(subscription.getPlan().getPeriod()).isEqualTo(Plan.Period.DAY);
         assertThat(subscription.getPlan().getInterval()).isEqualTo(5);
@@ -131,7 +129,7 @@ public class SubscriptionModelTest extends BaseApiResourceTest {
         assertThat(firstSubscription.getPlanId()).isEqualTo("pln_a27286a");
         assertThat(firstSubscription.getPlan().getName()).isEqualTo("Test");
         assertThat(firstSubscription.getPlan().getDescription()).isEqualTo("Abc");
-        assertThat(firstSubscription.getPlan().getAmount()).isEqualTo(BigDecimal.valueOf(1000));
+        assertThat(firstSubscription.getPlan().getAmount()).isEqualTo(1000);
         assertThat(firstSubscription.getPlan().getCurrency()).isEqualTo("EUR");
         assertThat(firstSubscription.getPlan().getPeriod()).isEqualTo(Plan.Period.DAY);
         assertThat(firstSubscription.getPlan().getInterval()).isEqualTo(5);
@@ -148,7 +146,7 @@ public class SubscriptionModelTest extends BaseApiResourceTest {
         assertThat(secondSubscription.getPlanId()).isEqualTo("pln_a27286b");
         assertThat(secondSubscription.getPlan().getName()).isEqualTo("Test");
         assertThat(secondSubscription.getPlan().getDescription()).isEqualTo("Abc");
-        assertThat(secondSubscription.getPlan().getAmount()).isEqualTo(BigDecimal.valueOf(1000));
+        assertThat(secondSubscription.getPlan().getAmount()).isEqualTo(1000);
         assertThat(secondSubscription.getPlan().getCurrency()).isEqualTo("EUR");
         assertThat(secondSubscription.getPlan().getPeriod()).isEqualTo(Plan.Period.DAY);
         assertThat(secondSubscription.getPlan().getInterval()).isEqualTo(5);
@@ -165,7 +163,7 @@ public class SubscriptionModelTest extends BaseApiResourceTest {
         assertThat(thirdSubscription.getPlanId()).isEqualTo("pln_a27286c");
         assertThat(thirdSubscription.getPlan().getName()).isEqualTo("Test");
         assertThat(thirdSubscription.getPlan().getDescription()).isEqualTo("Abc");
-        assertThat(thirdSubscription.getPlan().getAmount()).isEqualTo(BigDecimal.valueOf(1000));
+        assertThat(thirdSubscription.getPlan().getAmount()).isEqualTo(1000);
         assertThat(thirdSubscription.getPlan().getCurrency()).isEqualTo("EUR");
         assertThat(thirdSubscription.getPlan().getPeriod()).isEqualTo(Plan.Period.DAY);
         assertThat(thirdSubscription.getPlan().getInterval()).isEqualTo(5);
