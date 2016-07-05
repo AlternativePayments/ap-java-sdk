@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<body th:fragment="one-transaction-void">
+    <ul>
+        <li th:text="'ID: ' + ${transactionVoid.id}"></li>
+        <li th:text="'Reason: ' + ${transactionVoid.reason}"></li>
+        <li th:text="'Amount: ' + ${transactionVoid.amount}"></li>
+        <li th:text="'Currency: ' + ${transactionVoid.currency}"></li>
+        <li th:text="'Status: ' + ${transactionVoid.status}"></li>
+        <li th:text="'Original Transaction Id: ' + ${transactionVoid.originalTransaction.id}"></li>
+        <li th:text="'Original Transaction Status: ' + ${transactionVoid.originalTransaction.status}"></li>
+    </ul>
+</body>
+</html>

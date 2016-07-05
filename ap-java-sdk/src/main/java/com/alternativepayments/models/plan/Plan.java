@@ -1,5 +1,7 @@
 package com.alternativepayments.models.plan;
 
+import java.math.BigDecimal;
+
 import org.joda.time.DateTime;
 
 import com.alternativepayments.models.BaseModel;
@@ -19,7 +21,7 @@ public class Plan extends BaseModel {
 
     private final int interval;
     private final Period period;
-    private final int amount;
+    private final BigDecimal amount;
     private final String currency;
     private final String name;
     private final String description;
@@ -46,7 +48,7 @@ public class Plan extends BaseModel {
             @JsonProperty("updated") final DateTime updated,
             @JsonProperty("interval") final int interval,
             @JsonProperty("period") final Period period,
-            @JsonProperty("amount") final int amount,
+            @JsonProperty("amount") final BigDecimal amount,
             @JsonProperty("currency") final String currency,
             @JsonProperty("name") final String name,
             @JsonProperty("description") final String description) {
@@ -66,7 +68,7 @@ public class Plan extends BaseModel {
     public static class Builder {
         // Required parameters
         private final String name;
-        private final int amount;
+        private final BigDecimal amount;
         private final String currency;
         private final int interval;
         private final Period period;
@@ -83,7 +85,7 @@ public class Plan extends BaseModel {
          * @param interval interval for the plan
          * @param period period for the plan
          */
-        public Builder(final String name, final int amount, final String currency, final int interval,
+        public Builder(final String name, final BigDecimal amount, final String currency, final int interval,
                 final Period period) {
             this.name = name;
             this.amount = amount;
@@ -145,7 +147,7 @@ public class Plan extends BaseModel {
     /**
      * @return the amount
      */
-    public int getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 

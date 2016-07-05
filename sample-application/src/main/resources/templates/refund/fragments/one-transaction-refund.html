@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<body th:fragment="one-transaction-refund">
+    <ul>
+        <li th:text="'ID: ' + ${transactionRefund.id}"></li>
+        <li th:text="'Reason: ' + ${transactionRefund.reason}"></li>
+        <li th:text="'Amount: ' + ${transactionRefund.amount}"></li>
+        <li th:text="'Currency: ' + ${transactionRefund.currency}"></li>
+        <li th:text="'Status: ' + ${transactionRefund.status}"></li>
+        <li th:text="'Original Transaction Id: ' + ${transactionRefund.originalTransaction.id}"></li>
+        <li th:text="'Original Transaction Status: ' + ${transactionRefund.originalTransaction.status}"></li>
+    </ul>
+</body>
+</html>
