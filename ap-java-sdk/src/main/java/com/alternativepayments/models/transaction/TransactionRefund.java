@@ -1,7 +1,5 @@
 package com.alternativepayments.models.transaction;
 
-import java.math.BigDecimal;
-
 import org.joda.time.DateTime;
 
 import com.alternativepayments.models.BaseModel;
@@ -15,7 +13,7 @@ public class TransactionRefund extends BaseModel {
 
     private static final String API_ENDPOINT = "transactions/%s/refunds/";
 
-    private final BigDecimal amount;
+    private final int amount;
     private final String currency;
     private final ReturnReason reason;
     private final String originalTransactionId;
@@ -42,7 +40,7 @@ public class TransactionRefund extends BaseModel {
             @JsonProperty("mode") final String mode,
             @JsonProperty("created") final DateTime created,
             @JsonProperty("updated") final DateTime updated,
-            @JsonProperty("amount") final BigDecimal amount,
+            @JsonProperty("amount") final int amount,
             @JsonProperty("currency") final String currency,
             @JsonProperty("reason") final ReturnReason reason,
             @JsonProperty("originalTransactionId") final String originalTransactionId,
@@ -68,7 +66,7 @@ public class TransactionRefund extends BaseModel {
 
         // Optional parameters - initialize with default values
         private Transaction originalTransaction;
-        private BigDecimal amount;
+        private int amount;
         private String currency;
         private String status;
 
@@ -103,7 +101,7 @@ public class TransactionRefund extends BaseModel {
          *
          * @return Builder
          */
-        public Builder amount(final BigDecimal amount) {
+        public Builder amount(final int amount) {
             this.amount = amount;
             return this;
         }
@@ -159,7 +157,7 @@ public class TransactionRefund extends BaseModel {
     /**
      * @return the amount
      */
-    public BigDecimal getAmount() {
+    public int getAmount() {
         return amount;
     }
 

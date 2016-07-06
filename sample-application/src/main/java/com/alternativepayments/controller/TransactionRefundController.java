@@ -1,7 +1,5 @@
 package com.alternativepayments.controller;
 
-import java.math.BigDecimal;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,13 +34,13 @@ public class TransactionRefundController {
     public String createTransactionRefund(Model model) {
         Customer customer = new Customer.Builder("John", "Doe", "john@doe.com", "DE").build();
         Payment payment = new Payment.Builder("SEPA", "John Doe").iban("BE88271080782541").build();
-        Transaction sepaTransaction = new Transaction.Builder(payment, null, BigDecimal.valueOf(500), "EUR")
+        Transaction sepaTransaction = new Transaction.Builder(payment, null, 500, "EUR")
                 .customer(customer).build();
         Transaction createdTransaction = alternativePaymentClient.create(sepaTransaction,
                 Transaction.API_ENDPOINT, Transaction.class);
 
         TransactionRefund transactionRefund = new TransactionRefund.Builder(ReturnReason.FRAUD,
-                createdTransaction.getId()).amount(BigDecimal.valueOf(50)).currency("EUR").build();
+                createdTransaction.getId()).amount(50).currency("EUR").build();
         TransactionRefund createdTransactionRefund = alternativePaymentClient.create(transactionRefund,
                 TransactionRefund.getApiEndpoint(createdTransaction.getId()), TransactionRefund.class);
 

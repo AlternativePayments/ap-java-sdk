@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class TransactionRefundCollection extends BaseCollection {
 
-    private final List<TransactionVoid> refundTransactions;
+    private final List<TransactionRefund> refundTransactions;
 
     /**
      * Transaction refund collection with pagination.
@@ -22,7 +22,7 @@ public class TransactionRefundCollection extends BaseCollection {
      */
     @JsonCreator
     public TransactionRefundCollection(
-            @JsonProperty("refundTransactions") final List<TransactionVoid> refundTransactions,
+            @JsonProperty("refundTransactions") final List<TransactionRefund> refundTransactions,
             @JsonProperty("pagination") final Pagination pagination) {
         super(pagination);
         this.refundTransactions = refundTransactions;
@@ -31,7 +31,7 @@ public class TransactionRefundCollection extends BaseCollection {
     /**
      * @return the transaction refunds
      */
-    public List<TransactionVoid> getRefundTransactions() {
+    public List<TransactionRefund> getRefundTransactions() {
         return refundTransactions;
     }
 }
