@@ -28,23 +28,27 @@ public class TransactionRefundController {
      * Create transaction refund page.
      *
      * @param model view model
+     * @param transactionId id of transaction
      * @return view to create transaction refund.
      */
     @RequestMapping("/create-transaction-refund")
-    public String createTransactionRefund(Model model) {
-        Customer customer = new Customer.Builder("John", "Doe", "john@doe.com", "DE").build();
-        Payment payment = new Payment.Builder("SEPA", "John Doe").iban("BE88271080782541").build();
-        Transaction sepaTransaction = new Transaction.Builder(payment, null, 500, "EUR")
-                .customer(customer).build();
-        Transaction createdTransaction = alternativePaymentClient.create(sepaTransaction,
-                Transaction.API_ENDPOINT, Transaction.class);
+    public String createTransactionRefund(Model model,
+            @RequestParam(value = "transaction_id", required = false) final String transactionId) {
+        if (StringUtils.isNotBlank(transactionId)) {
+            Customer customer = new Customer.Builder("John", "Doe", "john@doe.com", "DE").build();
+            Payment payment = new Payment.Builder("SEPA", "John Doe").iban("BE88271080782541").build();
+            Transaction sepaTransaction = new Transaction.Builder(payment, null, 500, "EUR").customer(customer).build();
+            Transaction createdTransaction = alternativePaymentClient.create(sepaTransaction, Transaction.API_ENDPOINT,
+                    Transaction.class);
 
-        TransactionRefund transactionRefund = new TransactionRefund.Builder(ReturnReason.FRAUD,
-                createdTransaction.getId()).amount(50).currency("EUR").build();
-        TransactionRefund createdTransactionRefund = alternativePaymentClient.create(transactionRefund,
-                TransactionRefund.getApiEndpoint(createdTransaction.getId()), TransactionRefund.class);
+            TransactionRefund transactionRefund = new TransactionRefund.Builder(ReturnReason.FRAUD,
+                    createdTransaction.getId()).amount(50).currency("EUR").build();
+            TransactionRefund createdTransactionRefund = alternativePaymentClient.create(transactionRefund,
+                    TransactionRefund.getApiEndpoint(createdTransaction.getId()), TransactionRefund.class);
 
-        model.addAttribute("transactionRefund", createdTransactionRefund);
+            model.addAttribute("transactionRefund", createdTransactionRefund);
+        }
+
         return "refund/create-transaction-refund";
     }
 
