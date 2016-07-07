@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.alternativepayments.AlternativePaymentClient;
-import com.alternativepayments.models.customer.Customer;
-import com.alternativepayments.models.transaction.Payment;
 import com.alternativepayments.models.transaction.ReturnReason;
-import com.alternativepayments.models.transaction.Transaction;
 import com.alternativepayments.models.transaction.TransactionRefund;
 import com.alternativepayments.models.transaction.TransactionRefundCollection;
 
@@ -35,16 +32,10 @@ public class TransactionRefundController {
     public String createTransactionRefund(Model model,
             @RequestParam(value = "transaction_id", required = false) final String transactionId) {
         if (StringUtils.isNotBlank(transactionId)) {
-            Customer customer = new Customer.Builder("John", "Doe", "john@doe.com", "DE").build();
-            Payment payment = new Payment.Builder("SEPA", "John Doe").iban("BE88271080782541").build();
-            Transaction sepaTransaction = new Transaction.Builder(payment, null, 500, "EUR").customer(customer).build();
-            Transaction createdTransaction = alternativePaymentClient.create(sepaTransaction, Transaction.API_ENDPOINT,
-                    Transaction.class);
-
             TransactionRefund transactionRefund = new TransactionRefund.Builder(ReturnReason.FRAUD,
-                    createdTransaction.getId()).amount(50).currency("EUR").build();
+                    transactionId).build();
             TransactionRefund createdTransactionRefund = alternativePaymentClient.create(transactionRefund,
-                    TransactionRefund.getApiEndpoint(createdTransaction.getId()), TransactionRefund.class);
+                    TransactionRefund.getApiEndpoint(transactionId), TransactionRefund.class);
 
             model.addAttribute("transactionRefund", createdTransactionRefund);
         }
