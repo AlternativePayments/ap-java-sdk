@@ -159,6 +159,8 @@ public class TransactionModelTest extends BaseApiResourceTest {
         assertThat(createdBrazilPayTransaction.getCreated().toString()).isEqualTo("2016-03-24T15:19:10.780Z");
         assertThat(createdBrazilPayTransaction.getRedirectUrl())
                 .isEqualTo("http://mybankingsite.com/hRedirection.aspx?transaction_id=trn_1a5f5e0c97");
+        assertThat(createdBrazilPayTransaction.getInitialTransactionId()).isEqualTo("trn_b60b283effe2");
+        assertThat(createdBrazilPayTransaction.isRecurring()).isTrue();
 
         assertThat(createdBrazilPayTransaction.getCustomer().getId()).isEqualTo("cus_bd838e3611d34d598");
         assertThat(createdBrazilPayTransaction.getCustomer().getMode()).isEqualTo("Live");

@@ -2,6 +2,8 @@
     "id": "trn_d12209838b",
     "mode": "Live",
     "status": "Pending",
+    "initialTransactionId": "trn_b60b283effe2",
+    "isRecurring": true,
     "customer": {
         "id": "cus_bd838e3611d34d598",
         "mode": "Live",
