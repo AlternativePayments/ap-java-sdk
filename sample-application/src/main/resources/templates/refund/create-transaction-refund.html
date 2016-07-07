@@ -10,9 +10,15 @@
     <section layout:fragment="menu" th:include="refund/fragments/transaction-refund-menu :: transaction-refund-menu">
     </section>
     <section layout:fragment="content">
-        <p th:text="'Transaction refund with ID ' + ${transactionRefund.id} + ' created!'" />
-        <ul th:replace="refund/fragments/one-transaction-refund :: 'one-transaction-refund' (transactionRefund=${transactionRefund})">
-        </ul>
+        <form th:action="@{/create-transaction-refund}">
+            Transaction id: <input type="text" name="transaction_id"/><br />
+            <button type="submit">Create Transaction Refund</button>
+        </form>
+        <div th:if="${transactionRefund != null}" >
+            <p th:text="'Transaction refund with ID ' + ${transactionRefund.id} + ' created!'" />
+            <ul th:replace="refund/fragments/one-transaction-refund :: 'one-transaction-refund' (transactionRefund=${transactionRefund})">
+            </ul>
+        </div>
     </section>
 </body>
 </html>

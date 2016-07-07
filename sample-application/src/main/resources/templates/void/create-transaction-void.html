@@ -10,9 +10,15 @@
     <section layout:fragment="menu" th:include="void/fragments/transaction-void-menu :: transaction-void-menu">
     </section>
     <section layout:fragment="content">
-        <p th:text="'Transaction void with ID ' + ${transactionVoid.id} + ' created!'" />
-        <ul th:replace="void/fragments/one-transaction-void :: 'one-transaction-void' (transactionVoid=${transactionVoid})">
-        </ul>
+        <form th:action="@{/create-transaction-void}">
+            Transaction id: <input type="text" name="transaction_id"/><br />
+            <button type="submit">Create Transaction Void</button>
+        </form>
+        <div th:if="${transactionVoid != null}" >
+            <p th:text="'Transaction void with ID ' + ${transactionVoid.id} + ' created!'" />
+            <ul th:replace="void/fragments/one-transaction-void :: 'one-transaction-void' (transactionVoid=${transactionVoid})">
+            </ul>
+        </div>
     </section>
 </body>
 </html>
