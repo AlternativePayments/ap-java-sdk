@@ -7,6 +7,8 @@
         <li th:text="'ID: ' + ${transaction.id}"></li>
         <li th:text="'Status: ' + ${transaction.status}"></li>
         <li th:text="'Amount: ' + ${transaction.amount}"></li>
+        <li th:text="'Is recurring: ' + ${transaction.recurring}"></li>
+        <li th:text="'Initial Transaction Id: ' + ${transaction.initialTransactionId}"></li>
         <li th:text="'Currency: ' + ${transaction.currency}"></li>
         <li th:text="'Customer ID: ' + ${transaction.customer.id}"></li>
         <li th:text="'Customer First Name: ' + ${transaction.customer.firstName}"></li>

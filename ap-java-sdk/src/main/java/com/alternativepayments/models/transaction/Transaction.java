@@ -32,6 +32,8 @@ public class Transaction extends BaseModel {
     private final String redirectUrl;
     private final PhoneVerification phoneverification;
     private final Preauthorization preauthorization;
+    private final boolean isRecurring;
+    private String initialTransactionId;
 
     /**
      * Create new Transaction using fields.
@@ -55,6 +57,8 @@ public class Transaction extends BaseModel {
      * @param redirectUrl redirect url for transaction
      * @param phoneverification phoneverification used for transaction
      * @param preauthorization preauthorization used for transaction
+     * @param isRecurring is transaction recurring or not
+     * @param initialTransactionId initial transaction id
      */
     @JsonCreator
     public Transaction(
@@ -76,7 +80,9 @@ public class Transaction extends BaseModel {
             @JsonProperty("redirectUrls") final RedirectUrls redirectUrls,
             @JsonProperty("redirectUrl") final String redirectUrl,
             @JsonProperty("phoneverification") final PhoneVerification phoneverification,
-            @JsonProperty("preauthorization") final Preauthorization preauthorization) {
+            @JsonProperty("preauthorization") final Preauthorization preauthorization,
+            @JsonProperty("isRecurring") final boolean isRecurring,
+            @JsonProperty("initialTransactionId") final String initialTransactionId) {
         super(id, mode, created, updated);
         this.customer = customer;
         this.customerId = customerId;
@@ -93,6 +99,8 @@ public class Transaction extends BaseModel {
         this.redirectUrl = redirectUrl;
         this.phoneverification = phoneverification;
         this.preauthorization = preauthorization;
+        this.isRecurring = isRecurring;
+        this.initialTransactionId = initialTransactionId;
     }
 
     /**
@@ -118,6 +126,8 @@ public class Transaction extends BaseModel {
         private String redirectUrl;
         private PhoneVerification phoneverification;
         private Preauthorization preauthorization;
+        private boolean isRecurring;
+        private String initialTransactionId;
 
         /**
          * Constructor that takes on all mandatory parameters.
@@ -267,6 +277,30 @@ public class Transaction extends BaseModel {
         }
 
         /**
+         * Set recurring for transaction.
+         *
+         * @param isRecurring is transaction recurring
+         *
+         * @return Builder
+         */
+        public Builder isRecurring(final boolean isRecurring) {
+            this.isRecurring = isRecurring;
+            return this;
+        }
+
+        /**
+         * Set initial transaction id.
+         *
+         * @param initialTransactionId initial transaction id
+         *
+         * @return Builder
+         */
+        public Builder initialTransactionId(final String initialTransactionId) {
+            this.initialTransactionId = initialTransactionId;
+            return this;
+        }
+
+        /**
          * Build method needed to be executed in order for Transaction to be created.
          *
          *
@@ -297,6 +331,8 @@ public class Transaction extends BaseModel {
         this.redirectUrl = builder.redirectUrl;
         this.phoneverification = builder.phoneverification;
         this.preauthorization = builder.preauthorization;
+        this.isRecurring = builder.isRecurring;
+        this.initialTransactionId = builder.initialTransactionId;
     }
 
     /**
@@ -402,5 +438,26 @@ public class Transaction extends BaseModel {
      */
     public Preauthorization getPreauthorization() {
         return preauthorization;
+    }
+
+    /**
+     * @return the initialTransactionId
+     */
+    public String getInitialTransactionId() {
+        return initialTransactionId;
+    }
+
+    /**
+     * @param initialTransactionId the initialTransactionId to set
+     */
+    public void setInitialTransactionId(String initialTransactionId) {
+        this.initialTransactionId = initialTransactionId;
+    }
+
+    /**
+     * @return the isRecurring
+     */
+    public boolean isRecurring() {
+        return isRecurring;
     }
 }
