@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.alternativepayments.AlternativePaymentClient;
-import com.alternativepayments.models.customer.Customer;
-import com.alternativepayments.models.transaction.Payment;
 import com.alternativepayments.models.transaction.ReturnReason;
-import com.alternativepayments.models.transaction.Transaction;
 import com.alternativepayments.models.transaction.TransactionVoid;
 import com.alternativepayments.models.transaction.TransactionVoidCollection;
 
@@ -35,16 +32,9 @@ public class TransactionVoidController {
     public String createTransactionVoid(Model model,
             @RequestParam(value = "transaction_id", required = false) final String transactionId) {
         if (StringUtils.isNotBlank(transactionId)) {
-            Customer customer = new Customer.Builder("John", "Doe", "john@doe.com", "DE").build();
-            Payment payment = new Payment.Builder("SEPA", "John Doe").iban("BE88271080782541").build();
-            Transaction sepaTransaction = new Transaction.Builder(payment, null, 500, "EUR").customer(customer).build();
-            Transaction createdTransaction = alternativePaymentClient.create(sepaTransaction, Transaction.API_ENDPOINT,
-                    Transaction.class);
-
-            TransactionVoid transactionVoid = new TransactionVoid.Builder(ReturnReason.FRAUD,
-                    createdTransaction.getId()).amount(50).currency("EUR").build();
+            TransactionVoid transactionVoid = new TransactionVoid.Builder(ReturnReason.FRAUD, transactionId).build();
             TransactionVoid createdTransactionVoid = alternativePaymentClient.create(transactionVoid,
-                    TransactionVoid.getApiEndpoint(createdTransaction.getId()), TransactionVoid.class);
+                    TransactionVoid.getApiEndpoint(transactionId), TransactionVoid.class);
 
             model.addAttribute("transactionVoid", createdTransactionVoid);
         }
