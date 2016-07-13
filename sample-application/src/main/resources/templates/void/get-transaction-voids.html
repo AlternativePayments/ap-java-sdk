@@ -14,7 +14,7 @@
             <input type="text" name="transaction_id"/>
             <button type="submit">Get Transaction Voids</button>
         </form>
-        <div th:each="transactionVoid : ${transactionVoids}" th:if="transactionVoids != null}">
+        <div th:each="transactionVoid : ${transactionVoids}" th:if="${transactionVoids != null}">
             <ul th:replace="void/fragments/one-transaction-void :: 'one-transaction-void' (transactionVoid=${transactionVoid})">
             </ul>
         </div>
