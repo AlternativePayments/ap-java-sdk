@@ -14,7 +14,7 @@
             <input type="text" name="transaction_id"/>
             <button type="submit">Get Transaction Refunds</button>
         </form>
-        <div th:each="transactionRefund : ${transactionRefunds}" th:if="transactionRefunds != null}">
+        <div th:each="transactionRefund : ${transactionRefunds}" th:if="${transactionRefunds != null}">
             <ul th:replace="refund/fragments/one-transaction-refund :: 'one-transaction-refund' (transactionRefund=${transactionRefund})">
             </ul>
         </div>
