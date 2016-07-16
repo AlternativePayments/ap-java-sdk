@@ -10,9 +10,17 @@
     <section layout:fragment="menu" th:include="subscription/fragments/subscription-menu :: subscription-menu">
     </section>
     <section layout:fragment="content">
-        <p th:text="'Subscription with ID ' + ${subscription.id} + ' created!'" />
-        <ul th:replace="subscription/fragments/one-subscription :: 'one-subscription' (subscription=${subscription})">
-        </ul>
+        <form th:action="@{/create-subscription}">
+            Plan name: <input type="text" name="plan_name"/><br />
+            Plan amount: <input type="text" name="plan_amount"/><br />
+            Customer email: <input type="text" name="customer_email"/><br />
+            <button type="submit">Create Subscription</button>
+        </form>
+        <div th:if="${subscription != null}" >
+	        <p th:text="'Subscription with ID ' + ${subscription.id} + ' created!'" />
+	        <ul th:replace="subscription/fragments/one-subscription :: 'one-subscription' (subscription=${subscription})">
+            </ul>
+        </div>
     </section>
 </body>
 </html>

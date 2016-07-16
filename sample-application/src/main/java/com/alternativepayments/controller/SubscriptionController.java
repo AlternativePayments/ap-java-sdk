@@ -1,8 +1,5 @@
 package com.alternativepayments.controller;
 
-import java.math.BigInteger;
-import java.security.SecureRandom;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +21,6 @@ import com.alternativepayments.models.transaction.Transaction;
 @Controller
 public class SubscriptionController {
 
-    private SecureRandom random = new SecureRandom();
-
     @Autowired
     private AlternativePaymentClient alternativePaymentClient;
 
@@ -33,26 +28,36 @@ public class SubscriptionController {
      * Create subscription page.
      *
      * @param model view model
+     * @param planName name of the plan for subscription
+     * @param planAmount amount of the plan for subscription
+     * @param customerEmail email of the customer for witch we create subscription
      * @return view to create subscription.
      */
     @RequestMapping("/create-subscription")
-    public String createSubscription(final Model model) {
-        Plan plan = new Plan.Builder(nextPlanName(), random.nextInt(10000), "EUR", 5, Plan.Period.DAY)
-                .description("Abc").build();
-        Plan createdPlan = alternativePaymentClient.create(plan, Plan.API_ENDPOINT, Plan.class);
+    public String createSubscription(final Model model,
+            @RequestParam(value = "plan_name", required = false) final String planName,
+            @RequestParam(value = "plan_amount", required = false) final Integer planAmount,
+            @RequestParam(value = "customer_email", required = false) final String customerEmail) {
 
-        Customer customer = new Customer.Builder("John", "Smith", "johnsmith@johnsmith.com", "US").build();
-        Payment payment = new Payment.Builder("SEPA", "John Doe").iban("BE88271080782541").build();
-        Transaction transaction = new Transaction.Builder(payment, null, 500, "EUR").customer(customer).build();
-        Transaction createdTransaction = alternativePaymentClient.create(transaction, Transaction.API_ENDPOINT,
-                Transaction.class);
+        if (StringUtils.isNotBlank(planName) && StringUtils.isNotBlank(String.valueOf(planAmount))
+                && StringUtils.isNotBlank(customerEmail)) {
+            Plan plan = new Plan.Builder(planName, planAmount, "EUR", 5, Plan.Period.DAY)
+                    .description("Abc").build();
+            Plan createdPlan = alternativePaymentClient.create(plan, Plan.API_ENDPOINT, Plan.class);
 
-        Subscription subscription = new Subscription.Builder(createdTransaction.getCustomer().getId(),
-                createdTransaction.getPayment().getId(), createdPlan.getId()).build();
-        Subscription createdSubscription = alternativePaymentClient.create(subscription, Subscription.API_ENDPOINT,
-                Subscription.class);
+            Customer customer = new Customer.Builder("John", "Smith", "johnsmith@johnsmith.com", "US").build();
+            Payment payment = new Payment.Builder("SEPA", "John Doe").iban("BE88271080782541").build();
+            Transaction transaction = new Transaction.Builder(payment, null, 500, "EUR").customer(customer).build();
+            Transaction createdTransaction = alternativePaymentClient.create(transaction, Transaction.API_ENDPOINT,
+                    Transaction.class);
 
-        model.addAttribute("subscription", createdSubscription);
+            Subscription subscription = new Subscription.Builder(createdTransaction.getCustomer().getId(),
+                    createdTransaction.getPayment().getId(), createdPlan.getId()).build();
+            Subscription createdSubscription = alternativePaymentClient.create(subscription, Subscription.API_ENDPOINT,
+                    Subscription.class);
+
+            model.addAttribute("subscription", createdSubscription);
+        }
         return "subscription/create-subscription";
     }
 
@@ -88,10 +93,6 @@ public class SubscriptionController {
         model.addAttribute("subscriptions", subscriptions.getSubscriptions());
 
         return "subscription/get-subscriptions";
-    }
-
-    private String nextPlanName() {
-        return new BigInteger(130, random).toString(32);
     }
 
 }
