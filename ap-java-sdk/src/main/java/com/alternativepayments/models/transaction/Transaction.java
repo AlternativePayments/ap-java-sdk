@@ -259,7 +259,7 @@ public class Transaction extends BaseModel {
          *
          * @return Builder
          */
-        public Builder phoneerification(final PhoneVerification phoneverification) {
+        public Builder phoneVerification(final PhoneVerification phoneverification) {
             this.phoneverification = phoneverification;
             return this;
         }

@@ -12,13 +12,13 @@ public class PhoneVerificationModelTest extends BaseApiResourceTest {
 
     @Test
     public void create_new_phoneverification() {
-        PhoneVerification phoneverification = new PhoneVerification.Builder("pk_live_cyelxxxxxxxxddddddddBQuFeAGDDNG",
-                "+15555555555").build();
+        String phoneNumber = "+15555555555";
+        PhoneVerification phoneverification = new PhoneVerification.Builder(API_PUBLIC_KEY, phoneNumber).build();
 
         PhoneVerificationApiMock.expectPost(phoneverification);
 
         final PhoneVerification createdPphoneverification = alternativePaymentClient
-                .create(phoneverification, PhoneVerification.API_ENDPOINT, PhoneVerification.class);
+                .createPhoneVerification(phoneNumber, PhoneVerification.API_ENDPOINT, PhoneVerification.class);
 
         assertThat(createdPphoneverification.getKey()).isEqualTo("pk_live_cyelxxxxxxxxddddddddBQuFeAGDDNG");
         assertThat(createdPphoneverification.getType()).isEqualTo("SMS");

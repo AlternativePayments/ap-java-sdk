@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.alternativepayments.AlternativePaymentClient;
 import com.alternativepayments.models.customer.Customer;
 import com.alternativepayments.models.transaction.Payment;
+import com.alternativepayments.models.transaction.PhoneVerification;
 import com.alternativepayments.models.transaction.RedirectUrls;
 import com.alternativepayments.models.transaction.Transaction;
 import com.alternativepayments.models.transaction.TransactionCollection;
+import com.alternativepayments.models.website.PaymentOption;
 
 /**
  * Controller for all action for transactions.
@@ -35,7 +37,60 @@ public class TransactionController {
         Payment payment = new Payment.Builder("SEPA", "John Doe").iban("BE88271080782541").build();
 
         Transaction sepaTransaction = new Transaction.Builder(payment, null, 500, "EUR")
-                .customer(customer).build();
+                .customer(customer).ipAddress("127.0.0.1").build();
+        Transaction createdTransaction = alternativePaymentClient.create(sepaTransaction, Transaction.API_ENDPOINT,
+                Transaction.class);
+        model.addAttribute("transaction", createdTransaction);
+        return "transaction/create-transaction";
+    }
+
+    /**
+     * Check if phone verification for SEPA is active.
+     *
+     * @param model view model
+     * @return view to SMS verification check.
+     */
+    @RequestMapping("/is-sepa-phone-verification-active")
+    public String isSepaPhoneVerificationActive(Model model) {
+        final String paymentOptionType = "SEPA";
+
+        PaymentOption paymentOption = alternativePaymentClient
+                .getForWebsite(PaymentOption.getApiEndpoint(paymentOptionType), PaymentOption.class);
+
+        model.addAttribute("paymentOption", paymentOption);
+        return "transaction/sepa-phone-verification";
+    }
+
+    /**
+     * Create phone verification for a number.
+     *
+     * @param model view model
+     * @return view to created phone verification for a number.
+     */
+    @RequestMapping("/create-phone-verification")
+    public String createPhoneVerification(Model model) {
+        PhoneVerification phoneVerification = alternativePaymentClient.createPhoneVerification("+15555555555",
+                PhoneVerification.API_ENDPOINT, PhoneVerification.class);
+
+        model.addAttribute("phoneVerification", phoneVerification);
+        return "transaction/create-phone-verification";
+    }
+
+    /**
+     * Create sepa transaction with phone verification page.
+     *
+     * @param model view model
+     * @return view to create sepa transaction.
+     */
+    @RequestMapping("/create-sepa-transaction-phone-verification")
+    public String createSepaTransactionPhoneVerification(Model model) {
+        Customer customer = new Customer.Builder("John", "Doe", "john@doe.com", "DE").build();
+        Payment payment = new Payment.Builder("SEPA", "John Doe").iban("BE88271080782541").build();
+        PhoneVerification phoneVerification = alternativePaymentClient.createPhoneVerification("+15555555555",
+                PhoneVerification.API_ENDPOINT, PhoneVerification.class);
+
+        Transaction sepaTransaction = new Transaction.Builder(payment, null, 500, "EUR").customer(customer)
+                .phoneVerification(phoneVerification).ipAddress("127.0.0.1").build();
         Transaction createdTransaction = alternativePaymentClient.create(sepaTransaction, Transaction.API_ENDPOINT,
                 Transaction.class);
         model.addAttribute("transaction", createdTransaction);
