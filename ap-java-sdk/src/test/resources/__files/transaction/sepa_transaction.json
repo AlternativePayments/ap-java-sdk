@@ -2,6 +2,7 @@
     "id": "trn_d12209838b",
     "mode": "Live",
     "status": "Pending",
+    "ipAddress": "127.0.0.1",
     "customer": {
         "id": "cus_bd838e3611d34d598",
         "mode": "Live",

@@ -113,6 +113,7 @@ public class Transaction extends BaseModel {
         private final String token;
         private final int amount;
         private final String currency;
+        private String ipAddress;
 
         // Optional parameters - initialize with default values
         private Customer customer;
@@ -120,7 +121,6 @@ public class Transaction extends BaseModel {
         private String merchantPassThruData;
         private String merchantTransactionId;
         private String description;
-        private String ipAddress;
         private String status;
         private RedirectUrls redirectUrls;
         private String redirectUrl;
@@ -136,12 +136,15 @@ public class Transaction extends BaseModel {
          * @param token token for the transaction
          * @param amount amount for the transaction
          * @param currency currency for the transaction
+         * @param ipAddress ip address
          */
-        public Builder(final Payment payment, final String token, final int amount, final String currency) {
+        public Builder(final Payment payment, final String token, final int amount, final String currency,
+                final String ipAddress) {
             this.payment = payment;
             this.token = token;
             this.amount = amount;
             this.currency = currency;
+            this.ipAddress = ipAddress;
         }
 
         /**
@@ -201,18 +204,6 @@ public class Transaction extends BaseModel {
          */
         public Builder description(final String description) {
             this.description = description;
-            return this;
-        }
-
-        /**
-         * Set ipAddress for building object.
-         *
-         * @param ipAddress of the transaction
-         *
-         * @return Builder
-         */
-        public Builder ipAddress(final String ipAddress) {
-            this.ipAddress = ipAddress;
             return this;
         }
 
