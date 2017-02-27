@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.alternativepayments</groupId>
     <artifactId>sample-application-java</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
     <packaging>jar</packaging>
 
     <name>Sample Java Application</name>
@@ -55,7 +55,7 @@
         <code.level>1.7</code.level>
         <start-class>com.alternativepayments.SampleApplication</start-class>
         <version.spring.boot>1.3.5.RELEASE</version.spring.boot>
-        <version.alternative.payment.sdk>0.1.0</version.alternative.payment.sdk>
+        <version.alternative.payment.sdk>0.1.1</version.alternative.payment.sdk>
         <version.plugin.jar>2.6</version.plugin.jar>
         <version.plugin.checkstyle>2.17</version.plugin.checkstyle>
         <version.plugin.spring.boot>2.6</version.plugin.spring.boot>

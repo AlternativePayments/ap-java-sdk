@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout/main">
+<head>
+    <title>Alternative Payments Java SDK Sample Application</title>
+</head>
+<body>
+    <section layout:fragment="menu" th:include="transaction/fragments/transaction-menu :: transaction-menu">
+    </section>
+    <section layout:fragment="content">
+        <div th:if="${paymentOption != null}" >
+            <ul>
+                <li th:text="'Id: ' + ${paymentOption.id}"></li>
+                <li th:text="'Mode: ' + ${paymentOption.mode}"></li>
+                <li th:text="'Has SMS verification: ' + ${paymentOption.hasSmsVerification}"></li>
+                <li th:text="'Website URL: ' + ${paymentOption.url}"></li>
+            </ul>
+        </div>
+    </section>
+</body>
+</html>

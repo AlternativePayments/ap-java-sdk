@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.alternativepayments.AlternativePaymentClient;
 import com.alternativepayments.models.customer.Customer;
 import com.alternativepayments.models.transaction.Payment;
+import com.alternativepayments.models.transaction.PhoneVerification;
 import com.alternativepayments.models.transaction.RedirectUrls;
 import com.alternativepayments.models.transaction.Transaction;
 import com.alternativepayments.models.transaction.TransactionCollection;
+import com.alternativepayments.models.website.PaymentOption;
 
 /**
  * Controller for all action for transactions.
@@ -34,8 +36,63 @@ public class TransactionController {
         Customer customer = new Customer.Builder("John", "Doe", "john@doe.com", "DE").build();
         Payment payment = new Payment.Builder("SEPA", "John Doe").iban("BE88271080782541").build();
 
-        Transaction sepaTransaction = new Transaction.Builder(payment, null, 500, "EUR")
-                .customer(customer).build();
+        Transaction sepaTransaction = new Transaction.Builder(payment, null, 500, "EUR", "127.0.0.1").customer(customer)
+                .build();
+        Transaction createdTransaction = alternativePaymentClient.create(sepaTransaction, Transaction.API_ENDPOINT,
+                Transaction.class);
+        model.addAttribute("transaction", createdTransaction);
+        return "transaction/create-transaction";
+    }
+
+    /**
+     * Check if phone verification for SEPA is active.
+     *
+     * @param model view model
+     * @return view to SMS verification check.
+     */
+    @RequestMapping("/is-sepa-phone-verification-active")
+    public String isSepaPhoneVerificationActive(Model model) {
+        final String paymentOptionType = "SEPA";
+
+        PaymentOption paymentOption = alternativePaymentClient
+                .getForWebsite(PaymentOption.getApiEndpoint(paymentOptionType), PaymentOption.class);
+
+        model.addAttribute("paymentOption", paymentOption);
+        return "transaction/sepa-phone-verification";
+    }
+
+    /**
+     * Create phone verification for a number.
+     *
+     * @param model view model
+     * @return view to created phone verification for a number.
+     */
+    @RequestMapping("/create-phone-verification")
+    public String createPhoneVerification(Model model) {
+        PhoneVerification phoneVerification = alternativePaymentClient.createPhoneVerification("+15555555555",
+                PhoneVerification.API_ENDPOINT, PhoneVerification.class);
+
+        model.addAttribute("phoneVerification", phoneVerification);
+        return "transaction/create-phone-verification";
+    }
+
+    /**
+     * Create sepa transaction with phone verification page.
+     *
+     * @param model view model
+     * @return view to create sepa transaction.
+     */
+    @RequestMapping("/create-sepa-transaction-phone-verification")
+    public String createSepaTransactionPhoneVerification(Model model) {
+        Customer customer = new Customer.Builder("John", "Doe", "john@doe.com", "DE").build();
+        Payment payment = new Payment.Builder("SEPA", "John Doe").iban("BE88271080782541").build();
+        PhoneVerification phoneVerification = alternativePaymentClient.createPhoneVerification("+15555555555",
+                PhoneVerification.API_ENDPOINT, PhoneVerification.class);
+        PhoneVerification transactionPhoneVerification = new PhoneVerification.Builder(phoneVerification.getKey(),
+                phoneVerification.getPhone()).token(phoneVerification.getToken()).pin(1234).build();
+
+        Transaction sepaTransaction = new Transaction.Builder(payment, null, 500, "EUR", "127.0.0.1").customer(customer)
+                .phoneVerification(transactionPhoneVerification).build();
         Transaction createdTransaction = alternativePaymentClient.create(sepaTransaction, Transaction.API_ENDPOINT,
                 Transaction.class);
         model.addAttribute("transaction", createdTransaction);
@@ -55,7 +112,7 @@ public class TransactionController {
         RedirectUrls redirectUrls = new RedirectUrls("http://plugins.alternativepayments.com/message/success.html",
                 "http://plugins.alternativepayments.com/message/failure.html");
 
-        Transaction mistercashTransaction = new Transaction.Builder(payment, null, 500, "EUR")
+        Transaction mistercashTransaction = new Transaction.Builder(payment, null, 500, "EUR", "127.0.0.1")
                 .redirectUrls(redirectUrls).customer(customer).build();
         Transaction createdTransaction = alternativePaymentClient.create(mistercashTransaction,
                 Transaction.API_ENDPOINT, Transaction.class);
@@ -76,7 +133,7 @@ public class TransactionController {
         RedirectUrls redirectUrls = new RedirectUrls("http://plugins.alternativepayments.com/message/success.html",
                 "http://plugins.alternativepayments.com/message/failure.html");
 
-        Transaction idealTransaction = new Transaction.Builder(payment, null, 500, "EUR")
+        Transaction idealTransaction = new Transaction.Builder(payment, null, 500, "EUR", "127.0.0.1")
                 .redirectUrls(redirectUrls).customer(customer).build();
         Transaction createdTransaction = alternativePaymentClient.create(idealTransaction,
                 Transaction.API_ENDPOINT, Transaction.class);
@@ -99,7 +156,7 @@ public class TransactionController {
         RedirectUrls redirectUrls = new RedirectUrls("http://plugins.alternativepayments.com/message/success.html",
                 "http://plugins.alternativepayments.com/message/failure.html");
 
-        Transaction brazilPayTransaction = new Transaction.Builder(payment, null, 100, "EUR")
+        Transaction brazilPayTransaction = new Transaction.Builder(payment, null, 100, "EUR", "127.0.0.1")
                 .redirectUrls(redirectUrls).customer(customer).build();
         Transaction createdTransaction = alternativePaymentClient.create(brazilPayTransaction,
                 Transaction.API_ENDPOINT, Transaction.class);
@@ -119,7 +176,7 @@ public class TransactionController {
         Payment payment = new Payment.Builder("CreditCard", "John Doe").creditCardNumber("4111111111111111")
                 .creditCardType("visa").expirationMonth(12).expirationYear(2019).cvv2(222).build();
 
-        Transaction creditCardTransaction = new Transaction.Builder(payment, null, 100, "EUR")
+        Transaction creditCardTransaction = new Transaction.Builder(payment, null, 100, "EUR", "127.0.0.1")
                 .customer(customer).build();
 
         Transaction createdTransaction = alternativePaymentClient.create(creditCardTransaction,
@@ -140,7 +197,7 @@ public class TransactionController {
         Payment payment = new Payment.Builder("Teleingreso", "John Doe").build();
         RedirectUrls redirectUrls = new RedirectUrls("http://plugins.alternativepayments.com/message/success.html",
                 "http://plugins.alternativepayments.com/message/failure.html");
-        Transaction teleingresoTransaction = new Transaction.Builder(payment, null, 100, "EUR")
+        Transaction teleingresoTransaction = new Transaction.Builder(payment, null, 100, "EUR", "127.0.0.1")
                 .redirectUrls(redirectUrls).customer(customer).build();
 
         Transaction createdTransaction = alternativePaymentClient.create(teleingresoTransaction,
@@ -161,7 +218,7 @@ public class TransactionController {
         Payment payment = new Payment.Builder("Teleingreso", "John Doe").build();
         RedirectUrls redirectUrls = new RedirectUrls("http://plugins.alternativepayments.com/message/success.html",
                 "http://plugins.alternativepayments.com/message/failure.html");
-        Transaction safetyPayTransaction = new Transaction.Builder(payment, null, 100, "EUR")
+        Transaction safetyPayTransaction = new Transaction.Builder(payment, null, 100, "EUR", "127.0.0.1")
                 .redirectUrls(redirectUrls).customer(customer).build();
 
         Transaction createdTransaction = alternativePaymentClient.create(safetyPayTransaction,
@@ -183,7 +240,7 @@ public class TransactionController {
         Payment payment = new Payment.Builder("POLi", "John Doe").build();
         RedirectUrls redirectUrls = new RedirectUrls("http://plugins.alternativepayments.com/message/success.html",
                 "http://plugins.alternativepayments.com/message/failure.html");
-        Transaction poliTransaction = new Transaction.Builder(payment, null, 100, "EUR")
+        Transaction poliTransaction = new Transaction.Builder(payment, null, 100, "EUR", "127.0.0.1")
                 .redirectUrls(redirectUrls).customer(customer).build();
 
         Transaction createdTransaction = alternativePaymentClient.create(poliTransaction,
@@ -205,7 +262,7 @@ public class TransactionController {
         Payment payment = new Payment.Builder("TrustPay", "John Doe").build();
         RedirectUrls redirectUrls = new RedirectUrls("http://plugins.alternativepayments.com/message/success.html",
                 "http://plugins.alternativepayments.com/message/failure.html");
-        Transaction trustPayTransaction = new Transaction.Builder(payment, null, 100, "EUR")
+        Transaction trustPayTransaction = new Transaction.Builder(payment, null, 100, "EUR", "127.0.0.1")
                 .redirectUrls(redirectUrls).customer(customer).build();
 
         Transaction createdTransaction = alternativePaymentClient.create(trustPayTransaction,
@@ -227,7 +284,7 @@ public class TransactionController {
         Payment payment = new Payment.Builder("directpay", "John Doe").build();
         RedirectUrls redirectUrls = new RedirectUrls("http://plugins.alternativepayments.com/message/success.html",
                 "http://plugins.alternativepayments.com/message/failure.html");
-        Transaction directPayTransaction = new Transaction.Builder(payment, null, 100, "EUR")
+        Transaction directPayTransaction = new Transaction.Builder(payment, null, 100, "EUR", "127.0.0.1")
                 .redirectUrls(redirectUrls).customer(customer).build();
 
         Transaction createdTransaction = alternativePaymentClient.create(directPayTransaction,
@@ -249,7 +306,7 @@ public class TransactionController {
         Payment payment = new Payment.Builder("directpaymax", "John Doe").bankCode("POSTBANK").build();
         RedirectUrls redirectUrls = new RedirectUrls("http://plugins.alternativepayments.com/message/success.html",
                 "http://plugins.alternativepayments.com/message/failure.html");
-        Transaction directPayMaxTransaction = new Transaction.Builder(payment, null, 100, "EUR")
+        Transaction directPayMaxTransaction = new Transaction.Builder(payment, null, 100, "EUR", "127.0.0.1")
                 .redirectUrls(redirectUrls).customer(customer).build();
 
         Transaction createdTransaction = alternativePaymentClient.create(directPayMaxTransaction,

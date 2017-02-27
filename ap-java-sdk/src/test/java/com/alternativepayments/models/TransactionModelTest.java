@@ -19,7 +19,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
         Customer customer = new Customer.Builder("John", "Doe", "john@doe.com", "DE").build();
         Payment payment = new Payment.Builder("SEPA", "John Doe").iban("DE71XXXXX3330").build();
 
-        Transaction sepaTransaction = new Transaction.Builder(payment, null, 500, "EUR")
+        Transaction sepaTransaction = new Transaction.Builder(payment, null, 500, "EUR", "127.0.0.1")
                 .customer(customer).build();
 
         TransactionApiMock.expectSepaPost(sepaTransaction);
@@ -32,6 +32,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
         assertThat(createdSepaTransaction.getAmount()).isEqualTo(500);
         assertThat(createdSepaTransaction.getCurrency()).isEqualTo("EUR");
         assertThat(createdSepaTransaction.getCreated().toString()).isEqualTo("2016-03-24T15:19:10.780Z");
+        assertThat(createdSepaTransaction.getIpAddress()).isEqualTo("127.0.0.1");
 
         assertThat(createdSepaTransaction.getCustomer().getId()).isEqualTo("cus_bd838e3611d34d598");
         assertThat(createdSepaTransaction.getCustomer().getMode()).isEqualTo("Live");
@@ -55,7 +56,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
         RedirectUrls redirectUrls = new RedirectUrls("http://plugins.alternativepayments.com/message/success.html",
                 "http://plugins.alternativepayments.com/message/failure.html");
 
-        Transaction mistercashTransaction = new Transaction.Builder(payment, null, 500, "EUR")
+        Transaction mistercashTransaction = new Transaction.Builder(payment, null, 500, "EUR", "127.0.0.1")
                 .redirectUrls(redirectUrls).customer(customer).build();
 
         TransactionApiMock.expectMistercashPost(mistercashTransaction);
@@ -97,7 +98,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
         RedirectUrls redirectUrls = new RedirectUrls("http://plugins.alternativepayments.com/message/success.html",
                 "http://plugins.alternativepayments.com/message/failure.html");
 
-        Transaction idealTransaction = new Transaction.Builder(payment, null, 500, "EUR")
+        Transaction idealTransaction = new Transaction.Builder(payment, null, 500, "EUR", "127.0.0.1")
                 .redirectUrls(redirectUrls).customer(customer).build();
 
         TransactionApiMock.expectIdealTranasaction(idealTransaction);
@@ -143,7 +144,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
         RedirectUrls redirectUrls = new RedirectUrls("http://plugins.alternativepayments.com/message/success.html",
                 "http://plugins.alternativepayments.com/message/failure.html");
 
-        Transaction brazilPayTransaction = new Transaction.Builder(payment, null, 100, "EUR")
+        Transaction brazilPayTransaction = new Transaction.Builder(payment, null, 100, "EUR", "127.0.0.1")
                 .redirectUrls(redirectUrls).customer(customer).build();
 
         TransactionApiMock.expectBrazilPayTranasaction(brazilPayTransaction);
@@ -197,7 +198,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
         Payment payment = new Payment.Builder("CreditCard", "John Doe").creditCardNumber("XXXXXXXXXXX1111")
                 .creditCardType("visa").expirationMonth(12).expirationYear(2009).cvv2(222).build();
 
-        Transaction creditCardTransaction = new Transaction.Builder(payment, null, 100, "EUR")
+        Transaction creditCardTransaction = new Transaction.Builder(payment, null, 100, "EUR", "127.0.0.1")
                 .customer(customer).build();
 
         TransactionApiMock.expectCreditCardTranasaction(creditCardTransaction);

@@ -47,7 +47,8 @@ public class SubscriptionController {
 
             Customer customer = new Customer.Builder("John", "Smith", "johnsmith@johnsmith.com", "US").build();
             Payment payment = new Payment.Builder("SEPA", "John Doe").iban("BE88271080782541").build();
-            Transaction transaction = new Transaction.Builder(payment, null, 500, "EUR").customer(customer).build();
+            Transaction transaction = new Transaction.Builder(payment, null, 500, "EUR", "127.0.0.1").customer(customer)
+                    .build();
             Transaction createdTransaction = alternativePaymentClient.create(transaction, Transaction.API_ENDPOINT,
                     Transaction.class);
 

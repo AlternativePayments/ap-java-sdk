@@ -1,3 +1,4 @@
 alternativePayment:
   apiBase: https://api.alternativepayments.com/api
-  apiKey: add key here
+  apiSecretKey: add key here
+  apiPublicKey: add key here

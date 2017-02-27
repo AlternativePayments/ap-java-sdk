@@ -17,6 +17,7 @@ import com.alternativepayments.models.BaseCollection;
 import com.alternativepayments.models.BaseModel;
 import com.alternativepayments.models.ErrorModel;
 import com.alternativepayments.models.Pagination;
+import com.alternativepayments.models.transaction.PhoneVerification;
 
 /**
  * Alternative Payments Java SDK Client.
@@ -28,18 +29,28 @@ public class AlternativePaymentClient {
      */
     public static final String VERSION = "0.1.0";
 
+    /**
+     * Website endpoint for various utility checks.
+     */
+    public static final String WEBSITE_ENDPOINT = "websites/%s/";
+
     private Client httpClient;
     private WebTarget apiTarget;
+    private String websiteEndpoint;
+    private String apiPublicKey;
 
     /**
      * Create default HTTP client with API base and API key.
      *
      * @param apiBase base URL of API.
-     * @param apiKey API key to use.
+     * @param apiSecretKey API secret key to use.
+     * @param apiPublicKey API public key to use.
      */
-    public AlternativePaymentClient(final String apiBase, final String apiKey) {
-        this.httpClient = HttpClientFactory.createDefault(apiKey);
+    public AlternativePaymentClient(final String apiBase, final String apiSecretKey, final String apiPublicKey) {
+        this.httpClient = HttpClientFactory.createDefault(apiSecretKey);
         this.apiTarget = httpClient.target(apiBase);
+        this.apiPublicKey = apiPublicKey;
+        this.websiteEndpoint = String.format(WEBSITE_ENDPOINT, apiPublicKey);
     }
 
     /**
@@ -57,6 +68,22 @@ public class AlternativePaymentClient {
     }
 
     /**
+     * Create new phone verification for phone number.
+     *
+     * @param <T> This is the type parameter
+     * @param phoneNumber phone number for verifcation.
+     * @param endpoint endpoint to query
+     * @param clazz class for deserialization
+     * @return
+     * @return newly created entity
+     */
+    public <T extends BaseModel> T createPhoneVerification(final String phoneNumber, final String endpoint,
+            Class<T> clazz) {
+        PhoneVerification phoneVerification = new PhoneVerification.Builder(apiPublicKey, phoneNumber).build();
+        return post(apiTarget.path(endpoint), phoneVerification, clazz);
+    }
+
+    /**
      * Get single entity by ID.
      *
      * @param <T> This is the type parameter
@@ -67,6 +94,18 @@ public class AlternativePaymentClient {
      */
     public <T extends BaseModel> T getById(final String id, final String endpoint, Class<T> clazz) {
         return get(apiTarget.path(endpoint + id), clazz);
+    }
+
+    /**
+     * Get endpoint for website (website namespace has utility checks).
+     *
+     * @param <T> This is the type parameter
+     * @param endpoint endpoint to query
+     * @param clazz class for deserialization
+     * @return single entity
+     */
+    public <T extends BaseModel> T getForWebsite(final String endpoint, Class<T> clazz) {
+        return get(apiTarget.path(websiteEndpoint + endpoint), clazz);
     }
 
     /**
