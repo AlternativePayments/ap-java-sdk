@@ -23,8 +23,12 @@ public class PlanModelTest extends BaseApiResourceTest {
         assertThat(plan.getDescription()).isEqualTo("Test plan");
         assertThat(plan.getAmount()).isEqualTo(1000);
         assertThat(plan.getCurrency()).isEqualTo("EUR");
-        assertThat(plan.getPeriod()).isEqualTo(Plan.Period.DAY);
-        assertThat(plan.getInterval()).isEqualTo(5);
+        assertThat(plan.getIntervalUnit()).isEqualTo(Plan.Period.MONTH);
+        assertThat(plan.getIntervalCount()).isEqualTo(1);
+        assertThat(plan.getBillingCycles()).isEqualTo(12);
+        assertThat(plan.isConversionRateFixed()).isTrue();
+        assertThat(plan.getIpAddress()).isEqualTo("91.218.229.20");
+        assertThat(plan.getTrialPeriod()).isEqualTo(7);
         assertThat(plan.getCreated().toString()).isEqualTo("2012-04-23T18:25:43.511Z");
     }
 
@@ -45,25 +49,33 @@ public class PlanModelTest extends BaseApiResourceTest {
         assertThat(firstPlan.getDescription()).isEqualTo("Test plan");
         assertThat(firstPlan.getAmount()).isEqualTo(1000);
         assertThat(firstPlan.getCurrency()).isEqualTo("EUR");
-        assertThat(firstPlan.getPeriod()).isEqualTo(Plan.Period.DAY);
-        assertThat(firstPlan.getInterval()).isEqualTo(5);
+        assertThat(firstPlan.getIntervalUnit()).isEqualTo(Plan.Period.MONTH);
+        assertThat(firstPlan.getIntervalCount()).isEqualTo(1);
+        assertThat(firstPlan.getBillingCycles()).isEqualTo(12);
+        assertThat(firstPlan.isConversionRateFixed()).isTrue();
+        assertThat(firstPlan.getIpAddress()).isEqualTo("91.218.229.20");
+        assertThat(firstPlan.getTrialPeriod()).isEqualTo(7);
         assertThat(firstPlan.getCreated().toString()).isEqualTo("2012-04-23T18:25:43.511Z");
 
         final Plan secondPlan = plans.getPlans().get(1);
         assertThat(secondPlan.getId()).isEqualTo("pln_a27286b");
         assertThat(secondPlan.getName()).isEqualTo("Test2");
         assertThat(secondPlan.getDescription()).isEqualTo("Test2 plan");
-        assertThat(secondPlan.getAmount()).isEqualTo(2000);
+        assertThat(secondPlan.getAmount()).isEqualTo(1000);
         assertThat(secondPlan.getCurrency()).isEqualTo("EUR");
-        assertThat(secondPlan.getPeriod()).isEqualTo(Plan.Period.DAY);
-        assertThat(secondPlan.getInterval()).isEqualTo(5);
+        assertThat(secondPlan.getIntervalUnit()).isEqualTo(Plan.Period.MONTH);
+        assertThat(secondPlan.getIntervalCount()).isEqualTo(1);
+        assertThat(secondPlan.getBillingCycles()).isEqualTo(12);
+        assertThat(secondPlan.isConversionRateFixed()).isTrue();
+        assertThat(secondPlan.getIpAddress()).isEqualTo("91.218.229.20");
+        assertThat(secondPlan.getTrialPeriod()).isEqualTo(7);
         assertThat(secondPlan.getCreated().toString()).isEqualTo("2012-04-23T18:25:43.511Z");
 
     }
 
     @Test
     public void create_new_plan() {
-        Plan plan = new Plan.Builder("Test", 1000, "EUR", 5, Plan.Period.DAY)
+        Plan plan = new Plan.Builder("Test", 1000, Plan.Period.MONTH, 1, 12, "91.218.229.20")
                 .description("Test plan").build();
 
         PlanApiMock.expectPost(plan);
@@ -75,8 +87,10 @@ public class PlanModelTest extends BaseApiResourceTest {
         assertThat(createdPlan.getDescription()).isEqualTo("Test plan");
         assertThat(createdPlan.getAmount()).isEqualTo(1000);
         assertThat(createdPlan.getCurrency()).isEqualTo("EUR");
-        assertThat(createdPlan.getPeriod()).isEqualTo(Plan.Period.DAY);
-        assertThat(createdPlan.getInterval()).isEqualTo(5);
+        assertThat(createdPlan.getIntervalUnit()).isEqualTo(Plan.Period.MONTH);
+        assertThat(createdPlan.getIntervalCount()).isEqualTo(1);
+        assertThat(createdPlan.getBillingCycles()).isEqualTo(12);
+        assertThat(createdPlan.getIpAddress()).isEqualTo("91.218.229.20");
         assertThat(createdPlan.getCreated().toString()).isEqualTo("2012-04-23T18:25:43.511Z");
     }
 
@@ -98,28 +112,41 @@ public class PlanModelTest extends BaseApiResourceTest {
         assertThat(firstPlan.getDescription()).isEqualTo("Test plan");
         assertThat(firstPlan.getAmount()).isEqualTo(1000);
         assertThat(firstPlan.getCurrency()).isEqualTo("EUR");
-        assertThat(firstPlan.getPeriod()).isEqualTo(Plan.Period.DAY);
-        assertThat(firstPlan.getInterval()).isEqualTo(5);
+        assertThat(firstPlan.getIntervalUnit()).isEqualTo(Plan.Period.MONTH);
+        assertThat(firstPlan.getIntervalCount()).isEqualTo(1);
+        assertThat(firstPlan.getBillingCycles()).isEqualTo(12);
+        assertThat(firstPlan.isConversionRateFixed()).isTrue();
+        assertThat(firstPlan.getIpAddress()).isEqualTo("91.218.229.20");
+        assertThat(firstPlan.getTrialPeriod()).isEqualTo(7);
         assertThat(firstPlan.getCreated().toString()).isEqualTo("2012-04-23T18:25:43.511Z");
 
         final Plan secondPlan = plans.getPlans().get(1);
         assertThat(secondPlan.getId()).isEqualTo("pln_a27286b");
+        assertThat(secondPlan.getId()).isEqualTo("pln_a27286b");
         assertThat(secondPlan.getName()).isEqualTo("Test2");
         assertThat(secondPlan.getDescription()).isEqualTo("Test2 plan");
-        assertThat(secondPlan.getAmount()).isEqualTo(2000);
+        assertThat(secondPlan.getAmount()).isEqualTo(1000);
         assertThat(secondPlan.getCurrency()).isEqualTo("EUR");
-        assertThat(secondPlan.getPeriod()).isEqualTo(Plan.Period.DAY);
-        assertThat(secondPlan.getInterval()).isEqualTo(5);
+        assertThat(secondPlan.getIntervalUnit()).isEqualTo(Plan.Period.MONTH);
+        assertThat(secondPlan.getIntervalCount()).isEqualTo(1);
+        assertThat(secondPlan.getBillingCycles()).isEqualTo(12);
+        assertThat(secondPlan.isConversionRateFixed()).isTrue();
+        assertThat(secondPlan.getIpAddress()).isEqualTo("91.218.229.20");
+        assertThat(secondPlan.getTrialPeriod()).isEqualTo(7);
         assertThat(secondPlan.getCreated().toString()).isEqualTo("2012-04-23T18:25:43.511Z");
 
         final Plan thirdPlan = plans.getPlans().get(2);
         assertThat(thirdPlan.getId()).isEqualTo("pln_a27286c");
-        assertThat(thirdPlan.getName()).isEqualTo("Test2");
-        assertThat(thirdPlan.getDescription()).isEqualTo("Test2 plan");
-        assertThat(thirdPlan.getAmount()).isEqualTo(2000);
+        assertThat(thirdPlan.getName()).isEqualTo("Test3");
+        assertThat(thirdPlan.getDescription()).isEqualTo("Test3 plan");
+        assertThat(thirdPlan.getAmount()).isEqualTo(1000);
         assertThat(thirdPlan.getCurrency()).isEqualTo("EUR");
-        assertThat(thirdPlan.getPeriod()).isEqualTo(Plan.Period.DAY);
-        assertThat(thirdPlan.getInterval()).isEqualTo(5);
+        assertThat(thirdPlan.getIntervalUnit()).isEqualTo(Plan.Period.MONTH);
+        assertThat(thirdPlan.getIntervalCount()).isEqualTo(1);
+        assertThat(thirdPlan.getBillingCycles()).isEqualTo(12);
+        assertThat(thirdPlan.isConversionRateFixed()).isTrue();
+        assertThat(thirdPlan.getIpAddress()).isEqualTo("91.218.229.20");
+        assertThat(thirdPlan.getTrialPeriod()).isEqualTo(7);
         assertThat(thirdPlan.getCreated().toString()).isEqualTo("2012-04-23T18:25:43.511Z");
     }
 }

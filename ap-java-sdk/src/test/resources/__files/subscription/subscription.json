@@ -1,27 +1,47 @@
 {
-    "id": "sbs_c475040",
-    "mode": "Test",
-    "planId": "pln_a27286a",
+    "id": "sbs_e71bbe5375af",
+    "mode": "Live",
+    "planId": "pln_7021187813bb",
     "plan": {
-        "id": "pln_a27286a",
+        "id": "pln_7021187813bb",
         "mode": "Test",
         "name": "Test",
         "description": "Abc",
         "amount": 1000,
         "currency": "EUR",
-        "period": "Day",
-        "interval": 5
+        "intervalUnit": "day",
+        "intervalCount": 5,
+        "billingCycles": 12,
+        "trialPeriod": 7,
+        "isConversionRateFixed": true,
+        "status": "Active",
+        "ipAddress": "91.218.229.20",
+        "created": "2016-12-01T13:25:53.797Z"
     },
-    "customerId": "cus_70ac08b06b4949bfb",
+    "customerId": "cus_5210f6ee95c445f5a",
     "customer": {
-        "id": "cus_70ac08b06b4949bfb",
+        "id": "cus_5210f6ee95c445f5a",
         "mode": "Test",
         "firstName": "John",
         "lastName": "Smith",
         "email": "johnsmith@johnsmith.com",
         "created": "2016-06-02T08:33:05.61Z"
     },
-    "paymentId": "25275",
-    "created": "2016-06-02T08:44:16.963Z",
-    "status": "InRecur"
+    "paymentId": "pay_7c3a29e41fba4171a",
+    "payment": {
+        "id": "pay_7c3a29e41fba4171a",
+        "mode": "Live",
+        "paymentOption": "SEPA",
+        "holder": "John Doe",
+        "iban": "NL02XXXXX9585",
+        "bic": "ABNANL2AXXX",
+        "created": "2016-12-01T10:40:34.2243803Z"
+    },
+    "amount": 0,
+    "isConversionRateFixed": false,
+    "quantity": 2,
+    "currentBillingCycle": 0,
+    "ipAddress": "91.218.229.20",
+    "status": "Trial",
+    "created": "2016-06-02T08:44:16.963Z"
 }

@@ -6,9 +6,11 @@ import org.junit.Test;
 
 import com.alternativepayments.apimocks.SubscriptionApiMock;
 import com.alternativepayments.base.BaseApiResourceTest;
+import com.alternativepayments.models.customer.Customer;
 import com.alternativepayments.models.plan.Plan;
 import com.alternativepayments.models.subscription.Subscription;
 import com.alternativepayments.models.subscription.SubscriptionCollection;
+import com.alternativepayments.models.transaction.Payment;
 
 public class SubscriptionModelTest extends BaseApiResourceTest {
 
@@ -20,20 +22,26 @@ public class SubscriptionModelTest extends BaseApiResourceTest {
         final Subscription subscription = alternativePaymentClient.getById(id, Subscription.API_ENDPOINT,
                 Subscription.class);
 
-        assertThat(subscription.getId()).isEqualTo("sbs_c475040");
-        assertThat(subscription.getPlanId()).isEqualTo("pln_a27286a");
+        assertThat(subscription.getId()).isEqualTo("sbs_e71bbe5375af");
+        assertThat(subscription.getPlanId()).isEqualTo("pln_7021187813bb");
         assertThat(subscription.getPlan().getName()).isEqualTo("Test");
         assertThat(subscription.getPlan().getDescription()).isEqualTo("Abc");
         assertThat(subscription.getPlan().getAmount()).isEqualTo(1000);
         assertThat(subscription.getPlan().getCurrency()).isEqualTo("EUR");
-        assertThat(subscription.getPlan().getPeriod()).isEqualTo(Plan.Period.DAY);
-        assertThat(subscription.getPlan().getInterval()).isEqualTo(5);
-        assertThat(subscription.getCustomerId()).isEqualTo("cus_70ac08b06b4949bfb");
+        assertThat(subscription.getPlan().getIntervalUnit()).isEqualTo(Plan.Period.DAY);
+        assertThat(subscription.getPlan().getIntervalCount()).isEqualTo(5);
+        assertThat(subscription.getCustomerId()).isEqualTo("cus_5210f6ee95c445f5a");
         assertThat(subscription.getCustomer().getFirstName()).isEqualTo("John");
         assertThat(subscription.getCustomer().getLastName()).isEqualTo("Smith");
         assertThat(subscription.getCustomer().getEmail()).isEqualTo("johnsmith@johnsmith.com");
-        assertThat(subscription.getPaymentId()).isEqualTo("25275");
-        assertThat(subscription.getStatus()).isEqualTo("InRecur");
+        assertThat(subscription.getPaymentId()).isEqualTo("pay_7c3a29e41fba4171a");
+        assertThat(subscription.getPayment().getId()).isEqualTo("pay_7c3a29e41fba4171a");
+        assertThat(subscription.getAmount()).isEqualTo(0);
+        assertThat(subscription.isConversionRateFixed()).isFalse();
+        assertThat(subscription.getQuantity()).isEqualTo(2);
+        assertThat(subscription.getCurrentBillingCycle()).isEqualTo(0);
+        assertThat(subscription.getIpAddress()).isEqualTo("91.218.229.20");
+        assertThat(subscription.getStatus()).isEqualTo("Trial");
         assertThat(subscription.getCreated().toString()).isEqualTo("2016-06-02T08:44:16.963Z");
     }
 
@@ -56,14 +64,14 @@ public class SubscriptionModelTest extends BaseApiResourceTest {
         assertThat(firstSubscription.getPlan().getDescription()).isEqualTo("Abc");
         assertThat(firstSubscription.getPlan().getAmount()).isEqualTo(1000);
         assertThat(firstSubscription.getPlan().getCurrency()).isEqualTo("EUR");
-        assertThat(firstSubscription.getPlan().getPeriod()).isEqualTo(Plan.Period.DAY);
-        assertThat(firstSubscription.getPlan().getInterval()).isEqualTo(5);
+        assertThat(firstSubscription.getPlan().getIntervalUnit()).isEqualTo(Plan.Period.DAY);
+        assertThat(firstSubscription.getPlan().getIntervalCount()).isEqualTo(5);
         assertThat(firstSubscription.getCustomerId()).isEqualTo("cus_70ac08b06b4949bfb");
         assertThat(firstSubscription.getCustomer().getFirstName()).isEqualTo("John");
         assertThat(firstSubscription.getCustomer().getLastName()).isEqualTo("Smith");
         assertThat(firstSubscription.getCustomer().getEmail()).isEqualTo("johnsmith@johnsmith.com");
         assertThat(firstSubscription.getPaymentId()).isEqualTo("25275");
-        assertThat(firstSubscription.getStatus()).isEqualTo("InRecur");
+        assertThat(firstSubscription.getStatus()).isEqualTo("Trial");
         assertThat(firstSubscription.getCreated().toString()).isEqualTo("2016-06-02T08:44:16.963Z");
 
         Subscription secondSubscription = subscriptions.getSubscriptions().get(1);
@@ -73,42 +81,51 @@ public class SubscriptionModelTest extends BaseApiResourceTest {
         assertThat(secondSubscription.getPlan().getDescription()).isEqualTo("Abc");
         assertThat(secondSubscription.getPlan().getAmount()).isEqualTo(1000);
         assertThat(secondSubscription.getPlan().getCurrency()).isEqualTo("EUR");
-        assertThat(secondSubscription.getPlan().getPeriod()).isEqualTo(Plan.Period.DAY);
-        assertThat(secondSubscription.getPlan().getInterval()).isEqualTo(5);
+        assertThat(secondSubscription.getPlan().getIntervalUnit()).isEqualTo(Plan.Period.DAY);
+        assertThat(secondSubscription.getPlan().getIntervalCount()).isEqualTo(5);
         assertThat(secondSubscription.getCustomerId()).isEqualTo("cus_70ac08b06b4949bfc");
         assertThat(secondSubscription.getCustomer().getFirstName()).isEqualTo("John");
         assertThat(secondSubscription.getCustomer().getLastName()).isEqualTo("Smith");
         assertThat(secondSubscription.getCustomer().getEmail()).isEqualTo("johnsmith@johnsmith.com");
         assertThat(secondSubscription.getPaymentId()).isEqualTo("25276");
-        assertThat(secondSubscription.getStatus()).isEqualTo("InRecur");
+        assertThat(secondSubscription.getStatus()).isEqualTo("Trial");
         assertThat(secondSubscription.getCreated().toString()).isEqualTo("2016-06-02T08:44:16.963Z");
 
     }
 
     @Test
     public void create_new_customer() {
-        Subscription subscriptionToCreate = new Subscription.Builder("cus_70ac08b06b4949bfb", "25275", "pln_a27286a")
-                .build();
+        Customer customer = new Customer.Builder("John", "Doe", "john@doe.com", "DE").build();
+        Payment payment = new Payment.Builder("mistercash", "John Doe").build();
+
+        Subscription subscriptionToCreate = new Subscription.Builder(2, "91.218.229.20").planId("pln_a27286a")
+                .customer(customer).payment(payment).build();
 
         SubscriptionApiMock.expectPost(subscriptionToCreate);
 
         final Subscription subscription = alternativePaymentClient.create(subscriptionToCreate,
                 Subscription.API_ENDPOINT, Subscription.class);
 
-        assertThat(subscription.getId()).isEqualTo("sbs_c475040");
-        assertThat(subscription.getPlanId()).isEqualTo("pln_a27286a");
+        assertThat(subscription.getId()).isEqualTo("sbs_e71bbe5375af");
+        assertThat(subscription.getPlanId()).isEqualTo("pln_7021187813bb");
         assertThat(subscription.getPlan().getName()).isEqualTo("Test");
         assertThat(subscription.getPlan().getDescription()).isEqualTo("Abc");
         assertThat(subscription.getPlan().getAmount()).isEqualTo(1000);
         assertThat(subscription.getPlan().getCurrency()).isEqualTo("EUR");
-        assertThat(subscription.getPlan().getPeriod()).isEqualTo(Plan.Period.DAY);
-        assertThat(subscription.getPlan().getInterval()).isEqualTo(5);
-        assertThat(subscription.getCustomerId()).isEqualTo("cus_70ac08b06b4949bfb");
+        assertThat(subscription.getPlan().getIntervalUnit()).isEqualTo(Plan.Period.DAY);
+        assertThat(subscription.getPlan().getIntervalCount()).isEqualTo(5);
+        assertThat(subscription.getCustomerId()).isEqualTo("cus_5210f6ee95c445f5a");
         assertThat(subscription.getCustomer().getFirstName()).isEqualTo("John");
         assertThat(subscription.getCustomer().getLastName()).isEqualTo("Smith");
         assertThat(subscription.getCustomer().getEmail()).isEqualTo("johnsmith@johnsmith.com");
-        assertThat(subscription.getPaymentId()).isEqualTo("25275");
-        assertThat(subscription.getStatus()).isEqualTo("InRecur");
+        assertThat(subscription.getPaymentId()).isEqualTo("pay_7c3a29e41fba4171a");
+        assertThat(subscription.getPayment().getId()).isEqualTo("pay_7c3a29e41fba4171a");
+        assertThat(subscription.getAmount()).isEqualTo(0);
+        assertThat(subscription.isConversionRateFixed()).isFalse();
+        assertThat(subscription.getQuantity()).isEqualTo(2);
+        assertThat(subscription.getCurrentBillingCycle()).isEqualTo(0);
+        assertThat(subscription.getIpAddress()).isEqualTo("91.218.229.20");
+        assertThat(subscription.getStatus()).isEqualTo("Trial");
         assertThat(subscription.getCreated().toString()).isEqualTo("2016-06-02T08:44:16.963Z");
     }
 
@@ -131,14 +148,14 @@ public class SubscriptionModelTest extends BaseApiResourceTest {
         assertThat(firstSubscription.getPlan().getDescription()).isEqualTo("Abc");
         assertThat(firstSubscription.getPlan().getAmount()).isEqualTo(1000);
         assertThat(firstSubscription.getPlan().getCurrency()).isEqualTo("EUR");
-        assertThat(firstSubscription.getPlan().getPeriod()).isEqualTo(Plan.Period.DAY);
-        assertThat(firstSubscription.getPlan().getInterval()).isEqualTo(5);
+        assertThat(firstSubscription.getPlan().getIntervalUnit()).isEqualTo(Plan.Period.DAY);
+        assertThat(firstSubscription.getPlan().getIntervalCount()).isEqualTo(5);
         assertThat(firstSubscription.getCustomerId()).isEqualTo("cus_70ac08b06b4949bfb");
         assertThat(firstSubscription.getCustomer().getFirstName()).isEqualTo("John");
         assertThat(firstSubscription.getCustomer().getLastName()).isEqualTo("Smith");
         assertThat(firstSubscription.getCustomer().getEmail()).isEqualTo("johnsmith@johnsmith.com");
         assertThat(firstSubscription.getPaymentId()).isEqualTo("25275");
-        assertThat(firstSubscription.getStatus()).isEqualTo("InRecur");
+        assertThat(firstSubscription.getStatus()).isEqualTo("Trial");
         assertThat(firstSubscription.getCreated().toString()).isEqualTo("2016-06-02T08:44:16.963Z");
 
         Subscription secondSubscription = subscriptions.getSubscriptions().get(1);
@@ -148,14 +165,14 @@ public class SubscriptionModelTest extends BaseApiResourceTest {
         assertThat(secondSubscription.getPlan().getDescription()).isEqualTo("Abc");
         assertThat(secondSubscription.getPlan().getAmount()).isEqualTo(1000);
         assertThat(secondSubscription.getPlan().getCurrency()).isEqualTo("EUR");
-        assertThat(secondSubscription.getPlan().getPeriod()).isEqualTo(Plan.Period.DAY);
-        assertThat(secondSubscription.getPlan().getInterval()).isEqualTo(5);
+        assertThat(secondSubscription.getPlan().getIntervalUnit()).isEqualTo(Plan.Period.DAY);
+        assertThat(secondSubscription.getPlan().getIntervalCount()).isEqualTo(5);
         assertThat(secondSubscription.getCustomerId()).isEqualTo("cus_70ac08b06b4949bfc");
         assertThat(secondSubscription.getCustomer().getFirstName()).isEqualTo("John");
         assertThat(secondSubscription.getCustomer().getLastName()).isEqualTo("Smith");
         assertThat(secondSubscription.getCustomer().getEmail()).isEqualTo("johnsmith@johnsmith.com");
         assertThat(secondSubscription.getPaymentId()).isEqualTo("25276");
-        assertThat(secondSubscription.getStatus()).isEqualTo("InRecur");
+        assertThat(secondSubscription.getStatus()).isEqualTo("Trial");
         assertThat(secondSubscription.getCreated().toString()).isEqualTo("2016-06-02T08:44:16.963Z");
 
         Subscription thirdSubscription = subscriptions.getSubscriptions().get(2);
@@ -165,14 +182,14 @@ public class SubscriptionModelTest extends BaseApiResourceTest {
         assertThat(thirdSubscription.getPlan().getDescription()).isEqualTo("Abc");
         assertThat(thirdSubscription.getPlan().getAmount()).isEqualTo(1000);
         assertThat(thirdSubscription.getPlan().getCurrency()).isEqualTo("EUR");
-        assertThat(thirdSubscription.getPlan().getPeriod()).isEqualTo(Plan.Period.DAY);
-        assertThat(thirdSubscription.getPlan().getInterval()).isEqualTo(5);
+        assertThat(thirdSubscription.getPlan().getIntervalUnit()).isEqualTo(Plan.Period.DAY);
+        assertThat(thirdSubscription.getPlan().getIntervalCount()).isEqualTo(5);
         assertThat(thirdSubscription.getCustomerId()).isEqualTo("cus_70ac08b06b4949bfd");
         assertThat(thirdSubscription.getCustomer().getFirstName()).isEqualTo("John");
         assertThat(thirdSubscription.getCustomer().getLastName()).isEqualTo("Smith");
         assertThat(thirdSubscription.getCustomer().getEmail()).isEqualTo("johnsmith@johnsmith.com");
         assertThat(thirdSubscription.getPaymentId()).isEqualTo("25277");
-        assertThat(thirdSubscription.getStatus()).isEqualTo("InRecur");
+        assertThat(thirdSubscription.getStatus()).isEqualTo("Trial");
         assertThat(thirdSubscription.getCreated().toString()).isEqualTo("2016-06-02T08:44:16.963Z");
     }
 }

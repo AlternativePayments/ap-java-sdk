@@ -13,7 +13,6 @@ import com.alternativepayments.models.plan.Plan;
 import com.alternativepayments.models.subscription.Subscription;
 import com.alternativepayments.models.subscription.SubscriptionCollection;
 import com.alternativepayments.models.transaction.Payment;
-import com.alternativepayments.models.transaction.Transaction;
 
 /**
  * Controller for all action on subscription.
@@ -41,19 +40,20 @@ public class SubscriptionController {
 
         if (StringUtils.isNotBlank(planName) && StringUtils.isNotBlank(String.valueOf(planAmount))
                 && StringUtils.isNotBlank(customerEmail)) {
-            Plan plan = new Plan.Builder(planName, planAmount, "EUR", 5, Plan.Period.DAY)
-                    .description("Abc").build();
+            Plan plan = new Plan.Builder("Test", 1000, Plan.Period.DAY, 5, 12, "91.218.229.20").description("Test plan")
+                    .build();
             Plan createdPlan = alternativePaymentClient.create(plan, Plan.API_ENDPOINT, Plan.class);
 
             Customer customer = new Customer.Builder("John", "Smith", "johnsmith@johnsmith.com", "US").build();
             Payment payment = new Payment.Builder("SEPA", "John Doe").iban("BE88271080782541").build();
-            Transaction transaction = new Transaction.Builder(payment, null, 500, "EUR", "127.0.0.1").customer(customer)
-                    .build();
-            Transaction createdTransaction = alternativePaymentClient.create(transaction, Transaction.API_ENDPOINT,
-                    Transaction.class);
+            // Transaction transaction = new Transaction.Builder(payment, null, 500, "EUR",
+            // "127.0.0.1").customer(customer)
+            // .build();
+            // Transaction createdTransaction = alternativePaymentClient.create(transaction, Transaction.API_ENDPOINT,
+            // Transaction.class);
 
-            Subscription subscription = new Subscription.Builder(createdTransaction.getCustomer().getId(),
-                    createdTransaction.getPayment().getId(), createdPlan.getId()).build();
+            Subscription subscription = new Subscription.Builder(2, "91.218.229.20").planId(createdPlan.getId())
+                    .customer(customer).payment(payment).build();
             Subscription createdSubscription = alternativePaymentClient.create(subscription, Subscription.API_ENDPOINT,
                     Subscription.class);
 
