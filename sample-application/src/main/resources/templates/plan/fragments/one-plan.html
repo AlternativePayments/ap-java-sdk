@@ -7,10 +7,14 @@
         <li th:text="'ID: ' + ${plan.id}"></li>
         <li th:text="'Name: ' + ${plan.name}"></li>
         <li th:text="'Description: ' + ${plan.description}"></li>
-        <li th:text="'Interval: ' + ${plan.interval}"></li>
-        <li th:text="'Period: ' + ${plan.period}"></li>
         <li th:text="'Amount: ' + ${plan.amount}"></li>
         <li th:text="'Currency: ' + ${plan.currency}"></li>
+        <li th:text="'Interval Unit: ' + ${plan.intervalUnit}"></li>
+        <li th:text="'Interval Count: ' + ${plan.intervalCount}"></li>
+        <li th:text="'Billing Cycles: ' + ${plan.billingCycles}"></li>
+        <li th:text="'Is conversion rate fixed: ' + ${plan.isConversionRateFixed}"></li>
+        <li th:text="'IP Address: ' + ${plan.ipAddress}"></li>
+        <li th:text="'Trial Period: ' + ${plan.trialPeriod}"></li>
     </ul>
 </body>
 </html>

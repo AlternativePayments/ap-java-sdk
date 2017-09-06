@@ -11,8 +11,14 @@
                 "description": "Abc",
                 "amount": 1000,
                 "currency": "EUR",
-                "period": "Day",
-                "interval": 5
+                "intervalUnit": "Day",
+                "intervalCount": 5,
+                "billingCycles": 12,
+                "trialPeriod": 7,
+                "isConversionRateFixed": true,
+                "status": "Active",
+                "ipAddress": "91.218.229.20",
+                "created": "2016-12-01T13:25:53.797Z"
             },
             "customerId": "cus_70ac08b06b4949bfb",
             "customer": {
@@ -24,8 +30,13 @@
                 "created": "2016-06-02T08:33:05.61Z"
             },
             "paymentId": "25275",
-            "created": "2016-06-02T08:44:16.963Z",
-            "status": "InRecur"
+            "amount": 0,
+            "isConversionRateFixed": false,
+            "quantity": 2,
+            "currentBillingCycle": 0,
+            "ipAddress": "91.218.229.20",
+            "status": "Trial",
+            "created": "2016-06-02T08:44:16.963Z"
         },
         {
             "id": "sbs_c475041",
@@ -38,8 +49,14 @@
                 "description": "Abc",
                 "amount": 1000,
                 "currency": "EUR",
-                "period": "Day",
-                "interval": 5
+                "intervalUnit": "Day",
+                "intervalCount": 5,
+                "billingCycles": 12,
+                "trialPeriod": 7,
+                "isConversionRateFixed": true,
+                "status": "Active",
+                "ipAddress": "91.218.229.20",
+                "created": "2016-12-01T13:25:53.797Z"
             },
             "customerId": "cus_70ac08b06b4949bfc",
             "customer": {
@@ -51,8 +68,13 @@
                 "created": "2016-06-02T08:33:05.61Z"
             },
             "paymentId": "25276",
-            "created": "2016-06-02T08:44:16.963Z",
-            "status": "InRecur"
+            "amount": 0,
+            "isConversionRateFixed": false,
+            "quantity": 2,
+            "currentBillingCycle": 0,
+            "ipAddress": "91.218.229.20",
+            "status": "Trial",
+            "created": "2016-06-02T08:44:16.963Z"
         }
     ],
     "pagination": {

@@ -28,7 +28,7 @@ public class PlanController {
      */
     @RequestMapping("/create-plan")
     public String createPlan(Model model) {
-        Plan plan = new Plan.Builder("Test", 1000, "EUR", 5, Plan.Period.DAY)
+        Plan plan = new Plan.Builder("Test", 1000, "EUR", Plan.Period.MONTH, 1, 12, "91.218.229.20")
                 .description("Test plan").build();
 
         Plan createdPlan = alternativePaymentClient.create(plan, Plan.API_ENDPOINT, Plan.class);

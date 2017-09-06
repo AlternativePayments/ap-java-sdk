@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout/main">
+<head>
+    <title>Alternative Payments Java SDK Sample Application</title>
+</head>
+<body>
+    <section layout:fragment="menu" th:include="hosted-pages/fragments/hosted-pages-menu :: hosted-pages-menu">
+    </section>
+    <section layout:fragment="content">
+        <p th:text="'Transaction with ID ' + ${transaction.id} + ' created!'" />
+        <ul th:replace="hosted-pages/fragments/one-transaction :: 'one-transaction' (transaction=${transaction})">
+        </ul>
+    </section>
+</body>
+</html>

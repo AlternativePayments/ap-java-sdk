@@ -11,6 +11,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Payment extends BaseModel {
 
+    /**
+     * Endpoint for this resource.
+     */
+    public static final String API_ENDPOINT = "payments/";
+
     private final String paymentOption;
     private final String holder;
     private final String iban;
@@ -22,6 +27,7 @@ public class Payment extends BaseModel {
     private final int expirationMonth;
     private final String creditCardType;
     private final String bic;
+    private final String pinCode;
 
     /**
      * Create new Payment using all fields.
@@ -41,6 +47,7 @@ public class Payment extends BaseModel {
      * @param expirationMonth month of expiration for card
      * @param creditCardType type of credit card used for payment
      * @param bic bic for payment
+     * @param pinCode pin code for payment
      */
     @JsonCreator
     public Payment(
@@ -58,7 +65,8 @@ public class Payment extends BaseModel {
             @JsonProperty("expirationYear") final int expirationYear,
             @JsonProperty("expirationMonth") final int expirationMonth,
             @JsonProperty("creditCardType") final String creditCardType,
-            @JsonProperty("bic") final String bic) {
+            @JsonProperty("bic") final String bic,
+            @JsonProperty("pinCode") final String pinCode) {
         super(id, mode, created, updated);
         this.paymentOption = paymentOption;
         this.holder = holder;
@@ -71,6 +79,7 @@ public class Payment extends BaseModel {
         this.expirationMonth = expirationMonth;
         this.creditCardType = creditCardType;
         this.bic = bic;
+        this.pinCode = pinCode;
     }
 
     /**
@@ -92,6 +101,7 @@ public class Payment extends BaseModel {
         private  int expirationMonth;
         private  String creditCardType;
         private  String bic;
+        private String pinCode;
 
 
         /**
@@ -214,6 +224,18 @@ public class Payment extends BaseModel {
         }
 
         /**
+         * Set pinCode for building object.
+         *
+         * @param pinCode of the payment
+         *
+         * @return Builder
+         */
+        public Builder pinCode(final String pinCode) {
+            this.pinCode = pinCode;
+            return this;
+        }
+
+        /**
          * Build method needed to be executed in order for Payment to be created.
          *
          *
@@ -240,6 +262,7 @@ public class Payment extends BaseModel {
         this.expirationMonth = builder.expirationMonth;
         this.creditCardType = builder.creditCardType;
         this.bic = builder.bic;
+        this.pinCode = builder.pinCode;
     }
 
     /**
@@ -317,6 +340,13 @@ public class Payment extends BaseModel {
      */
     public String getBic() {
         return bic;
+    }
+
+    /**
+     * @return pinCode for payment.
+     */
+    public String getPinCode() {
+        return pinCode;
     }
 
 }

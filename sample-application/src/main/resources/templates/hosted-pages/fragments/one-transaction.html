@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<body th:fragment="one-transaction">
+    <ul>
+        <li th:text="'ID: ' + ${transaction.id}"></li>
+        <li th:text="'Status: ' + ${transaction.status}"></li>
+        <li th:text="'Amount: ' + ${transaction.amount}"></li>
+        <li th:text="'Currency: ' + ${transaction.currency}"></li>
+        <li th:text="'Customer ID: ' + ${transaction.customer.id}"></li>
+        <li th:text="'Customer First Name: ' + ${transaction.customer.firstName}"></li>
+        <li th:text="'Customer Last Name: ' + ${transaction.customer.lastName}"></li>
+        <li th:text="'Customer Email: ' + ${transaction.customer.email}"></li>
+        <li th:text="'Redirect URL: ' + ${transaction.redirectUrl}"></li>
+    </ul>
+</body>
+</html>
