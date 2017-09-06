@@ -17,9 +17,15 @@ public class Transaction extends BaseModel {
      */
     public static final String API_ENDPOINT = "transactions/";
 
+    /**
+     * Endpoint for creating transaction using hosted pages.
+     */
+    public static final String API_HOSTED_PAGES_ENDPOINT = "transactions/hosted/";
+
     private final Customer customer;
     private final String customerId;
     private final Payment payment;
+    private final String paymentId;
     private final String token;
     private final int amount;
     private final String currency;
@@ -45,6 +51,7 @@ public class Transaction extends BaseModel {
      * @param customer customer for transaction
      * @param customerId id for customer
      * @param payment payment for transaction
+     * @param paymentId paymentId for transaction
      * @param token token for transaction
      * @param amount amount for transaction
      * @param currency used for transaction
@@ -69,6 +76,7 @@ public class Transaction extends BaseModel {
             @JsonProperty("customer") final Customer customer,
             @JsonProperty("customerId") final String customerId,
             @JsonProperty("payment") final Payment payment,
+            @JsonProperty("paymentId") final String paymentId,
             @JsonProperty("token") final String token,
             @JsonProperty("amount") final int amount,
             @JsonProperty("currency") final String currency,
@@ -87,6 +95,7 @@ public class Transaction extends BaseModel {
         this.customer = customer;
         this.customerId = customerId;
         this.payment = payment;
+        this.paymentId = paymentId;
         this.token = token;
         this.amount = amount;
         this.currency = currency;
@@ -109,8 +118,6 @@ public class Transaction extends BaseModel {
      */
     public static class Builder {
         // Required parameters
-        private final Payment payment;
-        private final String token;
         private final int amount;
         private final String currency;
         private String ipAddress;
@@ -128,23 +135,58 @@ public class Transaction extends BaseModel {
         private Preauthorization preauthorization;
         private boolean isRecurring;
         private String initialTransactionId;
+        private Payment payment;
+        private String paymentId;
+        private String token;
 
         /**
          * Constructor that takes on all mandatory parameters.
          *
-         * @param payment payment for the transaction
-         * @param token token for the transaction
          * @param amount amount for the transaction
          * @param currency currency for the transaction
          * @param ipAddress ip address
          */
-        public Builder(final Payment payment, final String token, final int amount, final String currency,
+        public Builder(final int amount, final String currency,
                 final String ipAddress) {
-            this.payment = payment;
-            this.token = token;
             this.amount = amount;
             this.currency = currency;
             this.ipAddress = ipAddress;
+        }
+
+        /**
+         * Set payment for building object.
+         *
+         * @param payment of the transaction
+         *
+         * @return Builder
+         */
+        public Builder payment(final Payment payment) {
+            this.payment = payment;
+            return this;
+        }
+
+        /**
+         * Set paymentId for building object.
+         *
+         * @param paymentId for the transaction
+         *
+         * @return Builder
+         */
+        public Builder paymentId(final String paymentId) {
+            this.paymentId = paymentId;
+            return this;
+        }
+
+        /**
+         * Set token for building object.
+         *
+         * @param token of the transaction
+         *
+         * @return Builder
+         */
+        public Builder token(final String token) {
+            this.token = token;
+            return this;
         }
 
         /**
@@ -305,12 +347,13 @@ public class Transaction extends BaseModel {
 
     private Transaction(final Builder builder) {
         // Required parameters
-        this.payment = builder.payment;
-        this.token = builder.token;
         this.amount = builder.amount;
         this.currency = builder.currency;
 
         // Optional parameters
+        this.payment = builder.payment;
+        this.token = builder.token;
+        this.paymentId = builder.paymentId;
         this.customer = builder.customer;
         this.customerId = builder.customerId;
         this.merchantPassThruData = builder.merchantPassThruData;
@@ -345,6 +388,13 @@ public class Transaction extends BaseModel {
      */
     public Payment getPayment() {
         return payment;
+    }
+
+    /**
+     * @return paymentId for transaction.
+     */
+    public String getPaymentId() {
+        return paymentId;
     }
 
     /**

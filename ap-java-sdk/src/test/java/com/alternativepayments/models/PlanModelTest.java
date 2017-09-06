@@ -26,7 +26,7 @@ public class PlanModelTest extends BaseApiResourceTest {
         assertThat(plan.getIntervalUnit()).isEqualTo(Plan.Period.MONTH);
         assertThat(plan.getIntervalCount()).isEqualTo(1);
         assertThat(plan.getBillingCycles()).isEqualTo(12);
-        assertThat(plan.isConversionRateFixed()).isTrue();
+        assertThat(plan.getIsConversionRateFixed()).isTrue();
         assertThat(plan.getIpAddress()).isEqualTo("91.218.229.20");
         assertThat(plan.getTrialPeriod()).isEqualTo(7);
         assertThat(plan.getCreated().toString()).isEqualTo("2012-04-23T18:25:43.511Z");
@@ -52,7 +52,7 @@ public class PlanModelTest extends BaseApiResourceTest {
         assertThat(firstPlan.getIntervalUnit()).isEqualTo(Plan.Period.MONTH);
         assertThat(firstPlan.getIntervalCount()).isEqualTo(1);
         assertThat(firstPlan.getBillingCycles()).isEqualTo(12);
-        assertThat(firstPlan.isConversionRateFixed()).isTrue();
+        assertThat(firstPlan.getIsConversionRateFixed()).isTrue();
         assertThat(firstPlan.getIpAddress()).isEqualTo("91.218.229.20");
         assertThat(firstPlan.getTrialPeriod()).isEqualTo(7);
         assertThat(firstPlan.getCreated().toString()).isEqualTo("2012-04-23T18:25:43.511Z");
@@ -66,7 +66,7 @@ public class PlanModelTest extends BaseApiResourceTest {
         assertThat(secondPlan.getIntervalUnit()).isEqualTo(Plan.Period.MONTH);
         assertThat(secondPlan.getIntervalCount()).isEqualTo(1);
         assertThat(secondPlan.getBillingCycles()).isEqualTo(12);
-        assertThat(secondPlan.isConversionRateFixed()).isTrue();
+        assertThat(secondPlan.getIsConversionRateFixed()).isTrue();
         assertThat(secondPlan.getIpAddress()).isEqualTo("91.218.229.20");
         assertThat(secondPlan.getTrialPeriod()).isEqualTo(7);
         assertThat(secondPlan.getCreated().toString()).isEqualTo("2012-04-23T18:25:43.511Z");
@@ -75,7 +75,7 @@ public class PlanModelTest extends BaseApiResourceTest {
 
     @Test
     public void create_new_plan() {
-        Plan plan = new Plan.Builder("Test", 1000, Plan.Period.MONTH, 1, 12, "91.218.229.20")
+        Plan plan = new Plan.Builder("Test", 1000, "EUR", Plan.Period.MONTH, 1, 12, "91.218.229.20")
                 .description("Test plan").build();
 
         PlanApiMock.expectPost(plan);
@@ -115,7 +115,7 @@ public class PlanModelTest extends BaseApiResourceTest {
         assertThat(firstPlan.getIntervalUnit()).isEqualTo(Plan.Period.MONTH);
         assertThat(firstPlan.getIntervalCount()).isEqualTo(1);
         assertThat(firstPlan.getBillingCycles()).isEqualTo(12);
-        assertThat(firstPlan.isConversionRateFixed()).isTrue();
+        assertThat(firstPlan.getIsConversionRateFixed()).isTrue();
         assertThat(firstPlan.getIpAddress()).isEqualTo("91.218.229.20");
         assertThat(firstPlan.getTrialPeriod()).isEqualTo(7);
         assertThat(firstPlan.getCreated().toString()).isEqualTo("2012-04-23T18:25:43.511Z");
@@ -130,7 +130,7 @@ public class PlanModelTest extends BaseApiResourceTest {
         assertThat(secondPlan.getIntervalUnit()).isEqualTo(Plan.Period.MONTH);
         assertThat(secondPlan.getIntervalCount()).isEqualTo(1);
         assertThat(secondPlan.getBillingCycles()).isEqualTo(12);
-        assertThat(secondPlan.isConversionRateFixed()).isTrue();
+        assertThat(secondPlan.getIsConversionRateFixed()).isTrue();
         assertThat(secondPlan.getIpAddress()).isEqualTo("91.218.229.20");
         assertThat(secondPlan.getTrialPeriod()).isEqualTo(7);
         assertThat(secondPlan.getCreated().toString()).isEqualTo("2012-04-23T18:25:43.511Z");
@@ -144,7 +144,7 @@ public class PlanModelTest extends BaseApiResourceTest {
         assertThat(thirdPlan.getIntervalUnit()).isEqualTo(Plan.Period.MONTH);
         assertThat(thirdPlan.getIntervalCount()).isEqualTo(1);
         assertThat(thirdPlan.getBillingCycles()).isEqualTo(12);
-        assertThat(thirdPlan.isConversionRateFixed()).isTrue();
+        assertThat(thirdPlan.getIsConversionRateFixed()).isTrue();
         assertThat(thirdPlan.getIpAddress()).isEqualTo("91.218.229.20");
         assertThat(thirdPlan.getTrialPeriod()).isEqualTo(7);
         assertThat(thirdPlan.getCreated().toString()).isEqualTo("2012-04-23T18:25:43.511Z");

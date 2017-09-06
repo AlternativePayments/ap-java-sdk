@@ -13,6 +13,7 @@ import com.alternativepayments.models.plan.Plan;
 import com.alternativepayments.models.subscription.Subscription;
 import com.alternativepayments.models.subscription.SubscriptionCollection;
 import com.alternativepayments.models.transaction.Payment;
+import com.alternativepayments.models.transaction.PhoneVerification;
 
 /**
  * Controller for all action on subscription.
@@ -40,20 +41,23 @@ public class SubscriptionController {
 
         if (StringUtils.isNotBlank(planName) && StringUtils.isNotBlank(String.valueOf(planAmount))
                 && StringUtils.isNotBlank(customerEmail)) {
-            Plan plan = new Plan.Builder("Test", 1000, Plan.Period.DAY, 5, 12, "91.218.229.20").description("Test plan")
-                    .build();
+            Plan plan = new Plan.Builder("Test", 1000, "EUR", Plan.Period.DAY, 5, 12, "91.218.229.20")
+                    .description("Test plan").build();
             Plan createdPlan = alternativePaymentClient.create(plan, Plan.API_ENDPOINT, Plan.class);
+            Customer customer = new Customer.Builder("John", "Smith", "johnsmith@johnsmith.com", "DE").build();
+            Customer createdCustomer = alternativePaymentClient.create(customer, Customer.API_ENDPOINT, Customer.class);
+            Payment payment = new Payment.Builder("SEPA", "John Doe").iban("DE89370400440532013000").build();
+            Payment createdPayment = alternativePaymentClient.create(payment, Payment.API_ENDPOINT, Payment.class);
 
-            Customer customer = new Customer.Builder("John", "Smith", "johnsmith@johnsmith.com", "US").build();
-            Payment payment = new Payment.Builder("SEPA", "John Doe").iban("BE88271080782541").build();
-            // Transaction transaction = new Transaction.Builder(payment, null, 500, "EUR",
-            // "127.0.0.1").customer(customer)
-            // .build();
-            // Transaction createdTransaction = alternativePaymentClient.create(transaction, Transaction.API_ENDPOINT,
-            // Transaction.class);
+            PhoneVerification phoneVerification = alternativePaymentClient.createPhoneVerification("+15555555555",
+                    PhoneVerification.API_ENDPOINT, PhoneVerification.class);
+            PhoneVerification transactionPhoneVerification = new PhoneVerification.Builder(phoneVerification.getKey(),
+                    phoneVerification.getPhone()).token(phoneVerification.getToken()).pin(1234).build();
+
 
             Subscription subscription = new Subscription.Builder(2, "91.218.229.20").planId(createdPlan.getId())
-                    .customer(customer).payment(payment).build();
+                    .customerId(createdCustomer.getId()).paymentId(createdPayment.getId())
+                    .build();
             Subscription createdSubscription = alternativePaymentClient.create(subscription, Subscription.API_ENDPOINT,
                     Subscription.class);
 

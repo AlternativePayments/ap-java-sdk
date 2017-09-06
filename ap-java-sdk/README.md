@@ -9,6 +9,18 @@ Java library which wraps HTTP communication with Alternative Payments server.
 Installed Java 1.7
 Installed Maven 3.x with configured Java
 
+### Optional: ENABLE TLS ON JAVA 1.7
+
+If server is using TLS 1.2 or TLS1.1 (which is the case with Alternative Payments API server) you need to enable it in Java 1.7.
+Both are supported by JRE 1.7 but not enabled by default. There are two ways how you can do it:
+
+1. Add `-Dhttps.protocols=TLSv1,TLSv1.1,TLSv1.2` when starting your application
+2. Add `System.setProperty(“https.protocols”, “TLSv1,TLSv1.1,TLSv1.2”);` to your client application code.
+
+Sample application is using second approach.
+
+Reference is [this page](https://tonyyan.wordpress.com/2015/07/17/enabled-tls-1-2-and-tls-1-1-on-java-7/).
+
 ### RUNNING APPLICATION
 
 Clone repo

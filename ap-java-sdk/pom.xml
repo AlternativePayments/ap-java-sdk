@@ -48,7 +48,7 @@
         <source.level>1.7</source.level>
         <code.level>1.7</code.level>
         <version.fasterxml>2.6.6</version.fasterxml>
-        <version.jersey>2.23</version.jersey>
+        <version.jersey>2.25</version.jersey>
         <version.slf4j>1.7.7</version.slf4j>
         <version.commons3>3.4</version.commons3>
         <version.junit>4.9</version.junit>

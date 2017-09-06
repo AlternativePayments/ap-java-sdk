@@ -15,6 +15,7 @@ public class SampleApplication {
      * @throws Exception exception while starting Spring application
      */
     public static void main(final String[] args) throws Exception {
+        System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
         SpringApplication.run(SampleApplication.class, args);
     }
 }

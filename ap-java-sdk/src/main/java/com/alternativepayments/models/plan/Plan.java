@@ -87,14 +87,14 @@ public class Plan extends BaseModel {
         // Required parameters
         private final String name;
         private final int amount;
-        private Period intervalUnit;
+        private final String currency;
+        private final Period intervalUnit;
         private int intervalCount;
         private int billingCycles;
         private String ipAddress;
 
         // Optional parameters - initialize with default values
         private String description;
-        private String currency;
         private int trialPeriod;
         private boolean isConversionRateFixed;
         private boolean cancelSubscriptions;
@@ -108,15 +108,17 @@ public class Plan extends BaseModel {
          * @param intervalCount number which defines when the charge will be created (in interval units)
          * @param billingCycles number of times plan is to be executed
          * @param ipAddress ip address of person creating plan
+         * @param currency Currency for amount to be payed
          */
-        public Builder(final String name, final int amount, final Period intervalUnit, final int intervalCount,
-                final int billingCycles, final String ipAddress) {
+        public Builder(final String name, final int amount, final String currency, final Period intervalUnit,
+                final int intervalCount, final int billingCycles, final String ipAddress) {
             this.name = name;
             this.amount = amount;
             this.intervalUnit = intervalUnit;
             this.intervalCount = intervalCount;
             this.billingCycles = billingCycles;
             this.ipAddress = ipAddress;
+            this.currency = currency;
         }
 
         /**
@@ -128,18 +130,6 @@ public class Plan extends BaseModel {
          */
         public Builder description(final String description) {
             this.description = description;
-            return this;
-        }
-
-        /**
-         * Set currency for building object.
-         *
-         * @param currency of the plan
-         *
-         * @return Builder
-         */
-        public Builder currency(final String currency) {
-            this.currency = currency;
             return this;
         }
 
@@ -260,7 +250,7 @@ public class Plan extends BaseModel {
     /**
      * @return the isConversionRateFixed
      */
-    public boolean isConversionRateFixed() {
+    public boolean getIsConversionRateFixed() {
         return isConversionRateFixed;
     }
 
@@ -281,7 +271,7 @@ public class Plan extends BaseModel {
     /**
      * @return the cancelSubscriptions
      */
-    public boolean isCancelSubscriptions() {
+    public boolean getIsCancelSubscriptions() {
         return cancelSubscriptions;
     }
 
@@ -292,19 +282,19 @@ public class Plan extends BaseModel {
         /**
          * Day period.
          */
-        DAY("day"),
+        DAY("Day"),
         /**
          * Week period.
          */
-        WEEK("week"),
+        WEEK("Week"),
         /**
          * Month period.
          */
-        MONTH("month"),
+        MONTH("Month"),
         /**
          * Year period.
          */
-        YEAR("year");
+        YEAR("Year");
 
         private final String value;
 

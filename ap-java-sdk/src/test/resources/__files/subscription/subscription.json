@@ -9,7 +9,7 @@
         "description": "Abc",
         "amount": 1000,
         "currency": "EUR",
-        "intervalUnit": "day",
+        "intervalUnit": "Day",
         "intervalCount": 5,
         "billingCycles": 12,
         "trialPeriod": 7,
