@@ -1,10 +1,11 @@
 language: java
+sudo: true
 
 env:
   - TEST_DIR=ap-java-sdk
   - TEST_DIR=sample-application
 
 jdk:
-  - oraclejdk7
+  - openjdk7
 
 script: cd $TEST_DIR && mvn install -Dgpg.skip=true
