@@ -9,11 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.alternativepayments.AlternativePaymentClient;
 import com.alternativepayments.models.customer.Customer;
-import com.alternativepayments.models.transaction.Payment;
-import com.alternativepayments.models.transaction.PhoneVerification;
-import com.alternativepayments.models.transaction.RedirectUrls;
-import com.alternativepayments.models.transaction.Transaction;
-import com.alternativepayments.models.transaction.TransactionCollection;
+import com.alternativepayments.models.transaction.*;
 import com.alternativepayments.models.website.PaymentOption;
 
 /**
@@ -283,7 +279,7 @@ public class TransactionController {
     @RequestMapping("/create-directpay-transaction")
     public String createDirectPayTransaction(Model model) {
         Customer customer = new Customer.Builder("John", "Doe", "john@doe.com", "DE").build();
-        Payment payment = new Payment.Builder("directpay", "John Doe").build();
+        Payment payment = new Payment.Builder("DirectPayEU", "John Doe").build();
         RedirectUrls redirectUrls = new RedirectUrls("http://plugins.alternativepayments.com/message/success.html",
                 "http://plugins.alternativepayments.com/message/failure.html");
         Transaction directPayTransaction = new Transaction.Builder(100, "EUR", "127.0.0.1").payment(payment)
@@ -305,7 +301,7 @@ public class TransactionController {
     @RequestMapping("/create-directpay-max-transaction")
     public String createDirectPayMaxTransaction(Model model) {
         Customer customer = new Customer.Builder("John", "Doe", "john@doe.com", "DE").build();
-        Payment payment = new Payment.Builder("directpaymax", "John Doe").bankCode("POSTBANK").build();
+        Payment payment = new Payment.Builder("DirectPayMaxEU", "John Doe").bankCode("POSTBANK").build();
         RedirectUrls redirectUrls = new RedirectUrls("http://plugins.alternativepayments.com/message/success.html",
                 "http://plugins.alternativepayments.com/message/failure.html");
         Transaction directPayMaxTransaction = new Transaction.Builder(100, "EUR", "127.0.0.1").payment(payment)

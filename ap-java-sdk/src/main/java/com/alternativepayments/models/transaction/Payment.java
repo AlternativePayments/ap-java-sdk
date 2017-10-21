@@ -22,9 +22,9 @@ public class Payment extends BaseModel {
     private final String bankCode;
     private final String documentId;
     private final String creditCardNumber;
-    private final int CVV2;
-    private final int expirationYear;
-    private final int expirationMonth;
+    private final Integer CVV2;
+    private final Integer expirationYear;
+    private final Integer expirationMonth;
     private final String creditCardType;
     private final String bic;
     private final String pinCode;
@@ -61,9 +61,9 @@ public class Payment extends BaseModel {
             @JsonProperty("bankCode") final String bankCode,
             @JsonProperty("documentId") final String documentId,
             @JsonProperty("creditCardNumber") final String creditCardNumber,
-            @JsonProperty("CVV2") final int CVV2,
-            @JsonProperty("expirationYear") final int expirationYear,
-            @JsonProperty("expirationMonth") final int expirationMonth,
+            @JsonProperty("CVV2") final Integer CVV2,
+            @JsonProperty("expirationYear") final Integer expirationYear,
+            @JsonProperty("expirationMonth") final Integer expirationMonth,
             @JsonProperty("creditCardType") final String creditCardType,
             @JsonProperty("bic") final String bic,
             @JsonProperty("pinCode") final String pinCode) {
@@ -96,9 +96,9 @@ public class Payment extends BaseModel {
         private  String bankCode;
         private  String documentId;
         private  String creditCardNumber;
-        private  int CVV2;
-        private  int expirationYear;
-        private  int expirationMonth;
+        private  Integer CVV2;
+        private  Integer expirationYear;
+        private  Integer expirationMonth;
         private  String creditCardType;
         private  String bic;
         private String pinCode;
@@ -170,7 +170,7 @@ public class Payment extends BaseModel {
          *
          * @return Builder
          */
-        public Builder cvv2(final int CVV2) {
+        public Builder cvv2(final Integer CVV2) {
             this.CVV2 = CVV2;
             return this;
         }
@@ -182,7 +182,7 @@ public class Payment extends BaseModel {
          *
          * @return Builder
          */
-        public Builder expirationYear(final int expirationYear) {
+        public Builder expirationYear(final Integer expirationYear) {
             this.expirationYear = expirationYear;
             return this;
         }
@@ -194,7 +194,7 @@ public class Payment extends BaseModel {
          *
          * @return Builder
          */
-        public Builder expirationMonth(final int expirationMonth) {
+        public Builder expirationMonth(final Integer expirationMonth) {
             this.expirationMonth = expirationMonth;
             return this;
         }
@@ -310,21 +310,21 @@ public class Payment extends BaseModel {
     /**
      * @return CVV2 for payment.
      */
-    public int getCVV2() {
+    public Integer getCVV2() {
         return CVV2;
     }
 
     /**
      * @return expiration year for payment.
      */
-    public int getExpirationYear() {
+    public Integer getExpirationYear() {
         return expirationYear;
     }
 
     /**
      * @return expiration month for payment.
      */
-    public int getExpirationMonth() {
+    public Integer getExpirationMonth() {
         return expirationMonth;
     }
 
