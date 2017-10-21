@@ -7,10 +7,7 @@ import org.junit.Test;
 import com.alternativepayments.apimocks.TransactionApiMock;
 import com.alternativepayments.base.BaseApiResourceTest;
 import com.alternativepayments.models.customer.Customer;
-import com.alternativepayments.models.transaction.Payment;
-import com.alternativepayments.models.transaction.RedirectUrls;
-import com.alternativepayments.models.transaction.Transaction;
-import com.alternativepayments.models.transaction.TransactionCollection;
+import com.alternativepayments.models.transaction.*;
 
 public class TransactionModelTest extends BaseApiResourceTest {
 
@@ -47,6 +44,7 @@ public class TransactionModelTest extends BaseApiResourceTest {
         assertThat(createdSepaTransaction.getPayment().getHolder()).isEqualTo("John Doe");
         assertThat(createdSepaTransaction.getPayment().getPaymentOption()).isEqualTo("SEPA");
         assertThat(createdSepaTransaction.getPayment().getIban()).isEqualTo("DE71XXXXX3330");
+        assertThat(createdSepaTransaction.getPayment().getCVV2()).isNull();
     }
 
     @Test

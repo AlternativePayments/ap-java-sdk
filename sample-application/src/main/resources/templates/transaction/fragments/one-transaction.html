@@ -17,6 +17,8 @@
         <li th:text="'Payment ID: ' + ${transaction.payment.id}"></li>
         <li th:text="'Paytment Holder: ' + ${transaction.payment.holder}"></li>
         <li th:text="'Payment Option: ' + ${transaction.payment.paymentOption}"></li>
+        <li th:text="'Redirect URL: ' + ${transaction.redirectUrls.returnUrl}"></li>
+        <li th:text="'Cancel URL: ' + ${transaction.redirectUrls.cancelUrl}"></li>
     </ul>
 </body>
 </html>
