@@ -1,5 +1,4 @@
 language: java
-sudo: true
 
 env:
   - TEST_DIR=ap-java-sdk
